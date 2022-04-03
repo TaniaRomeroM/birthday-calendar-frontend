@@ -1,0 +1,93 @@
+<div>
+    <h1>Contactos</h1>
+    <p-toast></p-toast>
+    <!--selectionMode="single" -->
+    <p-panel [showHeader]="false">
+        <div style="margin-bottom: 20px">
+            <p-menubar [model]="items"></p-menubar>
+        </div>
+        <p-table [value]="contactos" [columns]="cols" [paginator]="true" [rows]="7" selectionMode="single">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns">
+                        <!-- Pinta de forma dinamica los headers -->
+                        {{col.header}}
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-contacto let-columns="columns">
+                <tr>
+                    <td *ngFor="let col of columns">
+                        {{contacto[col.field]}}
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="4">No hay contactos.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-panel>
+
+    <p-dialog header="Nuevo contacto" [responsive]="true" [style]="{width: '700px'}" [(visible)]="displaySaveDialog" [modal]="true">
+        <!-- Modal - La estructura de div es para que sea responsive -->
+        <div class="ui-g ui-fluid modalNuevoContacto">
+            <div class="ui-g-12">
+                <!--<div class="ui-g-4">
+                    <label for="usuarioId">usuarioId</label>
+                </div>
+                <div class="ui-g-8">
+                    <input pInputText id="usuarioId" [(ngModel)]="contacto.usuarioId" />
+                </div>-->
+                <span class="p-float-label">
+                    <input type="text" id="inputtext" pInputText [(ngModel)]="contacto.usuarioId"> 
+                    <label for="inputtext">Usuario Id</label>
+                </span>
+
+            </div>
+
+            <div class="ui-g-12">
+                <!--<div class="ui-g-4">
+                    <label for="nombre">Nombre</label>
+                </div>
+                <div class="ui-g-8">
+                    <input pInputText id="nombre" [(ngModel)]="contacto.nombre" />
+                </div>-->
+
+                <span class="p-float-label">
+                    <input type="text" id="inputtext" pInputText [(ngModel)]="contacto.nombre"> 
+                    <label for="inputtext">Nombre</label>
+                </span>
+            </div>
+
+            <div class="ui-g-12">
+                <span class="p-float-label">
+                    <input type="text" id="inputtext" pInputText [(ngModel)]="contacto.apellido"> 
+                    <label for="inputtext">Apellido</label>
+                </span>
+            </div>
+
+            <div class="ui-g-12">
+                <span class="p-float-label">
+                    <p-calendar inputId="icon" [(ngModel)]="date" [showIcon]="true" ></p-calendar>
+                    <label for="inputtext">Cumpleaños</label>
+                </span>
+            </div>
+
+            <div class="ui-g-12">
+                <span class="p-float-label">
+                    <input type="text" id="inputtext" pInputText [(ngModel)]="contacto.email"> 
+                    <label for="inputtext">Email</label>
+                </span>
+            </div>
+        </div>
+
+        <p-footer>
+            <div class=""ui-dialog-buttonpane ui-helper-clearfix>
+                <button type="button" pButton (click)="addContacto()" label="Añadir"></button>
+            </div>
+        </p-footer>
+
+    </p-dialog>
+</div>

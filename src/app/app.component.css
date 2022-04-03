@@ -1,0 +1,30 @@
+
+mat-sidenav-container {
+    height:100%;
+}
+
+.toolbar-item-span {
+    padding-left: 2%;
+}
+
+mat-sidenav {
+    padding-top: 1%;
+    width: 15%;
+}
+
+.sidenav-item {
+    padding: 10%;
+    margin: 5% 0;
+}
+
+.sidenav-item-span {
+    padding-left: 10%;
+}
+
+mat-sidenav-content {
+    padding: 2%;
+}
+
+.toolbar-spacer {
+    flex: 1 1 auto;
+  }
