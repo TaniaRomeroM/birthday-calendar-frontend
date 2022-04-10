@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {MenuItem} from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +6,8 @@ import {MenuItem} from 'primeng/api';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  
+
   ngOnInit() {
-     
+
 }
 }

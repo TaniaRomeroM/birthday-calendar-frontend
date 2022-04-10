@@ -1,0 +1,37 @@
+<p-panel [showHeader]="false">
+  <div style="margin-bottom: 20px">
+      <p-menubar>
+        <button pButton pRipple label="Editar" icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="btnEditarFiesta();"></button>
+      </p-menubar>
+  </div>
+
+<div class="p-field">
+  <label for="fiestaId">Fiesta Id *</label>
+  <input type="text" pInputText id="name"  [disabled]="disabled" [(ngModel)]="fiesta.fiestaId" required autofocus />
+</div>
+
+<div class="p-field">
+  <label for="contactoId">Contacto Id *</label>
+  <input type="text" pInputText id="name" [disabled]="disabled" [(ngModel)]="fiesta.contactoId" required autofocus />
+</div>
+
+<div class="p-field">
+  <label for="usuarioId">Usuario Id *</label>
+  <input type="text" pInputText id="name" [disabled]="disabled" [(ngModel)]="fiesta.usuarioId" required autofocus />
+</div>
+
+<div class="p-field">
+  <label for="fechaFiesta">Fecha</label>
+  <input type="text" pInputText id="fechaFiesta" [disabled]="disabled" [(ngModel)]="fiesta.fechaFiesta" required autofocus />
+</div>
+
+<div class="p-field">
+  <label for="tipo">Tipo</label>
+  <input type="text" pInputText id="tipo" [disabled]="disabled" [(ngModel)]="fiesta.tipo" required autofocus />
+</div>
+
+<!-- FALTA -->
+    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="btonCancelar()" *ngIf="!this.disabled"></button>
+    <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="editarFiesta()" *ngIf="!this.disabled"></button>
+
+</p-panel>

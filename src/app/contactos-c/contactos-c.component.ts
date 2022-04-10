@@ -1,8 +1,9 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Contacto } from 'src/models/contacto';
 import { ContactoService } from '../service/contacto.service';
-
+import { ConfirmationService } from 'primeng/api';
 @Component({
   selector: 'app-contactos-c',
   templateUrl: './contactos-c.component.html',
@@ -12,9 +13,12 @@ export class ContactosCComponent implements OnInit {
 
   contactos: Contacto[];
   cols: any[];
+  title: string;
   items: MenuItem[];
   displaySaveDialog: boolean = false;
-  contacto: Contacto = {  // Para el modal de Nuevo Contacto
+  submitted: boolean;
+  edit : boolean = false;
+  contacto: Contacto = {  // Modal de Nuevo Contacto
     contactoId: null,
     usuarioId: null,
     nombre: null,
@@ -22,9 +26,11 @@ export class ContactosCComponent implements OnInit {
     fechanac: null,
     email: null
   };
-  date: Date;
+  pipe = new DatePipe('es');
+  todayWithPipe = null;
 
-  constructor(private contactoService: ContactoService, private messageService: MessageService) { }
+  constructor(private contactoService: ContactoService, private messageService: MessageService,
+    private confirmationService: ConfirmationService) { }
 
   getAll() {
     this.contactoService.getAll().subscribe(
@@ -41,24 +47,94 @@ export class ContactosCComponent implements OnInit {
       }
     );
   }
-  showSaveDialog() {
+
+  abrirModalNuevo() {
+    this.contacto = {
+      contactoId: null,
+      usuarioId: null,
+      nombre: null,
+      apellido: null,
+      fechanac: null,
+      email: null
+    };
+    this.title = "Nuevo Contacto";
+    this.submitted = false;
     this.displaySaveDialog = true;
   }
 
-  addContacto() {
-    this.contactoService.addContacto(this.contacto).subscribe(
-      (result:any) => {
-        let contacto = result as Contacto;
-        this.contactos.push(contacto); // Incluye automaticamente el contacto en la lista
-        this.messageService.add({severity: 'succes', summary:"Resultado", detail: "Se guardó el contacto correctamente."});
-        this.displaySaveDialog = false; // Cierra el modal
-
-      },
-      error => {
-        console.log(error);
-      }
-    )
+  editarContacto(contacto: Contacto) {
+    this.edit = true;
+    this.title = "Editar Contacto";
+    this.contacto = {...contacto};
+    this.displaySaveDialog = true;
   }
+
+  saveContacto() {
+    this.submitted = true;
+    if(this.contacto.fechanac instanceof Date){
+      console.log("I'm a date " + this.contacto.fechanac);
+    } else {
+    console.log("I'm not a date " + this.contacto.fechanac);
+    }
+    if(this.contacto.fechanac instanceof Date){
+      this.todayWithPipe = this.pipe.transform(this.contacto.fechanac, 'dd/MM/yyyy'); // Formatea la fecha que obtiene del formulario Cumpleanyos
+      this.contacto.fechanac = this.todayWithPipe;
+    }
+    this.contactoService.addContacto(this.contacto).subscribe( // Procesos que surgan una vez se ha guardado el contacto
+        (result:any) => {
+          let contacto = result as Contacto;
+          if (this.edit) {
+            this.contactos[this.findIndexById(this.contacto.contactoId)] = this.contacto;
+          } else {
+            this.contactos.push(contacto); // Incluye automaticamente el contacto en la lista
+          }
+          this.messageService.add({severity: 'succes', summary:"Resultado", detail: "Se guardó el contacto correctamente."});
+          this.displaySaveDialog = false; // Cierra el modal
+
+        },
+        error => {
+          console.log(error);
+        }
+      )
+  }
+
+  findIndexById(id: number): number {
+    let index = -1;
+    for (let i = 0; i < this.contactos.length; i++) {
+        if (this.contactos[i].contactoId === id) {
+            index = i;
+            break;
+        }
+    }
+    return index;
+}
+
+  eliminarContacto(contacto: Contacto) {
+    this.confirmationService.confirm({
+        message: '¿Estás seguro de que quieres eliminar a ' + contacto.nombre + '?',
+        header: 'Eliminar',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+            this.contactoService.eliminarContacto(contacto.contactoId).subscribe(
+              (result:any) => {
+              this.messageService.add({severity:'success', summary: 'Successful', detail: 'Contacto eliminado con éxito', life: 3000});
+            });
+        }
+    });
+  }
+/*
+  deleteObject(id:number){
+    let index = this.personas.findIndex((e) => e.id == id);
+    if(index != -1){
+      this.personas.splice(index, 1);
+    }
+  }
+*/
+
+hideDialog() {
+  this.displaySaveDialog = false;
+  this.submitted = false;
+}
 
   ngOnInit() { // Se ejecuta su interior cuando se cargue el componente por primera vez
     this.getAll();
@@ -70,13 +146,5 @@ export class ContactosCComponent implements OnInit {
       { field: "fechanac", header: "Fecha de Cumpleaños" },
       { field: "email", header: "Email" }
     ];
-
-    this.items = [
-      {
-        label: "Nuevo",
-        icon: 'pi pi-fw pi-plus',
-        command: () => this.showSaveDialog()
-      }
-    ]
   }
 }

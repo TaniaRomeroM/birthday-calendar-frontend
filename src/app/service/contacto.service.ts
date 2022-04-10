@@ -15,9 +15,18 @@ export class ContactoService {
     return this.http.get(this.baseUrl + "/contactos/1");
   }
 
+  encontrarContacto(contactoId: number): Observable<any> {
+    return this.http.get(this.baseUrl + "/contacto/" + contactoId);
+  }
+
   addContacto(contacto: Contacto): Observable<any>{
     let headers = new HttpHeaders();
-    headers = headers.set('Content-Type', 'application/json') //Para indicar que enviamos un JSON
+    headers = headers.set('Content-Type', 'application/json'); //Para indicar que enviamos un JSON
     return this.http.post(this.baseUrl + "/contactos/add", JSON.stringify(contacto), {headers:headers});
   }
+
+  eliminarContacto(id: number) : Observable<any>{
+    return this.http.get(this.baseUrl + "/contactos/eliminar/" + id);
+  }
+
 }

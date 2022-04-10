@@ -1,2 +1,52 @@
-<full-calendar class="fullcalendar" [options]="calendarOptions"></full-calendar>
+<full-calendar [options]="calendarOptions"></full-calendar>
+
+<p-dialog header="Cumpleaños" [responsive]="true" [style]="{width: '700px'}" [(visible)]="displaySaveDialog" [modal]="true">
+  <!-- Modal - La estructura de div es para que sea responsive -->
+  <div class="ui-g ui-fluid modalNuevoContacto">
+
+    <div class="ui-g-12">
+      <span class="p-float-label">
+        <input type="text" id="disabled-input" pInputText [disabled]="disabled" [(ngModel)]="contacto.fechanac">
+          <label for="inputtext">Cumpleaños</label>
+      </span>
+    </div>
+
+      <div class="ui-g-12">
+          <span class="p-float-label">
+              <input type="text" id="inputtext" pInputText [(ngModel)]="contacto.usuarioId">
+              <label for="inputtext">Usuario Id</label>
+          </span>
+
+      </div>
+
+      <div class="ui-g-12">
+
+          <span class="p-float-label">
+              <input type="text" id="inputtext" pInputText [(ngModel)]="contacto.nombre">
+              <label for="inputtext">Nombre</label>
+          </span>
+      </div>
+
+      <div class="ui-g-12">
+          <span class="p-float-label">
+              <input type="text" id="inputtext" pInputText [(ngModel)]="contacto.apellido">
+              <label for="inputtext">Apellido</label>
+          </span>
+      </div>
+
+      <div class="ui-g-12">
+          <span class="p-float-label">
+              <input type="text" id="inputtext" pInputText [(ngModel)]="contacto.email">
+              <label for="inputtext">Email</label>
+          </span>
+      </div>
+  </div>
+
+  <p-footer>
+      <div class=""ui-dialog-buttonpane ui-helper-clearfix>
+          <button type="button" pButton (click)="addContacto()" label="Añadir"></button>
+      </div>
+  </p-footer>
+
+</p-dialog>
 
