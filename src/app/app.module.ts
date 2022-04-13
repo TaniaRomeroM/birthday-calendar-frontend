@@ -22,6 +22,8 @@ import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import {SplitterModule} from 'primeng/splitter';
+import {DividerModule} from 'primeng/divider';
 
 import { CalendarModule } from 'primeng/calendar';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -91,6 +93,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FullCalendarModule,
     CalendarModule,
     ConfirmDialogModule,
+    SplitterModule,
+    DividerModule,
     RouterModule.forRoot(appRoutes) // Para indicar que quiero utilizar esa contante (appRoutes) en la app para enroutar los componentes
   ],
   providers: [MessageService, ConfirmationService, { provide: LOCALE_ID, useValue: 'es'} ],

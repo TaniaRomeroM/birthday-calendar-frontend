@@ -1,8 +1,23 @@
 full-calendar {  /*// No funciona*/
-    width: '200px';
-   height: '100%';
+  width: '200px';
+  height: '100%';
+  text-transform: capitalize;
+  color: rgb(66, 113, 94);
 }
 
-header-toolbar { /*// No funciona*/
-  text-transform: capitalize;
+.modalNuevoContacto{
+  justify-content: center;
+  text-align: center;
+}
+
+button.fc-prevYear-button.fc-button.fc-button-primary {
+  background-color: rgb(128, 212, 178);
+  border-color: rgb(128, 212, 178);
+  color: white;
+}
+
+button.fc-dayGridMonth-button.fc-button.fc-button-primary.fc-button.fc-button-active {
+  background-color: rgb(128, 212, 178);
+  border-color: rgb(128, 212, 178);
+  color: white;
 }

@@ -1,0 +1,37 @@
+.fieldinput{
+  margin: 0.3%;
+}
+
+input {
+  text-align: center;
+}
+
+.div1 {
+  border: 2px solid black;
+}
+
+button {
+  margin-left: 10px;
+}
+
+.panelDatos {
+  margin: 5%;
+  padding: 5%;
+}
+
+.panelCompras {
+  margin: 3%;
+  padding: 3%;
+}
+
+.btnEdit {
+  background-color: rgb(115, 176, 146);
+  border-color: rgb(115, 176, 146);
+  color: white;
+}
+
+.btnVolver {  /* NO FUNCIONA */
+  /*color: rgb(115, 176, 146);**/
+  background-color: rgb(115, 176, 146);
+  color: red;
+}

@@ -20,9 +20,11 @@ export class FiestasIdCComponent implements OnInit {
     usuarioId: null,
     fechaFiesta: null,
     tipo: null,
-    nombreContacto: null
+    nombreContacto: null,
+    nombreCompra: null
   }
   disabled: boolean = true;
+  cols: any[];
 
   constructor(private route: ActivatedRoute, private fiestaService: FiestaService, private messageService: MessageService, private contactoService: ContactoService) { }
 
@@ -43,6 +45,8 @@ export class FiestasIdCComponent implements OnInit {
               console.log(error);
             }
           );
+
+          /* Poner getCompras();*/
 
           this.fiesta = fiesta;
         }

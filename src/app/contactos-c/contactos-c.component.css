@@ -5,3 +5,29 @@
 .p-float-label {
     margin: 5%;
 }
+
+button {
+  margin-left: 5px;
+}
+
+.btnEdit {
+  background-color: rgb(128, 212, 178);
+  border-color: rgb(128, 212, 178);
+  color: white;
+}
+
+.btnDelete {
+  background-color: rgb( 192, 112, 102);
+  border-color: rgb( 192, 112, 102);
+  color: white;
+}
+
+.btnNuevo {
+  background-color: rgb(93, 149, 127);
+  border-color: rgb(93, 149, 127);
+  color: white;
+}
+
+.btnModal {
+  color: rgb(93, 149, 127);
+}

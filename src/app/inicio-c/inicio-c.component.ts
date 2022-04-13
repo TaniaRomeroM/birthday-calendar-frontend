@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { ContactoService } from '../service/contacto.service';
 import { DatePipe } from '@angular/common';
 import esLocale from '@fullcalendar/core/locales/es';
+import { reduce } from 'rxjs';
 
 @Component({
   selector: 'app-inicio-c',
@@ -29,18 +30,22 @@ export class InicioCComponent implements OnInit {
   pipe = new DatePipe('es'); // Modal fechanac
   todayWithPipe = null; // Modal fechanac
 
+
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     headerToolbar: {
-      left: 'prev,next today',
+      left: 'prevYear,prev,next,nextYear today',
       center: 'title',
       right: 'dayGridMonth listWeek'
     },
+    titleFormat: { year: 'numeric', month: 'long'},
+    dayHeaderFormat: { weekday: 'long'},
     dateClick: this.handleDateClick.bind(this), // bind es importante
     events: [
       { title: this.contacto.nombre, date: '2022-04-04' },
       { title: 'event 2', date: '2022-04-02' }
     ],
+    eventColor: 'rgb(160, 228, 200)',
    // events:this.eventFromApiPush,
     locale: esLocale,
     aspectRatio: 2.5,

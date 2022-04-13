@@ -30,4 +30,8 @@ export class FiestaService {
     return this.http.get(this.baseUrl + "/fiesta/" + fiestaId);
   }
 
+  getCompras(): Observable<any> {
+    return this.http.get(this.baseUrl + "/compras/1");
+  }
+
 }

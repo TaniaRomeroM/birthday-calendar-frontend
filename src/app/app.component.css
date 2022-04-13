@@ -27,4 +27,13 @@ mat-sidenav-content {
 
 .toolbar-spacer {
     flex: 1 1 auto;
-  }
+}
+
+mat-toolbar {
+  background-color: rgb(97, 191, 153, 0.6);
+  /*color: white;*/
+}
+
+mat-sidenav {
+  background-color: rgb(139, 204, 178, 0.1);
+}

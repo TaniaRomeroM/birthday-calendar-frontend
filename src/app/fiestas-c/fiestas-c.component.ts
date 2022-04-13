@@ -20,7 +20,8 @@ export class FiestasCComponent implements OnInit {
     usuarioId: null,
     fechaFiesta: null,
     tipo: null,
-    nombreContacto: null
+    nombreContacto: null,
+    nombreCompra: null
   };
   cols: any[];
   displaySaveDialog: boolean = false;
@@ -67,7 +68,8 @@ export class FiestasCComponent implements OnInit {
       usuarioId: null,
       fechaFiesta: null,
       tipo: null,
-      nombreContacto: null
+      nombreContacto: null,
+      nombreCompra: null
     };
     this.title = "Nueva Fiesta";
     this.submitted = false;

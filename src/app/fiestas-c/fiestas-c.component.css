@@ -1,0 +1,33 @@
+
+a:link, a:visited, a:hover, a:active {
+  color: #000000;
+  text-decoration: none;
+}
+
+button {
+  margin-left: 5px;
+}
+
+.card {
+  background-color: white;
+}
+
+.btnNuevo {
+  color: rgb(93, 149, 127);
+}
+
+.btnModal {
+  color: rgb(93, 149, 127);
+}
+
+.btnEdit {
+  background-color: rgb(128, 212, 178);
+  border-color: rgb(128, 212, 178);
+  color: white;
+}
+
+.btnDelete {
+  background-color: rgb( 192, 112, 102);
+  border-color: rgb( 192, 112, 102);
+  color: white;
+}

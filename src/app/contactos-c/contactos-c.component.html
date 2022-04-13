@@ -6,7 +6,7 @@
     <p-panel [showHeader]="false">
         <div style="margin-bottom: 20px">
             <p-menubar>
-              <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="abrirModalNuevo()"></button>
+              <button pButton pRipple type="button" label="Nuevo" icon="pi pi-plus" class="btnNuevo p-button-raised p-button-text" (click)="abrirModalNuevo()"></button>
             </p-menubar>
         </div>
         <p-table [value]="contactos" [columns]="cols" [paginator]="true" [rows]="7" selectionMode="single">
@@ -25,8 +25,8 @@
                         {{contacto[col.field]}}
                     </td>
                     <td>
-                      <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editarContacto(contacto);"></button>
-                      <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="eliminarContacto(contacto);"></button>
+                      <button pButton pRipple icon="pi pi-pencil" class="btnEdit p-button-rounded p-button-success p-mr-2" (click)="editarContacto(contacto);"></button>
+                      <button pButton pRipple icon="pi pi-trash" class="btnDelete p-button-rounded p-button-warning" (click)="eliminarContacto(contacto);"></button>
                   </td>
                 </tr>
             </ng-template>
@@ -60,7 +60,7 @@
 
           <div class="p-field">
             <label for="fechanac">Cumpleaños</label>
-            <p-calendar inputId="icon" [(ngModel)]="contacto.fechanac" [showIcon]="true" dateFormat="dd/mm/yy"></p-calendar>
+            <p-calendar inputId="icon" class="estiloIcon" [(ngModel)]="contacto.fechanac" [showIcon]="true" dateFormat="dd/mm/yy"></p-calendar>
             <!--<input type="text" pInputText id="fechanac" [(ngModel)]="contacto.fechanac" required autofocus />-->
             <small class="p-invalid" *ngIf="submitted && !contacto.fechanac">La fecha es requerida.</small>
           </div>
@@ -72,8 +72,8 @@
       </ng-template>
 
       <ng-template pTemplate="footer">
-          <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-          <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveContacto()"></button>
+          <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btnModal p-button-text" (click)="hideDialog()"></button>
+          <button pButton pRipple label="Guardar" icon="pi pi-check" class="btnModal p-button-text" (click)="saveContacto()"></button>
       </ng-template>
   </p-dialog>
 </div>
