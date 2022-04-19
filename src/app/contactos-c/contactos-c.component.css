@@ -1,9 +1,9 @@
 .ui-g-12 {
-    text-align: center;
+  text-align: center;
 }
 
 .p-float-label {
-    margin: 5%;
+  margin: 5%;
 }
 
 button {
@@ -17,8 +17,8 @@ button {
 }
 
 .btnDelete {
-  background-color: rgb( 192, 112, 102);
-  border-color: rgb( 192, 112, 102);
+  background-color: rgb(192, 112, 102);
+  border-color: rgb(192, 112, 102);
   color: white;
 }
 
@@ -26,8 +26,37 @@ button {
   background-color: rgb(93, 149, 127);
   border-color: rgb(93, 149, 127);
   color: white;
+  width: 120px;
+  height: 40px;
 }
 
 .btnModal {
   color: rgb(93, 149, 127);
 }
+
+.p-invalid {
+  color: red;
+}
+
+.tituloH4 {
+  margin-top: 3%;
+  margin-bottom: 1%;
+  text-align: center;
+}
+
+/*.p-datepicker-calendar {
+  width: 20px;
+  height: 20px;
+  padding: 4px;
+}*/
+
+/*div.ng-trigger:nth-child(3)
+.p-datepicker-group-container
+.p-datepicker-group
+.p-datepicker-calendar-container
+
+
+div.ng-trigger:nth-child(3) - Panel blanco
+.p-datepicker-calendar
+.p-datepicker-calendar
+*/

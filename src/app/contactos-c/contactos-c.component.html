@@ -1,79 +1,84 @@
 <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
-<div>
-    <h1>Contactos</h1>
-    <p-toast></p-toast>
-    <!--selectionMode="single" -->
-    <p-panel [showHeader]="false">
-        <div style="margin-bottom: 20px">
-            <p-menubar>
-              <button pButton pRipple type="button" label="Nuevo" icon="pi pi-plus" class="btnNuevo p-button-raised p-button-text" (click)="abrirModalNuevo()"></button>
-            </p-menubar>
-        </div>
-        <p-table [value]="contactos" [columns]="cols" [paginator]="true" [rows]="7" selectionMode="single">
-            <ng-template pTemplate="header" let-columns>
-                <tr>
-                    <th *ngFor="let col of columns">
-                        <!-- Pinta de forma dinamica los headers -->
-                        {{col.header}}
-                    </th>
-                    <th></th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-contacto let-columns="columns">
-                <tr>
-                    <td *ngFor="let col of columns">
-                        {{contacto[col.field]}}
-                    </td>
-                    <td>
-                      <button pButton pRipple icon="pi pi-pencil" class="btnEdit p-button-rounded p-button-success p-mr-2" (click)="editarContacto(contacto);"></button>
-                      <button pButton pRipple icon="pi pi-trash" class="btnDelete p-button-rounded p-button-warning" (click)="eliminarContacto(contacto);"></button>
-                  </td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="emptymessage">
-                <tr>
-                    <td colspan="4">No hay contactos.</td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </p-panel>
 
-      <!-- Modal displaySaveDialog - Nuevo/Editar Contacto -->
-    <p-dialog [(visible)]="displaySaveDialog" [style]="{width: '450px'}" header={{title}} [modal]="true" styleClass="p-fluid">
-      <ng-template pTemplate="content">
-          <div class="p-field">
-              <label for="usuarioId">Usuario Id *</label>
-              <input type="text" pInputText id="name" [(ngModel)]="contacto.usuarioId" required autofocus />
-              <small class="p-invalid" *ngIf="submitted && !contacto.usuarioId">El nombre es requerido.</small>
-          </div>
+<p-card header="Contactos">
 
-          <div class="p-field">
-            <label for="name">Nombre *</label>
-            <input type="text" pInputText id="name" [(ngModel)]="contacto.nombre" required autofocus />
-            <small class="p-invalid" *ngIf="submitted && !contacto.nombre">El nombre es requerido.</small>
-          </div>
+  <p-menubar>
+    <button pButton pRipple type="button" label="Nuevo" icon="pi pi-plus" class="btnNuevo p-button-raised p-button-text"
+      (click)="abrirModalNuevo()"></button>
+  </p-menubar>
 
-          <div class="p-field">
-            <label for="apellido">Apellido</label>
-            <input type="text" pInputText id="apellido" [(ngModel)]="contacto.apellido" required autofocus />
-          </div>
+  <p-table [value]="contactos" [columns]="cols" [paginator]="true" [rows]="6" selectionMode="single"
+    [style]="{width: '90%', height:'80%', margin: 'auto', border: 'solid 2px grey'}">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns">
+          {{col.header}}
+          <!-- Pinta de forma dinamica los headers -->
+        </th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-contacto let-columns="columns">
+      <tr>
+        <td *ngFor="let col of columns">
+          {{contacto[col.field]}}
+        </td>
+        <td>
+          <button pButton pRipple icon="pi pi-pencil" class="btnEdit p-button-rounded p-button-success p-mr-2"
+            (click)="editarContacto(contacto);"></button>
+          <button pButton pRipple icon="pi pi-trash" class="btnDelete p-button-rounded p-button-warning"
+            (click)="eliminarContacto(contacto);"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">No hay contactos.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
 
-          <div class="p-field">
-            <label for="fechanac">Cumpleaños</label>
-            <p-calendar inputId="icon" class="estiloIcon" [(ngModel)]="contacto.fechanac" [showIcon]="true" dateFormat="dd/mm/yy"></p-calendar>
-            <!--<input type="text" pInputText id="fechanac" [(ngModel)]="contacto.fechanac" required autofocus />-->
-            <small class="p-invalid" *ngIf="submitted && !contacto.fechanac">La fecha es requerida.</small>
-          </div>
+<!-- Modal displaySaveDialog - Nuevo/Editar Contacto -->
+<p-dialog [(visible)]="displaySaveDialog" header={{title}} [modal]="true" styleClass="p-fluid"
+  [style]="{width: '50%', height:'100%'}">
 
-          <div class="p-field">
-            <label for="email">Email</label>
-            <input type="text" pInputText id="email" [(ngModel)]="contacto.email" required autofocus />
-          </div>
-      </ng-template>
+  <ng-template pTemplate="content">
 
-      <ng-template pTemplate="footer">
-          <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btnModal p-button-text" (click)="hideDialog()"></button>
-          <button pButton pRipple label="Guardar" icon="pi pi-check" class="btnModal p-button-text" (click)="saveContacto()"></button>
-      </ng-template>
-  </p-dialog>
-</div>
+    <h4 class="tituloH4">Cumpleaños *</h4>
+    <div class="field" [style]="{width: '57%', margin: 'auto'}">
+      <p-calendar  class="estiloIcon" [(ngModel)]="contacto.fechanac"
+        dateFormat="dd/mm/yy" [inline]="true"></p-calendar>
+      <small class="p-invalid" *ngIf="submitted && !contacto.fechanac">La fecha es requerida.</small>
+    </div>
+
+    <h4 class="tituloH4">Usuario Id *</h4>
+    <div class="p-field" [style]="{width: '90%', margin: 'auto'}">
+      <input type="text" pInputText id="name" [(ngModel)]="contacto.usuarioId" required autofocus />
+      <small class="p-invalid" *ngIf="submitted && !contacto.usuarioId">El nombre es requerido.</small>
+    </div>
+
+    <h4 class="tituloH4">Nombre *</h4>
+    <div class="p-field" [style]="{width: '90%', margin: 'auto'}">
+      <input type="text" pInputText id="name" [(ngModel)]="contacto.nombre" required autofocus />
+      <small class="p-invalid" *ngIf="submitted && !contacto.nombre">El nombre es requerido.</small>
+    </div>
+
+    <h4 class="tituloH4">Apellido</h4>
+    <div class="p-field" [style]="{width: '90%', margin: 'auto'}">
+      <input type="text" pInputText id="apellido" [(ngModel)]="contacto.apellido" required autofocus />
+    </div>
+
+    <h4 class="tituloH4">Email</h4>
+    <div class="p-field" [style]="{width: '90%', 'padding-left': '10%'}">
+      <input type="text" pInputText id="email" [(ngModel)]="contacto.email" required autofocus />
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btnModal p-button-text"
+      (click)="hideDialog()"></button>
+    <button pButton pRipple label="Guardar" icon="pi pi-check" class="btnModal p-button-text"
+      (click)="saveContacto()"></button>
+  </ng-template>
+</p-dialog>

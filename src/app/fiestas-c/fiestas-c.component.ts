@@ -5,6 +5,7 @@ import { MessageService } from 'primeng/api';
 import { DatePipe } from '@angular/common';
 import { ContactoService } from '../service/contacto.service';
 import { Contacto } from 'src/models/contacto';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-fiestas-c',
@@ -14,14 +15,23 @@ import { Contacto } from 'src/models/contacto';
 export class FiestasCComponent implements OnInit {
 
   fiestas: Fiesta[];
-  fiesta: Fiesta = {  // Modal de Nuevo Contacto
+  fiesta: Fiesta = {  // Modal de Nueva Fiesta
     fiestaId: null,
     contactoId: null,
     usuarioId: null,
     fechaFiesta: null,
     tipo: null,
-    nombreContacto: null,
-    nombreCompra: null
+    nombreContacto: null
+  };
+  contactos: Contacto[];
+  contactosDropdown: any[];
+  contacto: Contacto = {  // Modal de Nueva Fiesta
+    contactoId: null,
+    usuarioId: null,
+    nombre: null,
+    apellido: null,
+    fechanac: null,
+    email: null
   };
   cols: any[];
   displaySaveDialog: boolean = false;
@@ -30,7 +40,7 @@ export class FiestasCComponent implements OnInit {
   pipe = new DatePipe('es');
   todayWithPipe = null;
 
-  constructor(private fiestaService: FiestaService, private messageService: MessageService, private contactoService: ContactoService) { }
+  constructor(private fiestaService: FiestaService, private messageService: MessageService, private contactoService: ContactoService, private confirmationService: ConfirmationService) { }
 
   getAll() {
     this.fiestaService.getAll().subscribe(
@@ -61,6 +71,23 @@ export class FiestasCComponent implements OnInit {
     );
   }
 
+  getAllContactos(event) {
+    let query = event.query;
+    this.contactoService.getAll().subscribe(
+      (result: any) => {
+        let contactos: Contacto[] = [];
+        for (let i = 0; i < result.length; i++) {
+          let contacto = result[i] as Contacto; // Convertir la variable contacto (que no tiene un tipo definido) en una variable de tipo Contacto
+          contactos.push(contacto);
+        }
+        this.contactosDropdown = contactos;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
   abrirModal() {
     this.fiesta = {
       fiestaId: null,
@@ -68,8 +95,15 @@ export class FiestasCComponent implements OnInit {
       usuarioId: null,
       fechaFiesta: null,
       tipo: null,
-      nombreContacto: null,
-      nombreCompra: null
+      nombreContacto: null
+    };
+    this.contacto = {
+      contactoId: null,
+      usuarioId: null,
+      nombre: null,
+      apellido: null,
+      fechanac: null,
+      email: null
     };
     this.title = "Nueva Fiesta";
     this.submitted = false;
@@ -78,14 +112,21 @@ export class FiestasCComponent implements OnInit {
 
   addFiesta() {
     this.submitted = true;
-    this.todayWithPipe = this.pipe.transform(this.fiesta.fechaFiesta, 'dd/MM/yyyy'); // Formatea la fecha que obtiene del formulario Cumpleanyos
-    this.fiesta.fechaFiesta = this.todayWithPipe;
+    if (this.fiesta.fechaFiesta instanceof Date) {
+      this.todayWithPipe = this.pipe.transform(this.fiesta.fechaFiesta, 'dd/MM/yyyy'); // Formatea la fecha que obtiene del formulario Cumpleanyos
+      this.fiesta.fechaFiesta = this.todayWithPipe;
+    }
+    console.log("contacto nombre " + this.contacto.nombre);
+    console.log("contacto id " + this.contacto.contactoId);
+    console.log("fiesta id " + this.fiesta.fiestaId);
+    /*  IGUALAR contacto.contactoId   A   fiesta.contactoId  */
+    //this.fiesta.contactoId = this.contacto.contactoId;
 
     this.fiestaService.addFiesta(this.fiesta).subscribe( // Procesos que surgan una vez se ha guardado el contacto
-      (result:any) => {
+      (result: any) => {
         let fiesta = result as Fiesta;
-        this.fiestas.push(fiesta); // Incluye automaticamente el contacto en la lista
-        this.messageService.add({severity: 'succes', summary:"Resultado", detail: "Se guardó el contacto correctamente."});
+        this.fiestas.push(fiesta);
+        this.messageService.add({ severity: 'succes', summary: "Resultado", detail: "Se guardó la fiesta correctamente." });
         this.displaySaveDialog = false; // Cierra el modal
       },
       error => {
@@ -99,27 +140,34 @@ export class FiestasCComponent implements OnInit {
     this.submitted = false;
   }
 
-/*
   eliminarFiesta(fiesta: Fiesta) {
+    console.log("fiesta " + fiesta)
     this.confirmationService.confirm({
-        message: '¿Estás seguro de que quieres eliminar la fiesta ' + contacto.nombre + '?',
-        header: 'Eliminar',
-        icon: 'pi pi-exclamation-triangle',
-        accept: () => {
-            this.fiestaService.eliminarFiesta(fiesta.fiestaId).subscribe(data => {
-              this.messageService.add({severity:'success', summary: 'Successful', detail: 'Fiesta eliminada con éxito', life: 3000});
-            });
-        }
+      message: '¿Estás seguro de que quieres eliminar la fiesta de ' + fiesta.nombreContacto + '?',
+      header: 'Eliminar',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.fiestaService.eliminarFiesta(fiesta.fiestaId).subscribe(
+          (result: any) => {
+            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Fiesta eliminada con éxito', life: 3000 });
+            this.eliminarObjeto(result.fiestaId);
+          });
+      }
     });
   }
-*/
+
+  eliminarObjeto(fiestaId: number) {
+    let index = this.fiestas.findIndex((e) => e.fiestaId == fiestaId);
+    if (index != -1) {
+      this.fiestas.splice(index, 1);
+    }
+  }
+
   ngOnInit() {
     this.getAll();
     this.cols = [
-      { field: "fiestaId", header: "ID Fiesta" },
-      { field: "nombreContacto", header: "Nombre contacto" },
-      { field: "contactoId", header: "ID Contacto" },
       { field: "usuarioId", header: "ID Usuario" },
+      { field: "nombreContacto", header: "Nombre contacto" },
       { field: "fechaFiesta", header: "Fecha de la Fiesta" },
       { field: "tipo", header: "Tipo" }
     ];

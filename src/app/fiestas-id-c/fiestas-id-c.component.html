@@ -1,88 +1,159 @@
-<p-panel [showHeader]="false">
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+<p-card [style]="{'height': '1000px'}">
   <div style="margin-bottom: 30px">
-      <p-menubar class="menubar">
-        <button pButton pRipple label="Editar" icon="pi pi-pencil" class="btnEdit p-button-rounded p-button-success p-mr-2" (click)="btnEditarFiesta();"></button>
-        <button pButton pRipple label="Volver" class="btnVolver p-button-raised p-button-secondary p-button-text" [routerLink]="['/fiestas']"></button>
-      </p-menubar>
+    <p-menubar class="menubar">
+      <button pButton pRipple label="Eliminar" icon="pi pi-trash" class="btnDelete p-button-rounded p-button-warning"
+        (click)="eliminarFiesta(fiesta);"></button>
+      <button pButton pRipple label="Volver" class="btnVolver p-button-raised p-button-secondary p-button-text"
+        [routerLink]="['/fiestas']"></button>
+    </p-menubar>
   </div>
 
-  <div class="card">
-    <h1 style="text-align: center;">Fiesta de {{fiesta.nombreContacto}}</h1>
+  <mat-grid-list cols="3" rowHeight="700px">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
 
-    <p-splitter [style]="{'height': '100%'}" styleClass="mb-5">
-      <!-- PANEL 1 -->
+      <p-card header="Fiesta" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
+        <button pButton pRipple label="Editar" style="float: right;" icon="pi pi-pencil"
+          class="btnEdit p-button-rounded p-button-success p-mr-2" (click)="btnEditarFiesta();"></button>
         <ng-template pTemplate>
-            <div class="panelDatos col flex align-items-center justify-content-center">
-              <div class="p-field">
-                <h3 class="fieldinput">Fiesta Id *</h3>
-                <input size="30" type="text" pInputText id="name"  [disabled]="disabled" [(ngModel)]="fiesta.fiestaId" required autofocus />
-              </div>
+          <div class="panelDatos col flex align-items-center justify-content-center">
 
-              <div class="p-field">
-                <h3 class="fieldinput">Contacto Id *</h3>
-                <input size="30" type="text" pInputText id="name" [disabled]="disabled" [(ngModel)]="fiesta.contactoId" required autofocus />
-              </div>
-
-              <div class="p-field">
-                <h3 class="fieldinput">Nombre Contacto *</h3>
-                <input size="30" type="text" pInputText id="nombreContacto" [disabled]="disabled" [(ngModel)]="fiesta.nombreContacto" required autofocus />
-              </div>
-
-              <div class="p-field">
-                <h3 class="fieldinput">Usuario Id *</h3>
-                <input size="30" type="text" pInputText id="name" [disabled]="disabled" [(ngModel)]="fiesta.usuarioId" required autofocus />
-              </div>
-
-              <div class="p-field">
-                <h3 class="fieldinput">Fecha</h3>
-                <input size="30" type="text" pInputText id="fechaFiesta" [disabled]="disabled" [(ngModel)]="fiesta.fechaFiesta" required autofocus />
-              </div>
-
-              <div class="p-field">
-                <h3 class="fieldinput">Tipo</h3>
-                <input size="30" type="text" pInputText id="tipo" [disabled]="disabled" [(ngModel)]="fiesta.tipo" required autofocus />
-              </div>
+            <div class="p-field">
+              <h3 class="fieldinput">Usuario Id *</h3>
+              <input size="30" type="text" pInputText id="name" [disabled]="disabled" [(ngModel)]="fiesta.usuarioId"
+                required autofocus />
             </div>
-        </ng-template>
-        <!-- PANEL 2 -->
-        <ng-template pTemplate>
-            <div class="panelCompras col flex align-items-center justify-content-center">
 
-            <p-table [paginator]="true" [rows]="15" selectionMode="single">
-            <ng-template pTemplate="header" let-columns>
+            <div class="p-field">
+              <h3 class="fieldinput">Nombre Contacto *</h3>
+              <input size="30" type="text" pInputText id="nombreContacto" [disabled]="true"
+                [(ngModel)]="fiesta.nombreContacto" required autofocus />
+            </div>
+
+            <div class="p-field">
+              <h3 class="fieldinput">Fecha</h3>
+              <p-calendar id="fechaFiesta" inputId="icon" class="estiloIcon" [(ngModel)]="fiesta.fechaFiesta"
+                [showIcon]="true" [disabled]="disabled" dateFormat="dd/mm/yy"></p-calendar>
+            </div>
+
+            <div class="p-field">
+              <h3 class="fieldinput">Tipo</h3>
+              <input size="30" type="text" pInputText id="tipo" [disabled]="disabled" [(ngModel)]="fiesta.tipo" required
+                autofocus />
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btonCancelar p-button-text"
+              (click)="btonCancelar()" *ngIf="!this.disabled"></button>
+            <button pButton pRipple label="Guardar" icon="pi pi-check" class="btonGuardar p-button-text"
+              (click)="editarFiesta()" *ngIf="!this.disabled"></button>
+          </div>
+        </ng-template>
+      </p-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <p-card header="Compras" [style]="{'width': '18rem', 'margin-bottom': '2em'}">
+        <ng-template pTemplate>
+          <div class="panelCompras col flex align-items-center justify-content-center">
+            <p-table [value]="compras" dataKey="id">
+              <ng-template pTemplate="header">
                 <tr>
-                    <th>
-                      Compras
-                    </th>
-                    <th></th>
+                  <th></th>
+                  <th>
+                    <button pButton pRipple icon="pi pi-plus" class="btnModal p-button-text"
+                      (click)="btnNuevaCompra()"></button>
+                  </th>
                 </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-fiesta let-columns="columns">
+              </ng-template>
+              <ng-template pTemplate="body" let-compra>
                 <tr>
-                    <td>
-                        {{fiesta.nombreCompra}}
-                    </td>
-                    <td>
-                      <button pButton pRipple icon="pi pi-pencil" class="btnEdit p-button-rounded p-button-success" [routerLink]="['/fiestas',fiesta.fiestaId]"></button>
-                      <button pButton pRipple icon="pi pi-trash" class="btnDelete p-button-rounded p-button-warning" ></button>
+                  <td pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="compra.nombre">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{compra.nombre}}
+                      </ng-template>
+                    </p-cellEditor>
                   </td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="emptymessage">
+                  <td>
+                    <button pButton pRipple icon="pi pi-times" class="btnDeleteCompras p-button-text"
+                      (click)="eliminarCompra(compra)"></button>
+                  </td>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
                 <tr>
-                    <td colspan="4">No hay compras.</td>
+                  <td colspan="4">No hay compras.</td>
                 </tr>
-            </ng-template>
-        </p-table>
-
-            </div>
+              </ng-template>
+            </p-table>
+          </div>
         </ng-template>
-    </p-splitter>
-</div>
+      </p-card>
+    </mat-grid-tile>
 
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <p-card header="Invitados" [style]="{'width': '18rem', 'margin-bottom': '2em'}">
+        <ng-template pTemplate>
+          <div class="panelInvitados col flex align-items-center justify-content-center">
+            <p-table [value]="compras" dataKey="id">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th></th>
+                  <th>
+                    <button pButton pRipple icon="pi pi-plus" class="btnModal p-button-text"
+                      (click)="btnNuevaCompra()"></button>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-compra>
+                <tr>
+                  <td pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="compra.nombre">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{compra.nombre}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td>
+                    <button pButton pRipple icon="pi pi-times" class="btnDeleteCompras p-button-text"
+                      (click)="eliminarCompra(compra)"></button>
+                  </td>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="4">No hay invitados.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </ng-template>
+      </p-card>
+    </mat-grid-tile>
+  </mat-grid-list>
 
-  <div style="text-align: center;">
-    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="btonCancelar()" *ngIf="!this.disabled"></button>
-    <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="editarFiesta()" *ngIf="!this.disabled"></button>
-  </div>
-</p-panel>
+</p-card>
+
+<!-- Modal saveDialogCompras - Nueva Compra -->
+<p-dialog [(visible)]="saveDialogCompras" header={{title}} [modal]="true" styleClass="p-fluid"
+  [style]="{width: '30%', height:'25%'}">
+  <ng-template pTemplate="content">
+    <div class="p-field" [style]="{width: '90%', 'padding-left': '10%'}">
+      <input type="text" pInputText id="compra" [(ngModel)]="compra.nombre" required autofocus />
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btnModal p-button-text"
+      (click)="hideDialog()"></button>
+    <button pButton pRipple label="Guardar" icon="pi pi-check" class="btnModal p-button-text"
+      (click)="addCompra()"></button>
+  </ng-template>
+</p-dialog>

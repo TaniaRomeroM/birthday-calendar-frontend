@@ -1,4 +1,4 @@
-import { LOCALE_ID,NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
@@ -22,8 +22,11 @@ import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import {SplitterModule} from 'primeng/splitter';
-import {DividerModule} from 'primeng/divider';
+import { SplitterModule } from 'primeng/splitter';
+import { DividerModule } from 'primeng/divider';  // Quitar
+import { CardModule } from 'primeng/card';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 import { CalendarModule } from 'primeng/calendar';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -94,10 +97,13 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     CalendarModule,
     ConfirmDialogModule,
     SplitterModule,
-    DividerModule,
+    DividerModule,     // Quitar
+    AutoCompleteModule,
+    CardModule,
+    MatGridListModule,
     RouterModule.forRoot(appRoutes) // Para indicar que quiero utilizar esa contante (appRoutes) en la app para enroutar los componentes
   ],
-  providers: [MessageService, ConfirmationService, { provide: LOCALE_ID, useValue: 'es'} ],
+  providers: [MessageService, ConfirmationService, { provide: LOCALE_ID, useValue: 'es' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

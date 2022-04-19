@@ -1,11 +1,12 @@
-full-calendar {  /*// No funciona*/
+full-calendar {
+  /*// No funciona*/
   width: '200px';
   height: '100%';
   text-transform: capitalize;
   color: rgb(66, 113, 94);
 }
 
-.modalNuevoContacto{
+.modalNuevoContacto {
   justify-content: center;
   text-align: center;
 }

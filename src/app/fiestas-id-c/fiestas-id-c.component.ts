@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Fiesta } from 'src/models/fiesta';
 import { FiestaService } from '../service/fiesta.service';
 import { ContactoService } from '../service/contacto.service';
+import { CompraService } from '../service/compra.service';
 import { Contacto } from 'src/models/contacto';
+import { Compra } from 'src/models/compra';
+import { ConfirmationService } from 'primeng/api';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-fiestas-id-c',
@@ -20,13 +24,32 @@ export class FiestasIdCComponent implements OnInit {
     usuarioId: null,
     fechaFiesta: null,
     tipo: null,
-    nombreContacto: null,
-    nombreCompra: null
+    nombreContacto: null
   }
+  compras: Compra[];
+  compra: Compra = {
+    compraId: null,
+    fiestaId: null,
+    nombre: null
+  }
+  saveDialogCompras: boolean = false; // dialogo Nueva Compra
+  title: string; // dialogo Nueva Compra
   disabled: boolean = true;
   cols: any[];
+  submitted: boolean;
+  pipe = new DatePipe('es');
+  todayWithPipe = null;
 
-  constructor(private route: ActivatedRoute, private fiestaService: FiestaService, private messageService: MessageService, private contactoService: ContactoService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private fiestaService: FiestaService, private messageService: MessageService, private contactoService: ContactoService, private compraService: CompraService, private confirmationService: ConfirmationService) { }
+
+  /* FIESTA */
+  btnEditarFiesta() {
+    this.disabled = false;
+  }
+
+  btonCancelar() {
+    this.disabled = true;
+  }
 
   getFiesta() {
     this.fiestaService.encontrarFiesta(this.fiestaId).subscribe(
@@ -46,9 +69,8 @@ export class FiestasIdCComponent implements OnInit {
             }
           );
 
-          /* Poner getCompras();*/
-
           this.fiesta = fiesta;
+          this.getCompras();
         }
       },
       error => {
@@ -57,22 +79,17 @@ export class FiestasIdCComponent implements OnInit {
     );
   }
 
-  btnEditarFiesta() {
-    this.disabled = false;
-  }
-
-  btonCancelar() {
-    this.disabled = true;
-  }
-
   editarFiesta() {
-    /*this.todayWithPipe = this.pipe.transform(this.fiesta.fechaFiesta, 'dd/MM/yyyy'); // Formatea la fecha que obtiene del formulario Cumpleanyos
-    this.fiesta.fechaFiesta = this.todayWithPipe;*/
+    if (this.fiesta.fechaFiesta instanceof Date) {
+    this.todayWithPipe = this.pipe.transform(this.fiesta.fechaFiesta, 'dd/MM/yyyy'); // Formatea la fecha que obtiene del formulario Cumpleanyos
+    this.fiesta.fechaFiesta = this.todayWithPipe;
+    }
+
     this.fiestaService.addFiesta(this.fiesta).subscribe( // Procesos que surgan una vez se ha guardado el contacto
-      (result:any) => {
+      (result: any) => {
         let fiesta = result as Fiesta;
         this.fiesta = fiesta;
-        this.messageService.add({severity: 'succes', summary:"Resultado", detail: "Se guardó el contacto correctamente."});
+        this.messageService.add({ severity: 'succes', summary: "Resultado", detail: "Se guardó el contacto correctamente." });
         this.disabled = true;
       },
       error => {
@@ -81,9 +98,98 @@ export class FiestasIdCComponent implements OnInit {
     )
   }
 
+  eliminarFiesta(fiesta: Fiesta) {
+    this.confirmationService.confirm({
+      message: '¿Estás seguro de que quieres eliminar la fiesta de ' + fiesta.nombreContacto + '?',
+      header: 'Eliminar',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.fiestaService.eliminarFiesta(fiesta.fiestaId).subscribe(
+          (result: any) => {
+            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Fiesta eliminada con éxito', life: 3000 });
+            this.router.navigate(['fiestas']);
+          });
+      }
+    });
+  }
+
+
+  /* COMPRA */
+  btnNuevaCompra() {
+    this.compra = {
+      compraId: null,
+      fiestaId: null,
+      nombre: null
+    }
+    this.title = "Nueva Compra";
+    this.saveDialogCompras = true;
+  }
+
+  hideDialog() {
+    this.saveDialogCompras = false;
+    this.submitted = false;
+  }
+
+  getCompras() {
+    this.compraService.getAll(this.fiesta.fiestaId).subscribe(
+      (result: any) => {
+        let compras: Compra[] = [];
+        for (let i = 0; i < result.length; i++) {
+          let compra = result[i] as Compra; // Convertir la variable contacto (que no tiene un tipo definido) en una variable de tipo Contacto
+          compras.push(compra);
+        }
+        this.compras = compras;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  addCompra() {
+    this.submitted = true;
+    this.compra.fiestaId = this.fiesta.fiestaId;
+    this.compraService.addCompra(this.compra).subscribe( // Procesos que surgan una vez se ha guardado el contacto
+      (result: any) => {
+        let compra = result as Compra;
+        this.compras.push(compra);
+        this.messageService.add({ severity: 'succes', summary: "Resultado", detail: "Se guardó la compra correctamente." });
+        this.saveDialogCompras = false;
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  eliminarCompra(compra: Compra) {
+    this.confirmationService.confirm({
+      message: '¿Estás seguro de que quieres eliminar ' + compra.nombre + '?',
+      header: 'Eliminar',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.compraService.eliminarCompra(compra.compraId).subscribe(
+          (result: any) => {
+            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Compra eliminada con éxito', life: 3000 });
+            this.eliminarObjeto(result.compraId);
+          });
+      }
+    });
+  }
+
+  eliminarObjeto(compraId: number) {
+    let index = this.compras.findIndex((e) => e.compraId == compraId);
+    if (index != -1) {
+      this.compras.splice(index, 1);
+    }
+  }
+
   ngOnInit(): void {
     this.fiestaId = this.route.snapshot.params['id']; // Asi recibe el Id enviado desde el componente 'fiestas-c'
     this.getFiesta();
+    this.cols = [
+      { field: "nombre", header: "Compras" },
+    ];
   }
 
 }
