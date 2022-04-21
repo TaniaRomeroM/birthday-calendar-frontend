@@ -52,7 +52,11 @@ export class InicioCComponent implements OnInit {
         this.eventFromApiPush.push({
           title: c.nombre,
           start: fechaNacimiento,
-          /*endRecur: fechaNacimiento,*/
+          rrule: {
+            freq: 'yearly',
+            dtstart: fechaNacimiento,
+            until: '2032-01-01'
+          }
         })
       })
 
@@ -68,7 +72,6 @@ export class InicioCComponent implements OnInit {
         dayHeaderFormat: { weekday: 'long' },
         dateClick: this.handleDateClick.bind(this), // bind es importante
         eventColor: 'rgb(160, 228, 200)',
-        // events:this.eventFromApiPush,
         locale: esLocale,
         aspectRatio: 2.5,
         showNonCurrentDates: false,

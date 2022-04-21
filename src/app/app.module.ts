@@ -33,6 +33,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid'; // plugin
 import interactionPlugin from '@fullcalendar/interaction'; // plugin
 import listPlugin from '@fullcalendar/list'; // plugin
+import rrulePlugin from '@fullcalendar/rrule'; // plugin
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 
@@ -60,7 +61,8 @@ const appRoutes: Routes = [ // Crear un objeto por cada ruta
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin,
-  listPlugin
+  listPlugin,
+  rrulePlugin
 ]);
 
 @NgModule({
