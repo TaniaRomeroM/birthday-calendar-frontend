@@ -22,13 +22,28 @@ button {
   height: 40px;
 }
 
+ /*!important para que funcione */
+ .btnNuevo:hover{
+  background-color: white !important;
+  border-color: rgb(93, 149, 127) !important;
+  color: rgb(93, 149, 127) !important;
+}
+
 .btonCancelar {
   color: rgb(192, 112, 102);
- }
+}
 
- .btonGuardar {
-   color: rgb(93, 149, 127);
- }
+.btonCancelar:hover {
+  color: rgb(192, 112, 102) !important;
+}
+
+.btonGuardar {
+  color: rgb(93, 149, 127);
+}
+
+.btonGuardar:hover {
+  color: rgb(93, 149, 127) !important;
+}
 
 .btnEdit {
   background-color: rgb(128, 212, 178);

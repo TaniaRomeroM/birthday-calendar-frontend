@@ -11,8 +11,8 @@ export class ContactoService {
   baseUrl: string = "http://localhost:8080";
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<any> {
-    return this.http.get(this.baseUrl + "/contactos/1");
+  getAll(nombreUsuario: string): Observable<any> {
+    return this.http.get(this.baseUrl + "/contactos/" + nombreUsuario);
   }
 
   encontrarContacto(contactoId: number): Observable<any> {

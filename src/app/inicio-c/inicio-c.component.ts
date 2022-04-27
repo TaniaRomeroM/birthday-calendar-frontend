@@ -6,6 +6,7 @@ import { ContactoService } from '../service/contacto.service';
 import { DatePipe } from '@angular/common';
 import esLocale from '@fullcalendar/core/locales/es';
 import { reduce } from 'rxjs';
+import { TokenService } from '../service/token.service';
 
 @Component({
   selector: 'app-inicio-c',
@@ -14,7 +15,7 @@ import { reduce } from 'rxjs';
 })
 export class InicioCComponent implements OnInit {
 
-  constructor(private contactoService: ContactoService, private messageService: MessageService) { }
+  constructor(private contactoService: ContactoService, private messageService: MessageService, private tokenService: TokenService) { }
 
   displaySaveDialog: boolean = false; // Modal
   contactos: Contacto[];
@@ -33,7 +34,10 @@ export class InicioCComponent implements OnInit {
   calendarOptions: CalendarOptions;
 
   getAll() {
-    this.contactoService.getAll().subscribe(result => {
+    if (this.tokenService.getToken()) {
+      console.log("TOKEN" + this.tokenService.getToken());
+      console.log("USERNAME" + this.tokenService.getUsername());
+    this.contactoService.getAll(this.tokenService.getUsername()).subscribe(result => {
 
       let contactos: Contacto[] = [];
       for (let i = 0; i < result.length; i++) {
@@ -83,6 +87,7 @@ export class InicioCComponent implements OnInit {
       }
     );
   }
+}
 
   convertToDate(dateString) {
     //  Convert a "dd/MM/yyyy" string into a Date object
@@ -117,5 +122,4 @@ export class InicioCComponent implements OnInit {
   ngOnInit(): void {
     this.getAll();
   }
-
 }

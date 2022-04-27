@@ -89,7 +89,7 @@ export class FiestasIdCComponent implements OnInit {
       (result: any) => {
         let fiesta = result as Fiesta;
         this.fiesta = fiesta;
-        this.messageService.add({ severity: 'succes', summary: "Resultado", detail: "Se guardó el contacto correctamente." });
+        this.messageService.add({ severity: 'success', summary: "Fiesta", detail: "Se han modificado los datos correctamente." });
         this.disabled = true;
       },
       error => {
@@ -106,7 +106,7 @@ export class FiestasIdCComponent implements OnInit {
       accept: () => {
         this.fiestaService.eliminarFiesta(fiesta.fiestaId).subscribe(
           (result: any) => {
-            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Fiesta eliminada con éxito', life: 3000 });
+            this.messageService.add({ severity: 'success', summary: 'Fiesta', detail: 'Fiesta eliminada con éxito', life: 3000 });
             this.router.navigate(['fiestas']);
           });
       }
@@ -153,7 +153,7 @@ export class FiestasIdCComponent implements OnInit {
       (result: any) => {
         let compra = result as Compra;
         this.compras.push(compra);
-        this.messageService.add({ severity: 'succes', summary: "Resultado", detail: "Se guardó la compra correctamente." });
+        this.messageService.add({ severity: 'success', summary: "Productos", detail: "Se ha añadido el producto correctamente." });
         this.saveDialogCompras = false;
       },
       error => {
@@ -170,7 +170,7 @@ export class FiestasIdCComponent implements OnInit {
       accept: () => {
         this.compraService.eliminarCompra(compra.compraId).subscribe(
           (result: any) => {
-            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Compra eliminada con éxito', life: 3000 });
+            this.messageService.add({ severity: 'success', summary: 'Compra', detail: 'Compra eliminada con éxito', life: 3000 });
             this.eliminarObjeto(result.compraId);
           });
       }

@@ -2,13 +2,15 @@
     <mat-icon [routerLink]="'inicio'" style="cursor: pointer;">cake</mat-icon>
     <span [routerLink]="'inicio'" class="toolbar-item-span" style="cursor: pointer;">BirthDay Calendar</span>
     <span class="toolbar-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" style="cursor: pointer;">
-        <mat-icon>logout</mat-icon>
-    </button>
-</mat-toolbar>
+    <!--<button pButton pRipple type="button" class="btnCerrarSesion p-button-raised p-button-text" *ngIf="isLogged" (click)="onLogOut()">
+      <span class="material-icons">logout</span>Cerrar sesión
+    </button>-->
+    <p-splitButton icon="pi pi-fw pi-users" label={{this.usuario.nombre}} styleClass="p-button-text p-button-secondary p-mr-2 p-mb-2" [menuStyle]="{'width':'auto'}" *ngIf="isLogged" (onClick)="routePerfil()" [model]="items"></p-splitButton>
+    <!-- {{usuario.nombre}} -->
+  </mat-toolbar>
 
 <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="side" opened="true">
+    <mat-sidenav #sidenav mode="side" opened="true" *ngIf="isLogged">
         <mat-nav-list>
 
             <mat-list-item [routerLink]="'inicio'" class="sidenav-item">

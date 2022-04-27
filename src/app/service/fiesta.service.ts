@@ -11,8 +11,8 @@ export class FiestaService {
   baseUrl: string = "http://localhost:8080";
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<any> {
-    return this.http.get(this.baseUrl + "/fiestas/1");
+  getAll(nombreUsuario: string): Observable<any> {
+    return this.http.get(this.baseUrl + "/fiestas/" + nombreUsuario);
   }
 
   addFiesta(fiesta: Fiesta): Observable<any> {

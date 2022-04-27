@@ -1,0 +1,22 @@
+.form-group {
+  margin: 2%;
+}
+
+.btnRegistro {
+  background-color: rgb(215, 218, 214);
+  color: rgb(79, 129, 111);
+}
+
+.btnRegistro:hover {
+  color: white !important;
+  border-color: white !important;
+}
+
+.alert {
+  margin-bottom: 1%;;
+}
+
+a:link, a:visited, a:active {
+  text-decoration:none !important;
+  color: black !important;
+}

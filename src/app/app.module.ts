@@ -26,7 +26,9 @@ import { SplitterModule } from 'primeng/splitter';
 import { DividerModule } from 'primeng/divider';  // Quitar
 import { CardModule } from 'primeng/card';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 import { CalendarModule } from 'primeng/calendar';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -36,6 +38,7 @@ import listPlugin from '@fullcalendar/list'; // plugin
 import rrulePlugin from '@fullcalendar/rrule'; // plugin
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { AccordionModule } from 'primeng/accordion';
 
 import { InicioCComponent } from './inicio-c/inicio-c.component';
 import { ContactosCComponent } from './contactos-c/contactos-c.component';
@@ -44,19 +47,12 @@ import { NotificacionesCComponent } from './notificaciones-c/notificaciones-c.co
 import { SugerenciasCComponent } from './sugerencias-c/sugerencias-c.component';
 import { ErrorPersonalizadoComponent } from './error-personalizado/error-personalizado.component';
 import { FiestasIdCComponent } from './fiestas-id-c/fiestas-id-c.component';
+import { LoginComponent } from './auth/login.component';
+import { RegistroComponent } from './auth/registro.component';
+import { MenuCComponent } from './menu-c/menu-c.component';
+import { PerfilCComponent } from './perfil-c/perfil-c.component';
 
 registerLocaleData(localeEs, 'es');
-
-const appRoutes: Routes = [ // Crear un objeto por cada ruta
-  { path: '', component: InicioCComponent },
-  { path: 'inicio', component: InicioCComponent },
-  { path: 'contactos', component: ContactosCComponent },
-  { path: 'fiestas', component: FiestasCComponent },
-  { path: 'fiestas/:id', component: FiestasIdCComponent },
-  { path: 'notificaciones', component: NotificacionesCComponent },
-  { path: 'sugerencias', component: SugerenciasCComponent },
-  { path: '**', component: ErrorPersonalizadoComponent } // Tienes que estar siempre el ultimo, Cualquier ruta que sea diferente a las anteriores ira aqui
-];
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -75,6 +71,10 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     SugerenciasCComponent,
     ErrorPersonalizadoComponent,
     FiestasIdCComponent,
+    LoginComponent,
+    RegistroComponent,
+    MenuCComponent,
+    PerfilCComponent,
   ],
   imports: [
     BrowserModule,
@@ -103,7 +103,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AutoCompleteModule,
     CardModule,
     MatGridListModule,
-    RouterModule.forRoot(appRoutes) // Para indicar que quiero utilizar esa contante (appRoutes) en la app para enroutar los componentes
+    AccordionModule,
+    InputSwitchModule,
+    SplitButtonModule
   ],
   providers: [MessageService, ConfirmationService, { provide: LOCALE_ID, useValue: 'es' }],
   bootstrap: [AppComponent]

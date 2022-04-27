@@ -1,0 +1,38 @@
+.p-inputgroup {
+  width: 80%;
+  padding-top: 5%;
+  margin: auto;
+}
+
+.p-button-outlined {
+  margin: 5%;
+}
+
+.form-group {
+  padding-top: 4%;
+  margin: auto;
+}
+
+.btnIniciarSesion {
+background-color: rgb(215, 218, 214);
+color: rgb(79, 129, 111);
+}
+
+.btnIniciarSesion:hover {
+  color: white !important;
+  border-color: white !important;
+}
+
+.alert {
+  margin-top: 5%;
+  color: rgb(253, 39, 39);
+}
+
+.hrefregistro {
+  margin: 5%;
+}
+
+a:link, a:visited, a:active {
+  text-decoration:none !important;
+  color: black !important;
+}

@@ -37,3 +37,8 @@ mat-toolbar {
 mat-sidenav {
   background-color: rgb(139, 204, 178, 0.1);
 }
+
+p-splitButton {
+  margin-right: 4%;
+  color: black;
+}

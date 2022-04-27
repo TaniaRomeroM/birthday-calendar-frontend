@@ -1,4 +1,5 @@
 <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+<p-toast></p-toast>
 
 <p-card header="Contactos">
 
@@ -11,7 +12,7 @@
     [style]="{width: '90%', height:'80%', margin: 'auto', border: 'solid 2px rgb(223, 231, 227)', 'margin-top': '1%'}">
     <ng-template pTemplate="header" let-columns>
       <tr>
-        <th *ngFor="let col of columns">
+        <th *ngFor="let col of columns" [style]="{'text-align': 'center'}">
           {{col.header}}
           <!-- Pinta de forma dinamica los headers -->
         </th>
@@ -20,7 +21,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-contacto let-columns="columns">
       <tr>
-        <td *ngFor="let col of columns">
+        <td *ngFor="let col of columns" [style]="{'text-align': 'center'}">
           {{contacto[col.field]}}
         </td>
         <td>
@@ -41,44 +42,46 @@
 
 <!-- Modal displaySaveDialog - Nuevo/Editar Contacto -->
 <p-dialog [(visible)]="displaySaveDialog" header={{title}} [modal]="true" styleClass="p-fluid"
-  [style]="{width: '50%', height:'100%'}">
+  [style]="{width: '60%', height:'90%'}">
 
   <ng-template pTemplate="content">
 
-    <h4 class="tituloH4">Cumpleaños *</h4>
-    <div class="field" [style]="{width: '57%', margin: 'auto'}">
-      <p-calendar  class="estiloIcon" [(ngModel)]="contacto.fechanac"
-        dateFormat="dd/mm/yy" [inline]="true"></p-calendar>
-      <small class="p-invalid" *ngIf="submitted && !contacto.fechanac">La fecha es requerida.</small>
-    </div>
-
-    <h4 class="tituloH4">Usuario Id *</h4>
-    <div class="p-field" [style]="{width: '90%', margin: 'auto'}">
-      <input type="text" pInputText id="name" [(ngModel)]="contacto.usuarioId" required autofocus />
-      <small class="p-invalid" *ngIf="submitted && !contacto.usuarioId">El nombre es requerido.</small>
-    </div>
+    <p-accordion [style]="{width: '90%', margin: 'auto', 'padding-top': '1%'}">
+      <p-accordionTab header="Cumpleaños *">
+        <div class="field" [style]="{width: '57%', margin: 'auto'}">
+          <p-calendar class="estiloIcon" [(ngModel)]="contacto.fechanac" dateFormat="dd/mm/yy" [inline]="true">
+          </p-calendar>
+          <small class="p-invalid" *ngIf="submitted && !contacto.fechanac">La fecha es requerida.</small>
+        </div>
+      </p-accordionTab>
+    </p-accordion>
 
     <h4 class="tituloH4">Nombre *</h4>
-    <div class="p-field" [style]="{width: '90%', margin: 'auto'}">
+    <div class="p-field" [style]="{width: '80%', margin: 'auto'}">
       <input type="text" pInputText id="name" [(ngModel)]="contacto.nombre" required autofocus />
       <small class="p-invalid" *ngIf="submitted && !contacto.nombre">El nombre es requerido.</small>
     </div>
 
     <h4 class="tituloH4">Apellido</h4>
-    <div class="p-field" [style]="{width: '90%', margin: 'auto'}">
-      <input type="text" pInputText id="apellido" [(ngModel)]="contacto.apellido" required autofocus />
+    <div class="p-field" [style]="{width: '80%', margin: 'auto'}">
+      <input type="text" pInputText id="apellido" [(ngModel)]="contacto.apellido" />
     </div>
 
     <h4 class="tituloH4">Email</h4>
-    <div class="p-field" [style]="{width: '90%', 'padding-left': '10%'}">
-      <input type="text" pInputText id="email" [(ngModel)]="contacto.email" required autofocus />
+    <div class="p-field" [style]="{width: '80%', margin: 'auto'}">
+      <input type="text" pInputText id="email" [(ngModel)]="contacto.email" />
+    </div>
+
+    <div class="tituloH4">
+      <label class="estiloLabel">Fiesta</label>
+      <p-inputSwitch [(ngModel)]="checked"></p-inputSwitch>
     </div>
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btnModal p-button-text"
+    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btonCancelar p-button-text"
       (click)="hideDialog()"></button>
-    <button pButton pRipple label="Guardar" icon="pi pi-check" class="btnModal p-button-text"
+    <button pButton pRipple label="Guardar" icon="pi pi-check" class="btonGuardar p-button-text"
       (click)="saveContacto()"></button>
   </ng-template>
 </p-dialog>

@@ -1,0 +1,77 @@
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+<p-toast></p-toast>
+<!--<p-toast></p-toast>
+<p-toast position="center" key="c" (onClose)="onRegisterReject()" [baseZIndex]="5000">
+  <ng-template let-message pTemplate="message">
+      <div class="flex flex-column" style="flex: 1">
+          <div class="text-center">
+              <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+              <h4>{{message.summary}}</h4>
+              <p>{{message.detail}}</p>
+          </div>
+          <div class="grid p-fluid">
+              <div class="col-6">
+                  <button type="button" pButton (click)="onRegisterConfirm()" label="Yes" class="p-button-success"></button>
+              </div>
+              <div class="col-6">
+                  <button type="button" pButton (click)="onRegisterReject()" label="No" class="p-button-secondary"></button>
+              </div>
+          </div>
+      </div>
+  </ng-template>
+</p-toast>-->
+
+<p-card header="REGISTRO" [style]="{width: '50%', height: '90%','margin': 'auto', 'text-align': 'center', 'color': 'white', 'background-color': 'rgb(115, 176, 146)'}">
+
+  <form #f="ngForm" (ngSubmit)="showRegisterConfirm()" novalidate>
+    <div class="form-group">
+      <label for="nombre">Nombre *</label><br>
+      <input type="text" name="nombre" id="nombre" class="form-control"
+      [(ngModel)]="nombre" required>
+    </div>
+
+    <div class="form-group">
+      <label for="apellido">Apellido</label><br>
+      <input type="text" name="apellido" id="apellido" class="form-control"
+      [(ngModel)]="apellido">
+    </div>
+
+    <div class="form-group">
+      <label for="fechanac">Fecha de Nacimiento *</label><br>
+      <input type="text" name="fechanac" id="fechanac" class="form-control"
+      [(ngModel)]="fechanac"><br>
+      <small id="fechaHelp" class="form-text text-muted">Formato dd/mm/aaaa</small>
+      <!--<p-calendar name="fechanac" class="estiloIcon" [(ngModel)]="fechanac"
+        dateFormat="dd/mm/yy" [inline]="true"></p-calendar>-->
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email *</label><br>
+      <input type="text" name="email" id="email" class="form-control"
+      [(ngModel)]="email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="nombreUsuario">Nombre de usuario *</label><br>
+      <input type="text" name="nombreUsuario" id="nombreUsuario" class="form-control"
+      [(ngModel)]="nombreUsuario" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Contraseña *</label><br>
+      <input type="password" name="password" id="password" class="form-control"
+      [(ngModel)]="password" required>
+    </div>
+
+    <div class="form-group">
+      <button pButton label="Registrarse" class="btnRegistro p-button-raised p-button-text"></button>
+    </div>
+  </form>
+  <!--<div *ngIf="f.submitted && isRegisterFail" class="alert alert-danger mt-3">Error al registrarse: campos incorrectos.</div>-->
+
+  <!-- <div *ngIf="f.submitted && isRegisterFail" class="alert alert-danger mt-3">Error en el registro</div>-->
+  <!--<div *ngIf="f.submitted && isRegister" class="alert alert-success ">Usuario registrado</div>-->
+  <div>
+    <a [routerLink]="['']">Volver</a>
+  </div>
+</p-card>

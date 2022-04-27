@@ -27,11 +27,19 @@ button {
 
 .btonCancelar {
   color: rgb(192, 112, 102);
- }
+}
 
- .btonGuardar {
-   color: rgb(93, 149, 127);
- }
+.btonCancelar:hover {
+  color: rgb(192, 112, 102) !important;
+}
+
+.btonGuardar {
+  color: rgb(93, 149, 127);
+}
+
+.btonGuardar:hover {
+  color: rgb(93, 149, 127) !important;
+}
 
 .btnEdit {
   background-color: rgb(115, 176, 146);
@@ -54,11 +62,8 @@ p-table {
   color: rgb(192, 112, 102);
 }
 
-.btnVolver {
-  /* NO FUNCIONA */
-  /*color: rgb(115, 176, 146);**/
-  background-color: rgb(115, 176, 146);
-  color: red;
+.btnDeleteCompras:hover {
+  color: rgb(192, 112, 102) !important;
 }
 
 .cardFiesta {

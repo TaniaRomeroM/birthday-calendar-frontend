@@ -1,3 +1,47 @@
+/* MENU */
+
+mat-sidenav-container {
+  height:100%;
+}
+
+.toolbar-item-span {
+  padding-left: 2%;
+}
+
+mat-sidenav {
+  padding-top: 1%;
+  width: 15%;
+}
+
+.sidenav-item {
+  padding: 10%;
+  margin: 5% 0;
+}
+
+.sidenav-item-span {
+  padding-left: 10%;
+}
+
+mat-sidenav-content {
+  padding: 2%;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+background-color: rgb(97, 191, 153, 0.6);
+/*color: white;*/
+}
+
+mat-sidenav {
+background-color: rgb(139, 204, 178, 0.1);
+}
+
+
+/* INICIO */
+
 full-calendar {
   /*// No funciona*/
   width: '200px';
@@ -12,13 +56,17 @@ full-calendar {
 }
 
 button.fc-prevYear-button.fc-button.fc-button-primary {
+  /*// No funciona*/
+  background-color: rgb(128, 212, 178) !important;
+  border-color: rgb(128, 212, 178) !important;
+  color: white !important;
+}
+
+button.fc-dayGridMonth-button.fc-button.fc-button-primary.fc-button.fc-button-active {
+  /*// No funciona*/
   background-color: rgb(128, 212, 178);
   border-color: rgb(128, 212, 178);
   color: white;
 }
 
-button.fc-dayGridMonth-button.fc-button.fc-button-primary.fc-button.fc-button-active {
-  background-color: rgb(128, 212, 178);
-  border-color: rgb(128, 212, 178);
-  color: white;
-}
+

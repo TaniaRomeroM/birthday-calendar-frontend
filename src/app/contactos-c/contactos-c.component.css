@@ -30,8 +30,27 @@ button {
   height: 40px;
 }
 
-.btnModal {
+ /*!important para que funcione */
+.btnNuevo:hover{
+  background-color: white !important;
+  border-color: rgb(93, 149, 127) !important;
+  color: rgb(93, 149, 127) !important;
+}
+
+.btonCancelar {
+  color: rgb(192, 112, 102);
+}
+
+.btonCancelar:hover {
+  color: rgb(192, 112, 102) !important;
+}
+
+.btonGuardar {
   color: rgb(93, 149, 127);
+}
+
+.btonGuardar:hover {
+  color: rgb(93, 149, 127) !important;
 }
 
 .p-invalid {
@@ -42,6 +61,10 @@ button {
   margin-top: 3%;
   margin-bottom: 1%;
   text-align: center;
+}
+
+.estiloLabel {
+  margin-right: 2%;
 }
 
 /*.p-datepicker-calendar {

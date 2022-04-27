@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import { ContactoService } from '../service/contacto.service';
 import { Contacto } from 'src/models/contacto';
 import { ConfirmationService } from 'primeng/api';
+import { TokenService } from '../service/token.service';
 
 @Component({
   selector: 'app-fiestas-c',
@@ -40,10 +41,10 @@ export class FiestasCComponent implements OnInit {
   pipe = new DatePipe('es');
   todayWithPipe = null;
 
-  constructor(private fiestaService: FiestaService, private messageService: MessageService, private contactoService: ContactoService, private confirmationService: ConfirmationService) { }
+  constructor(private fiestaService: FiestaService, private messageService: MessageService, private contactoService: ContactoService, private confirmationService: ConfirmationService, private tokenService: TokenService) { }
 
   getAll() {
-    this.fiestaService.getAll().subscribe(
+    this.fiestaService.getAll(this.tokenService.getUsername()).subscribe(
       (result: any) => {
         let fiestas: Fiesta[] = [];
         for (let i = 0; i < result.length; i++) {
@@ -73,19 +74,24 @@ export class FiestasCComponent implements OnInit {
 
   getAllContactos(event) {
     let query = event.query;
-    this.contactoService.getAll().subscribe(
-      (result: any) => {
-        let contactos: Contacto[] = [];
-        for (let i = 0; i < result.length; i++) {
-          let contacto = result[i] as Contacto; // Convertir la variable contacto (que no tiene un tipo definido) en una variable de tipo Contacto
-          contactos.push(contacto);
+    if (this.tokenService.getToken()) {
+      console.log("TOKEN" + this.tokenService.getToken());
+      console.log("USERNAME" + this.tokenService.getUsername());
+
+      this.contactoService.getAll(this.tokenService.getUsername()).subscribe(
+        (result: any) => {
+          let contactos: Contacto[] = [];
+          for (let i = 0; i < result.length; i++) {
+            let contacto = result[i] as Contacto; // Convertir la variable contacto (que no tiene un tipo definido) en una variable de tipo Contacto
+            contactos.push(contacto);
+          }
+          this.contactosDropdown = contactos;
+        },
+        error => {
+          console.log(error);
         }
-        this.contactosDropdown = contactos;
-      },
-      error => {
-        console.log(error);
-      }
-    );
+      );
+    }
   }
 
   abrirModal() {
@@ -126,7 +132,7 @@ export class FiestasCComponent implements OnInit {
       (result: any) => {
         let fiesta = result as Fiesta;
         this.fiestas.push(fiesta);
-        this.messageService.add({ severity: 'succes', summary: "Resultado", detail: "Se guardó la fiesta correctamente." });
+        this.messageService.add({ severity: 'success', summary: "Nueva Fiesta", detail: "Se guardó la fiesta correctamente." });
         this.displaySaveDialog = false; // Cierra el modal
       },
       error => {
@@ -149,7 +155,7 @@ export class FiestasCComponent implements OnInit {
       accept: () => {
         this.fiestaService.eliminarFiesta(fiesta.fiestaId).subscribe(
           (result: any) => {
-            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Fiesta eliminada con éxito', life: 3000 });
+            this.messageService.add({ severity: 'success', summary: 'Fiesta', detail: 'Fiesta eliminada con éxito', life: 3000 });
             this.eliminarObjeto(result.fiestaId);
           });
       }
@@ -166,7 +172,6 @@ export class FiestasCComponent implements OnInit {
   ngOnInit() {
     this.getAll();
     this.cols = [
-      { field: "usuarioId", header: "ID Usuario" },
       { field: "nombreContacto", header: "Nombre contacto" },
       { field: "fechaFiesta", header: "Fecha de la Fiesta" },
       { field: "tipo", header: "Tipo" }
