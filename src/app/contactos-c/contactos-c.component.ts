@@ -7,6 +7,8 @@ import { ConfirmationService } from 'primeng/api';
 import { TokenService } from '../service/token.service';
 import { UsuarioService } from '../service/usuario.service';
 import { Usuario } from 'src/models/usuario';
+import { Fiesta } from 'src/models/fiesta';
+import { FiestaService } from '../service/fiesta.service';
 @Component({
   selector: 'app-contactos-c',
   templateUrl: './contactos-c.component.html',
@@ -30,12 +32,20 @@ export class ContactosCComponent implements OnInit {
     fechanac: null,
     email: null
   };
+  fiesta: Fiesta = {
+    fiestaId: null,
+    contactoId: null,
+    usuarioId: null,
+    fechaFiesta: null,
+    tipo: null,
+    nombreContacto: null
+  };
   pipe = new DatePipe('es');
   todayWithPipe = null;
-  checked : boolean = false;
+  checked: boolean = false;
 
   constructor(private contactoService: ContactoService, private usuarioService: UsuarioService, private messageService: MessageService,
-    private confirmationService: ConfirmationService, private tokenService: TokenService) { }
+    private confirmationService: ConfirmationService, private tokenService: TokenService, private fiestaService: FiestaService) { }
 
 
   abrirModalNuevo() {
@@ -90,33 +100,43 @@ export class ContactosCComponent implements OnInit {
       this.contacto.fechanac = this.todayWithPipe;
     }
 
-    if (this.checked === true) {
-      console.log("fiesta check")
-    }
-
     this.usuarioService.getUsuarioByNombreUsuario(this.tokenService.getUsername()).subscribe( // Procesos que surgan una vez se ha guardado el contacto
-    (result: any) => {
-      let usuario = result as Usuario;
-      this.contacto.usuarioId = usuario.usuarioId;
-      this.contactoService.addContacto(this.contacto).subscribe( // Procesos que surgan una vez se ha guardado el contacto
       (result: any) => {
-        let contacto = result as Contacto;
-        if (this.edit) {
-          this.contactos[this.findIndexById(this.contacto.contactoId)] = this.contacto;
-        }
-        this.messageService.add({ severity:'success', summary: "Nuevo contacto", detail: "Se guardó el contacto correctamente." });
-        this.displaySaveDialog = false; // Cierra el modal
-        this.getAll();
+        let usuario = result as Usuario;
+        this.contacto.usuarioId = usuario.usuarioId;
+        this.contactoService.addContacto(this.contacto).subscribe( // Procesos que surgan una vez se ha guardado el contacto
+          (result: any) => {
+            let contacto = result as Contacto;
+            if (this.edit) {
+              this.contactos[this.findIndexById(this.contacto.contactoId)] = this.contacto;
+            }
+            this.messageService.add({ severity: 'success', summary: "Nuevo contacto", detail: "Se guardó el contacto correctamente." });
+            this.displaySaveDialog = false; // Cierra el modal
+            this.getAll();
+
+            // CREAR FIESTA
+            if (this.checked === true) {
+              this.fiesta.contactoId = contacto.contactoId;
+              this.fiesta.usuarioId = usuario.usuarioId;
+              this.fiestaService.addFiesta(this.fiesta).subscribe( // Procesos que surgan una vez se ha guardado el contacto
+                (result: any) => {
+                  let fiesta = result as Fiesta;
+                }, error => {
+                  console.log(error);
+                }
+              )
+              this.checked = false;
+            }  ////
+          },
+          error => {
+            console.log(error);
+          }
+        )
       },
       error => {
         console.log(error);
       }
     )
-    },
-    error => {
-      console.log(error);
-    }
-  )
 
     //.subscribe({this.contacto.usuarioId = data.userid}
 
@@ -136,13 +156,13 @@ export class ContactosCComponent implements OnInit {
       }
     )*/
   }
-/*
-  public clickBonusChecked(e) {
-    this.bonusChecked = e.checked;
-     if (this.bonusChecked) {
-       console.log('jsdhck');
-     }
-   }*/
+  /*
+    public clickBonusChecked(e) {
+      this.bonusChecked = e.checked;
+       if (this.bonusChecked) {
+         console.log('jsdhck');
+       }
+     }*/
 
   findIndexById(id: number): number {
     let index = -1;

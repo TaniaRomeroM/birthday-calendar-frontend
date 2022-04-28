@@ -1,4 +1,4 @@
-<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+<p-confirmDialog [style]="{width: '450px'}" acceptLabel="Sí" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 <p-toast></p-toast>
 
 <p-card [style]="{'height': '1000px'}">
@@ -42,9 +42,9 @@
           </div>
 
           <div style="text-align: center;">
-            <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btonCancelar p-button-text"
-              (click)="btonCancelar()" *ngIf="!this.disabled"></button>
-            <button pButton pRipple label="Guardar" icon="pi pi-check" class="btonGuardar p-button-text"
+            <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btnCancelar p-button-text"
+              (click)="btnCancelar()" *ngIf="!this.disabled"></button>
+            <button pButton pRipple label="Guardar" icon="pi pi-check" class="btnGuardar p-button-text"
               (click)="editarFiesta()" *ngIf="!this.disabled"></button>
           </div>
         </ng-template>
@@ -148,9 +148,9 @@
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btonCancelar btnModal p-button-text"
+    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btnCancelar btnModal p-button-text"
       (click)="hideDialog()"></button>
-    <button pButton pRipple label="Guardar" icon="pi pi-check" class="btonGuardar btnModal p-button-text"
+    <button pButton pRipple label="Guardar" icon="pi pi-check" class="btnGuardar btnModal p-button-text"
       (click)="addCompra()"></button>
   </ng-template>
 </p-dialog>

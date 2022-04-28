@@ -1,1 +1,47 @@
-<p>perfil-c works!</p>
+<p-card header="Perfil">
+
+  <p-menubar class="menubar">
+    <button pButton pRipple label="Editar" style="float: right;" icon="pi pi-pencil"
+      class="btnEdit p-button-rounded p-button-success p-mr-2" (click)="btnEditarUsuario();"></button>
+  </p-menubar>
+
+  <div [style]="{width: '80%', margin: 'auto'}">
+
+    <div class="p-field" [style]="{width: '50%', margin: 'auto'}">
+      <h4 class="tituloH4">Nombre Usuario *</h4>
+      <input type="text" pInputText id="nombreUsuario" [(ngModel)]="usuario.nombreUsuario" required [disabled]="true"
+        [style]="{width: '100%', margin: 'auto'}" />
+    </div>
+
+    <div class="p-field" [style]="{width: '50%', margin: 'auto'}">
+      <h4 class="tituloH4">Nombre *</h4>
+      <input type="text" pInputText id="nombre" [(ngModel)]="usuario.nombre" required [disabled]="disabled"
+        [style]="{width: '100%', margin: 'auto'}" />
+    </div>
+
+    <div class="p-field" [style]="{width: '50%', margin: 'auto'}">
+      <h4 class="tituloH4">Apellido</h4>
+      <input type="text" pInputText id="apellido" [(ngModel)]="usuario.apellido" [disabled]="disabled"
+        [style]="{width: '100%', margin: 'auto'}" />
+    </div>
+
+    <div class="p-field" [style]="{width: '50%', margin: 'auto'}">
+      <h4 class="tituloH4">Fecha Nacimiento *</h4>
+      <input type="text" pInputText id="fechanac" [(ngModel)]="usuario.fechanac" required [disabled]="disabled"
+        [style]="{width: '100%', margin: 'auto'}" />
+    </div>
+
+    <div class="p-field" [style]="{width: '50%', margin: 'auto'}">
+      <h4 class="tituloH4">Email *</h4>
+      <input type="text" pInputText id="email" [(ngModel)]="usuario.email" required [disabled]="disabled"
+        [style]="{width: '100%', margin: 'auto'}" />
+    </div>
+
+    <div class="botonesEdit">
+      <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btnCancelar p-button-text"
+        (click)="btnCancelar()" *ngIf="!this.disabled"></button>
+      <button pButton pRipple label="Guardar" icon="pi pi-check" class="btnGuardar p-button-text"
+        (click)="btnGuardar()" *ngIf="!this.disabled"></button>
+    </div>
+  </div>
+</p-card>

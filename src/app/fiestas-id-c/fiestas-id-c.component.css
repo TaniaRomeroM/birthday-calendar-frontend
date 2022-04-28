@@ -25,19 +25,19 @@ button {
   padding: 3%;
 }
 
-.btonCancelar {
+.btnCancelar {
   color: rgb(192, 112, 102);
 }
 
-.btonCancelar:hover {
+.btnCancelar:hover {
   color: rgb(192, 112, 102) !important;
 }
 
-.btonGuardar {
+.btnGuardar {
   color: rgb(93, 149, 127);
 }
 
-.btonGuardar:hover {
+.btnGuardar:hover {
   color: rgb(93, 149, 127) !important;
 }
 
