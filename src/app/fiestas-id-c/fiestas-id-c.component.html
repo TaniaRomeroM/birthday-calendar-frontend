@@ -2,6 +2,8 @@
 <p-toast></p-toast>
 
 <p-card [style]="{'height': '1000px'}">
+
+  <!-- MENU BAR -->
   <div style="margin-bottom: 30px">
     <p-menubar class="menubar">
       <button pButton pRipple label="Eliminar" icon="pi pi-trash" class="btnDelete p-button-rounded p-button-warning"
@@ -11,9 +13,9 @@
     </p-menubar>
   </div>
 
+  <!-- CARD FIESTA -->
   <mat-grid-list cols="3" rowHeight="700px">
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-
       <p-card header="Fiesta" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
         <button pButton pRipple label="Editar" style="float: right;" icon="pi pi-pencil"
           class="btnEdit p-button-rounded p-button-success p-mr-2" (click)="btnEditarFiesta();"></button>
@@ -51,6 +53,7 @@
       </p-card>
     </mat-grid-tile>
 
+    <!-- CARD COMPRAS -->
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <p-card header="Compras" [style]="{'width': '18rem', 'margin-bottom': '2em'}">
         <ng-template pTemplate>
@@ -93,6 +96,7 @@
       </p-card>
     </mat-grid-tile>
 
+    <!-- CARD INVITADOS -->
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <p-card header="Invitados" [style]="{'width': '18rem', 'margin-bottom': '2em'}">
         <ng-template pTemplate>
@@ -135,10 +139,9 @@
       </p-card>
     </mat-grid-tile>
   </mat-grid-list>
-
 </p-card>
 
-<!-- Modal saveDialogCompras - Nueva Compra -->
+<!-- Modal saveDialogCompras - NUEVA COMPRA -->
 <p-dialog [(visible)]="saveDialogCompras" header={{title}} [modal]="true" styleClass="p-fluid"
   [style]="{width: '30%', height:'35%'}">
   <ng-template pTemplate="content">
@@ -149,7 +152,7 @@
 
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btnCancelar btnModal p-button-text"
-      (click)="hideDialog()"></button>
+      (click)="cerrarDialog()"></button>
     <button pButton pRipple label="Guardar" icon="pi pi-check" class="btnGuardar btnModal p-button-text"
       (click)="addCompra()"></button>
   </ng-template>

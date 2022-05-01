@@ -2,18 +2,20 @@
 <p-toast></p-toast>
 
 <p-card header="Fiestas">
+
+  <!-- MENU BAR -->
   <p-menubar>
     <button pButton pRipple type="button" label="Nuevo" icon="pi pi-plus" class="btnNuevo p-button-raised p-button-text"
       (click)="abrirModal()"></button>
   </p-menubar>
 
+  <!-- TABLA FIESTAS -->
   <p-table [value]="fiestas" [columns]="cols" [paginator]="true" [rows]="6" selectionMode="single"
   [style]="{width: '90%', height:'80%', margin: 'auto', border: 'solid 2px rgb(223, 231, 227)', 'margin-top': '1%'}">
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th *ngFor="let col of columns" [style]="{'text-align': 'center'}">
-          <!-- Pinta de forma dinamica los headers -->
-          {{col.header}}
+          {{col.header}} <!-- Pinta de forma dinamica los headers -->
         </th>
         <th></th>
       </tr>
@@ -41,7 +43,7 @@
   </p-table>
 </p-card>
 
-<!-- Modal displaySaveDialog - Nueva Fiesta -->
+<!-- Modal displaySaveDialog - NUEVA FIESTA -->
 <p-dialog [(visible)]="displaySaveDialog" header={{title}} [modal]="true" styleClass="p-fluid"
   [style]="{width: '40%', height:'100%'}">
   <ng-template pTemplate="content">
@@ -70,7 +72,7 @@
 
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btonCancelar p-button-text"
-      (click)="hideDialog()"></button>
+      (click)="cerrarDialog()"></button>
     <button pButton pRipple label="Guardar" icon="pi pi-check" class="btonGuardar p-button-text"
       (click)="addFiesta()"></button>
   </ng-template>

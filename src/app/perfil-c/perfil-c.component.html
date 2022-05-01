@@ -1,5 +1,7 @@
+<p-toast></p-toast>
 <p-card header="Perfil">
 
+  <!-- MENU BAR -->
   <p-menubar class="menubar">
     <button pButton pRipple label="Editar" style="float: right;" icon="pi pi-pencil"
       class="btnEdit p-button-rounded p-button-success p-mr-2" (click)="btnEditarUsuario();"></button>
@@ -41,7 +43,7 @@
       <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btnCancelar p-button-text"
         (click)="btnCancelar()" *ngIf="!this.disabled"></button>
       <button pButton pRipple label="Guardar" icon="pi pi-check" class="btnGuardar p-button-text"
-        (click)="btnGuardar()" *ngIf="!this.disabled"></button>
+        (click)="editarUsuario()" *ngIf="!this.disabled"></button>
     </div>
   </div>
 </p-card>

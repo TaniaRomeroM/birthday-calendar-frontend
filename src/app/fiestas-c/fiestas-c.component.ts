@@ -32,18 +32,47 @@ export class FiestasCComponent implements OnInit {
     nombre: null,
     apellido: null,
     fechanac: null,
-    email: null
+    email: null,
+    edad: null
   };
   cols: any[];
-  displaySaveDialog: boolean = false;
-  submitted: boolean;
   title: string;
+  submitted: boolean;
+  displaySaveDialog: boolean = false;
   pipe = new DatePipe('es');
   todayWithPipe = null;
 
   constructor(private fiestaService: FiestaService, private messageService: MessageService, private contactoService: ContactoService, private confirmationService: ConfirmationService, private tokenService: TokenService) { }
 
-  getAll() {
+  abrirModal() {
+    this.fiesta = {
+      fiestaId: null,
+      contactoId: null,
+      usuarioId: null,
+      fechaFiesta: null,
+      tipo: null,
+      nombreContacto: null
+    };
+    this.contacto = {
+      contactoId: null,
+      usuarioId: null,
+      nombre: null,
+      apellido: null,
+      fechanac: null,
+      email: null,
+      edad: null
+    };
+    this.title = "Nueva Fiesta";
+    this.submitted = false;
+    this.displaySaveDialog = true;
+  }
+
+  cerrarDialog() {
+    this.displaySaveDialog = false;
+    this.submitted = false;
+  }
+
+  getAllFiestas() {
     this.fiestaService.getAll(this.tokenService.getUsername()).subscribe(
       (result: any) => {
         let fiestas: Fiesta[] = [];
@@ -94,28 +123,6 @@ export class FiestasCComponent implements OnInit {
     }
   }
 
-  abrirModal() {
-    this.fiesta = {
-      fiestaId: null,
-      contactoId: null,
-      usuarioId: null,
-      fechaFiesta: null,
-      tipo: null,
-      nombreContacto: null
-    };
-    this.contacto = {
-      contactoId: null,
-      usuarioId: null,
-      nombre: null,
-      apellido: null,
-      fechanac: null,
-      email: null
-    };
-    this.title = "Nueva Fiesta";
-    this.submitted = false;
-    this.displaySaveDialog = true;
-  }
-
   addFiesta() {
     this.submitted = true;
     if (this.fiesta.fechaFiesta instanceof Date) {
@@ -139,11 +146,6 @@ export class FiestasCComponent implements OnInit {
         console.log(error);
       }
     )
-  }
-
-  hideDialog() {
-    this.displaySaveDialog = false;
-    this.submitted = false;
   }
 
   eliminarFiesta(fiesta: Fiesta) {
@@ -170,7 +172,7 @@ export class FiestasCComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAll();
+    this.getAllFiestas();
     this.cols = [
       { field: "nombreContacto", header: "Nombre contacto" },
       { field: "fechaFiesta", header: "Fecha de la Fiesta" },

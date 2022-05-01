@@ -1,8 +1,9 @@
 <full-calendar [options]="calendarOptions"></full-calendar>
 
+<!-- Modal - La estructura de div es para que sea responsive -->
+<!--
 <p-dialog header="Cumpleaños" [responsive]="true" [(visible)]="displaySaveDialog" [modal]="true"
   [style]="{width: '700px'}">
-  <!-- Modal - La estructura de div es para que sea responsive -->
   <div class="ui-g ui-fluid modalNuevoContacto">
 
     <div class="ui-g-12">
@@ -17,7 +18,6 @@
         <input type="text" id="inputtext" pInputText [(ngModel)]="contacto.usuarioId">
         <label for="inputtext">Usuario Id</label>
       </span>
-
     </div>
 
     <div class="ui-g-12">
@@ -48,5 +48,5 @@
       <button type="button" pButton (click)="addContacto()" label="Añadir"></button>
     </div>
   </p-footer>
-
 </p-dialog>
+-->

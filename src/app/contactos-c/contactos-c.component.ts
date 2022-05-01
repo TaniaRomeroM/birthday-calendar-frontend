@@ -17,12 +17,6 @@ import { FiestaService } from '../service/fiesta.service';
 })
 export class ContactosCComponent implements OnInit {
 
-  cols: any[];
-  title: string;
-  items: MenuItem[];
-  displaySaveDialog: boolean = false;
-  submitted: boolean;
-  edit: boolean = false;
   contactos: Contacto[];
   contacto: Contacto = {  // Modal de Nuevo Contacto
     contactoId: null,
@@ -30,7 +24,8 @@ export class ContactosCComponent implements OnInit {
     nombre: null,
     apellido: null,
     fechanac: null,
-    email: null
+    email: null,
+    edad: null
   };
   fiesta: Fiesta = {
     fiestaId: null,
@@ -40,34 +35,42 @@ export class ContactosCComponent implements OnInit {
     tipo: null,
     nombreContacto: null
   };
+  cols: any[];
+  title: string;
+  items: MenuItem[];
+  submitted: boolean;
+  edit: boolean = false;
+  checked: boolean = false;
+  displaySaveDialog: boolean = false;
   pipe = new DatePipe('es');
   todayWithPipe = null;
-  checked: boolean = false;
+
 
   constructor(private contactoService: ContactoService, private usuarioService: UsuarioService, private messageService: MessageService,
     private confirmationService: ConfirmationService, private tokenService: TokenService, private fiestaService: FiestaService) { }
 
 
-  abrirModalNuevo() {
+  abrirModal() {
     this.contacto = {
       contactoId: null,
       usuarioId: null,
       nombre: null,
       apellido: null,
       fechanac: null,
-      email: null
+      email: null,
+      edad: null
     };
     this.title = "Nuevo Contacto";
     this.submitted = false;
     this.displaySaveDialog = true;
   }
 
-  hideDialog() {
+  cerrarDialog() {
     this.displaySaveDialog = false;
     this.submitted = false;
   }
 
-  getAll() {
+  getAllContactos() {
     if (this.tokenService.getToken()) {
       /*console.log("TOKEN: " + this.tokenService.getToken());
       console.log("USERNAME: " + this.tokenService.getUsername());*/
@@ -88,7 +91,7 @@ export class ContactosCComponent implements OnInit {
     }
   }
 
-  saveContacto() {
+  guardarContacto() {
     this.submitted = true;
     /*if(this.contacto.fechanac instanceof Date){
       console.log("I'm a date " + this.contacto.fechanac);
@@ -112,7 +115,7 @@ export class ContactosCComponent implements OnInit {
             }
             this.messageService.add({ severity: 'success', summary: "Nuevo contacto", detail: "Se guardó el contacto correctamente." });
             this.displaySaveDialog = false; // Cierra el modal
-            this.getAll();
+            this.getAllContactos();
 
             // CREAR FIESTA
             if (this.checked === true) {
@@ -205,7 +208,7 @@ export class ContactosCComponent implements OnInit {
   }
 
   ngOnInit() { // Se ejecuta su interior cuando se cargue el componente por primera vez
-    this.getAll();
+    this.getAllContactos();
     this.cols = [
       { field: "nombre", header: "Nombre" },
       { field: "apellido", header: "Apellido" },

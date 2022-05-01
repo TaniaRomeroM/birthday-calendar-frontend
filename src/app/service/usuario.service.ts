@@ -15,4 +15,10 @@ export class UsuarioService {
     return this.http.get<Usuario>(this.baseUrl + "/usuarios/find/" + nombreUsuario);
   }
 
+  editarUsuario(usuario: Usuario): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json'); //Para indicar que enviamos un JSON
+    return this.http.post(this.baseUrl + "/usuarios/editar", JSON.stringify(usuario), { headers: headers });
+  }
+
 }

@@ -7,7 +7,6 @@ import { ErrorPersonalizadoComponent } from './error-personalizado/error-persona
 import { FiestasCComponent } from './fiestas-c/fiestas-c.component';
 import { FiestasIdCComponent } from './fiestas-id-c/fiestas-id-c.component';
 import { InicioCComponent } from './inicio-c/inicio-c.component';
-import { MenuCComponent } from './menu-c/menu-c.component';
 import { NotificacionesCComponent } from './notificaciones-c/notificaciones-c.component';
 import { SugerenciasCComponent } from './sugerencias-c/sugerencias-c.component';
 import { ProdGuardService as guard } from './guards/prod-guard.service';
@@ -17,7 +16,6 @@ const routes: Routes = [ // Crear un objeto por cada ruta
   { path: '', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'perfil', component: PerfilCComponent },
-  //{ path: 'menu', component: MenuCComponent },
   { path: 'inicio', component: InicioCComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user'] } },
   { path: 'contactos', component: ContactosCComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user'] } },
   { path: 'fiestas', component: FiestasCComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user'] } },

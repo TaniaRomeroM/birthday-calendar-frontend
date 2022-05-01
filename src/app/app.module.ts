@@ -49,7 +49,6 @@ import { ErrorPersonalizadoComponent } from './error-personalizado/error-persona
 import { FiestasIdCComponent } from './fiestas-id-c/fiestas-id-c.component';
 import { LoginComponent } from './auth/login.component';
 import { RegistroComponent } from './auth/registro.component';
-import { MenuCComponent } from './menu-c/menu-c.component';
 import { PerfilCComponent } from './perfil-c/perfil-c.component';
 
 registerLocaleData(localeEs, 'es');
@@ -73,7 +72,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FiestasIdCComponent,
     LoginComponent,
     RegistroComponent,
-    MenuCComponent,
     PerfilCComponent,
   ],
   imports: [

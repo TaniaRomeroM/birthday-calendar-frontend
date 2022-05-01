@@ -32,11 +32,11 @@ export class FiestasIdCComponent implements OnInit {
     fiestaId: null,
     nombre: null
   }
-  saveDialogCompras: boolean = false; // dialogo Nueva Compra
-  title: string; // dialogo Nueva Compra
-  disabled: boolean = true;
   cols: any[];
+  title: string; // dialogo Nueva Compra
   submitted: boolean;
+  disabled: boolean = true;
+  saveDialogCompras: boolean = false; // dialogo Nueva Compra
   pipe = new DatePipe('es');
   todayWithPipe = null;
 
@@ -125,7 +125,7 @@ export class FiestasIdCComponent implements OnInit {
     this.saveDialogCompras = true;
   }
 
-  hideDialog() {
+  cerrarDialog() {
     this.saveDialogCompras = false;
     this.submitted = false;
   }

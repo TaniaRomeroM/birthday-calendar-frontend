@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Usuario } from 'src/models/usuario';
 import { TokenService } from './service/token.service';
 import { UsuarioService } from './service/usuario.service';
-import {MenuItem} from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -30,7 +30,7 @@ export class AppComponent {
     if (this.tokenService.getToken()) {
       this.usuarioService.getUsuarioByNombreUsuario(this.tokenService.getUsername()).subscribe(
         (result: any) => {
-         this.usuario = result as Usuario;
+          this.usuario = result as Usuario;
         },
         error => {
           console.log(error);
@@ -44,7 +44,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    if(this.tokenService.getToken()) {
+    if (this.tokenService.getToken()) {
       this.isLogged = true;
       this.getUsuario();
     } else {
@@ -52,14 +52,16 @@ export class AppComponent {
     }
 
     this.items = [
-      {label: 'Cerrar Sesión', icon: 'pi pi-sign-out', command: () => {
-        this.onLogOut();
-    }},
-  ];
+      { label: 'Perfil', icon: 'pi pi-user-edit', routerLink: ['perfil'] },
+      { label: 'Cerrar Sesión', icon: 'pi pi-sign-out', command: () => {
+          this.onLogOut();
+        }
+      }
+    ];
   }
 
   ngDoCheck() {
-    if(this.tokenService.getToken()) {
+    if (this.tokenService.getToken()) {
       this.isLogged = true;
     } else {
       this.isLogged = false;
