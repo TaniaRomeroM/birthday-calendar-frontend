@@ -1,0 +1,37 @@
+.btnNuevo {
+  background-color: rgb(93, 149, 127);
+  border-color: rgb(93, 149, 127);
+  color: white;
+  width: 120px;
+  height: 40px;
+}
+
+.btnNuevo:hover{
+  background-color: white !important;
+  border-color: rgb(93, 149, 127) !important;
+  color: rgb(93, 149, 127) !important;
+}
+
+.btonCancelar {
+  color: rgb(192, 112, 102);
+}
+
+.btonCancelar:hover {
+  color: rgb(192, 112, 102) !important;
+}
+
+.btonGuardar {
+  color: rgb(93, 149, 127);
+}
+
+.btonGuardar:hover {
+  color: rgb(93, 149, 127) !important;
+}
+
+.divModal {
+  margin: 5%;
+}
+
+.p-invalid {
+  color: red;
+}

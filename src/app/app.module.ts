@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
@@ -29,6 +28,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 import { CalendarModule } from 'primeng/calendar';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -103,7 +104,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatGridListModule,
     AccordionModule,
     InputSwitchModule,
-    SplitButtonModule
+    SplitButtonModule,
+    InputTextareaModule,
+    KeyFilterModule
   ],
   providers: [MessageService, ConfirmationService, { provide: LOCALE_ID, useValue: 'es' }],
   bootstrap: [AppComponent]

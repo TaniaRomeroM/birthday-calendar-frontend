@@ -1,1 +1,59 @@
-<p>sugerencias-c works!</p>
+<p-confirmDialog [style]="{width: '450px'}" acceptLabel="Sí" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+<p-toast></p-toast>
+
+<p-card header="Sugerencias">
+
+  <!-- MENU BAR -->
+  <p-menubar>
+    <button pButton pRipple type="button" label="Nuevo" icon="pi pi-plus" class="btnNuevo p-button-raised p-button-text"
+      (click)="abrirModal()"></button>
+  </p-menubar>
+
+  <!-- LISTA SUGERENCIAS -->
+
+  <p-table [value]="sugerencias" [columns]="cols" [paginator]="true" [rows]="6" selectionMode="single" dataKey="name"
+    responsiveLayout="scroll"
+    [style]="{width: '90%', height:'80%', margin: 'auto', border: 'solid 2px rgb(223, 231, 227)', 'margin-top': '1%'}">
+    <!-- header -->
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns" [style]="{'text-align': 'center'}">
+          {{col.header}} <!-- Pinta de forma dinamica los headers -->
+        </th>
+      </tr>
+    </ng-template>
+    <!-- body -->
+    <ng-template pTemplate="body" let-sugerencia let-columns="columns" let-expanded="expanded">
+      <tr>
+        <td *ngFor="let col of columns" [style]="{'text-align': 'center'}">
+          {{sugerencia[col.field]}}
+        </td>
+      </tr>
+    </ng-template>
+    <!-- emptymessage -->
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">No hay sugerencias.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
+
+<!-- Modal displaySaveDialog - NUEVA SUGERENCIA -->
+<p-dialog [(visible)]="displaySaveDialog" header="Nueva sugerencia" [modal]="true" styleClass="p-fluid"
+  [style]="{width: '60%', height:'90%'}">
+  <div class="divModal">
+    <input type="text" pInputText [(ngModel)]="sugerencia.nombre" placeholder="Título *" required autofocus>
+    <small class="p-invalid" *ngIf="submitted && !sugerencia.nombre">El título es requerido.</small>
+  </div>
+  <div class="divModal">
+    <textarea rows="5" cols="30" size="250" maxlength="250" pInputTextarea [(ngModel)]="sugerencia.descripcion" placeholder="Descripción *" required></textarea>
+    <small class="form-text text-muted">Máximo 250 carácteres</small><br>
+    <small class="p-invalid" *ngIf="submitted && !sugerencia.descripcion">La descripción es requerida.</small>
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btonCancelar p-button-text"
+      (click)="cerrarDialog()"></button>
+    <button pButton pRipple label="Enviar" icon="pi pi-check" class="btonGuardar p-button-text" (click)="addSugerencia()"></button>
+  </ng-template>
+</p-dialog>
