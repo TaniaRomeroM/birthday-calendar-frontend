@@ -12,6 +12,18 @@
   color: rgb(93, 149, 127) !important;
 }
 
+.btnEdit {
+  background-color: rgb(128, 212, 178);
+  border-color: rgb(128, 212, 178);
+  color: white;
+}
+
+.btnEdit:hover {
+  background-color: rgb(84, 150, 124) !important;
+  border-color: rgb(84, 150, 124);
+  color: white;
+}
+
 .btonCancelar {
   color: rgb(192, 112, 102);
 }
@@ -34,4 +46,36 @@
 
 .p-invalid {
   color: red;
+}
+
+.PENDIENTE {
+  background-color: rgb(218, 213, 213);
+  color: rgb(123, 115, 115);
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.ACEPTADA {
+  background-color: rgb(233, 240, 180);
+  color: rgb(143, 147, 27);
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.REALIZADA {
+  background-color: rgb(160, 219, 183);
+  color: rgb(47, 119, 71);
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.RECHAZADA {
+  background-color: rgb(231, 170, 170);
+  color: rgb(129, 11, 11);
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
 }

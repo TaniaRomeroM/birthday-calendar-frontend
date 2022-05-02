@@ -25,6 +25,17 @@ export class SugerenciasCComponent implements OnInit {
   submitted: boolean;
   displaySaveDialog: boolean = false;
 
+  /* ADMIN */
+  sugerenciasAdmin: Sugerencia[];
+  sugerenciaAdmin: Sugerencia = {
+    sugerenciaId: null,
+    usuarioId: null,
+    nombre: null,
+    descripcion: null,
+    estadoSugerencia: null  /* ENUM */
+  };
+  colsAdmin: any[];
+  ///
   constructor(private tokenService: TokenService, private sugerenciaService: SugerenciaService, private messageService: MessageService, private usuarioService: UsuarioService) { }
 
   abrirModal() {
@@ -46,11 +57,11 @@ export class SugerenciasCComponent implements OnInit {
 
   getAllSugerencias() {
     if (this.tokenService.getToken()) {
-      this.sugerenciaService.getAll(this.tokenService.getUsername()).subscribe(
+      this.sugerenciaService.getAllNombreUsuario(this.tokenService.getUsername()).subscribe(
         (result: any) => {
           let sugerencias: Sugerencia[] = [];
           for (let i = 0; i < result.length; i++) {
-            let sugerencia = result[i] as Sugerencia; // Convertir la variable contacto (que no tiene un tipo definido) en una variable de tipo Contacto
+            let sugerencia = result[i] as Sugerencia;
             sugerencias.push(sugerencia);
           }
           this.sugerencias = sugerencias;
@@ -87,9 +98,38 @@ export class SugerenciasCComponent implements OnInit {
     )
   }
 
+  /* ADMIN */
+  getAllSugerenciasAdmin() {
+    if (this.tokenService.getToken()) {
+      this.sugerenciaService.getAll().subscribe(
+        (result: any) => {
+          let sugerenciasAdmin: Sugerencia[] = [];
+          for (let i = 0; i < result.length; i++) {
+            let sugerenciaAdmin = result[i] as Sugerencia;
+            sugerenciasAdmin.push(sugerenciaAdmin);
+          }
+          this.sugerenciasAdmin = sugerenciasAdmin;
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+  editarSugerenciaAdmin(sugerenciaAdmin: Sugerencia) {
+    this.sugerenciaAdmin = { ...sugerenciaAdmin };
+  }
+
   ngOnInit(): void {
     this.getAllSugerencias();
+    this.getAllSugerenciasAdmin();
     this.cols = [
+      { field: "nombre", header: "Título" },
+      { field: "descripcion", header: "Descripción" }
+    ];
+    this.colsAdmin = [
+      { field: "usuarioId", header: "Usuario" },
       { field: "nombre", header: "Título" },
       { field: "descripcion", header: "Descripción" }
     ];

@@ -48,6 +48,12 @@ button {
   margin-top: -15%;
 }
 
+.btnEdit:hover {
+  background-color: rgb(84, 150, 124) !important;
+  border-color: rgb(84, 150, 124);
+  color: white;
+}
+
 .btnDelete {
   background-color: rgb(192, 112, 102);
   border-color: rgb(192, 112, 102);

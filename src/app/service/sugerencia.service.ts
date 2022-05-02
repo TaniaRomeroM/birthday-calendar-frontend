@@ -11,7 +11,11 @@ export class SugerenciaService {
   baseUrl: string = "http://localhost:8080";
   constructor(private http: HttpClient) { }
 
-  getAll(nombreUsuario: string): Observable<any> {
+  getAll(): Observable<any> {
+    return this.http.get(this.baseUrl + "/sugerencias/");
+  }
+
+  getAllNombreUsuario(nombreUsuario: string): Observable<any> {
     return this.http.get(this.baseUrl + "/sugerencias/" + nombreUsuario);
   }
 
