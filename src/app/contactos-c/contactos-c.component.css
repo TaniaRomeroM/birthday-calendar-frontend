@@ -60,7 +60,7 @@ button {
 }
 
 .p-invalid {
-  color: red;
+  color: rgb(245, 51, 51);
 }
 
 .tituloH4 {
@@ -73,6 +73,9 @@ button {
   margin-right: 2%;
 }
 
+input {
+  text-align: center;
+}
 
 /*.p-datepicker-calendar {
   width: 20px;

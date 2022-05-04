@@ -26,7 +26,7 @@ export class AppComponent {
 
   constructor(private tokenService: TokenService, private router: Router, private usuarioService: UsuarioService) { }
 
-  getUsuario() { // NO SE RECARGA AL ENTRAR EN LA PAGINA
+  getUsuario() {
     if (this.tokenService.getToken()) {
       this.usuarioService.getUsuarioByNombreUsuario(this.tokenService.getUsername()).subscribe(
         (result: any) => {

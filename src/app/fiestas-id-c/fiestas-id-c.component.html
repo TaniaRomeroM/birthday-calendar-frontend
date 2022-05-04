@@ -1,10 +1,10 @@
 <p-confirmDialog [style]="{width: '450px'}" acceptLabel="Sí" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 <p-toast></p-toast>
 
-<p-card [style]="{'height': '1000px'}">
+<p-card [style]="{'height': '100%'}">
 
   <!-- MENU BAR -->
-  <div style="margin-bottom: 30px">
+  <div style="margin-bottom: 1%">
     <p-menubar class="menubar">
       <button pButton pRipple label="Eliminar" icon="pi pi-trash" class="btnDelete p-button-rounded p-button-warning"
         (click)="eliminarFiesta(fiesta);"></button>
@@ -30,14 +30,15 @@
 
             <div class="p-field">
               <h3 class="fieldinput">Fecha</h3>
-              <input size="30" type="text" pInputText id="fechaFiesta" [disabled]="disabled"
+              <!-- <p-inputMask mask="99/99/9999" [(ngModel)]="fiesta.fechaFiesta" placeholder="dd/mm/yyyy" [disabled]="disabled" autofocus></p-inputMask>-->
+             <input size="30" type="text" pInputText id="fechaFiesta" [disabled]="disabled"
                 [(ngModel)]="fiesta.fechaFiesta" required autofocus />
-              <!--<p-calendar id="fechaFiesta" inputId="icon" class="estiloIcon" [(ngModel)]="fiesta.fechaFiesta"
+              <!-- <p-calendar id="fechaFiesta" inputId="icon" class="estiloIcon" [(ngModel)]="fiesta.fechaFiesta"
                 [showIcon]="true" [disabled]="disabled" dateFormat="dd/mm/yy"></p-calendar>-->
             </div>
 
             <div class="p-field">
-              <h3 class="fieldinput">Tipo</h3>
+              <h3 class="fieldinput">Temática</h3>
               <input size="30" type="text" pInputText id="tipo" [disabled]="disabled" [(ngModel)]="fiesta.tipo" required
                 autofocus />
             </div>

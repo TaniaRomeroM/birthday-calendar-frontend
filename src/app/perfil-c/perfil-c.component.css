@@ -1,3 +1,17 @@
+
+
+.p-card-content {
+  margin-top: -1%;
+}
+
+.grid {
+  height: 50% !important;
+}
+
+input {
+  text-align: center;
+}
+
 .btnEdit {
   background-color: rgb(115, 176, 146);
   border-color: rgb(115, 176, 146);
@@ -29,4 +43,8 @@
 .botonesEdit {
   margin-top: 2%;
   text-align: center;
+}
+
+.p-invalid {
+  color: rgb(245, 51, 51);
 }

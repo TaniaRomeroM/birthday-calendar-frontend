@@ -1,7 +1,7 @@
 <p-confirmDialog [style]="{width: '450px'}" acceptLabel="Sí" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 <p-toast></p-toast>
 
-<p-card header="Contactos">
+<p-card header="Contactos" [style]="{height: '90%'}">
 
   <!-- MENU BAR -->
   <p-menubar>
@@ -10,7 +10,7 @@
   </p-menubar>
 
   <!-- TABLA CONTACTOS -->
-  <p-table [value]="contactos" [columns]="cols" [paginator]="true" [rows]="6" selectionMode="single"
+  <p-table [value]="contactos" [columns]="cols" [paginator]="true" [rows]="6" selectionMode="single" [responsive]="true"
     [style]="{width: '90%', height:'80%', margin: 'auto', border: 'solid 2px rgb(223, 231, 227)', 'margin-top': '1%'}">
     <ng-template pTemplate="header" let-columns>
       <tr>
@@ -42,12 +42,12 @@
 </p-card>
 
 <!-- Modal displaySaveDialog - NUEVO/EDITAR CONTACTO -->
-<p-dialog [(visible)]="displaySaveDialog" header={{title}} [modal]="true" styleClass="p-fluid"
+<p-dialog [(visible)]="displaySaveDialog" header={{title}} [modal]="true" styleClass="p-fluid" [responsive]="true"
   [style]="{width: '60%', height:'90%'}">
 
   <ng-template pTemplate="content">
 
-    <p-accordion [style]="{width: '90%', margin: 'auto', 'padding-top': '1%'}">
+    <!--<p-accordion [style]="{width: '90%', margin: 'auto', 'padding-top': '1%'}">
       <p-accordionTab header="Cumpleaños *">
         <div class="field" [style]="{width: '57%', margin: 'auto'}">
           <p-calendar class="estiloIcon" [(ngModel)]="contacto.fechanac" dateFormat="dd/mm/yy" [inline]="true">
@@ -55,7 +55,7 @@
           <small class="p-invalid" *ngIf="submitted && !contacto.fechanac">La fecha es requerida.</small>
         </div>
       </p-accordionTab>
-    </p-accordion>
+    </p-accordion>-->
 
     <h4 class="tituloH4">Nombre *</h4>
     <div class="p-field" [style]="{width: '80%', margin: 'auto'}">
@@ -66,6 +66,12 @@
     <h4 class="tituloH4">Apellido</h4>
     <div class="p-field" [style]="{width: '80%', margin: 'auto'}">
       <input type="text" pInputText id="apellido" [(ngModel)]="contacto.apellido" />
+    </div>
+
+     <h4 class="tituloH4">Fecha de nacimiento *</h4>
+    <div class="p-field" [style]="{width: '80%', margin: 'auto'}">
+      <p-inputMask mask="99/99/9999" [(ngModel)]="contacto.fechanac" placeholder="dd/mm/yyyy" [style]="{'text-align': 'center'}"></p-inputMask>
+      <small class="p-invalid" *ngIf="submitted && !contacto.fechanac">La fecha es requerida.</small>
     </div>
 
     <h4 class="tituloH4">Email</h4>

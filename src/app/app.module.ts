@@ -30,6 +30,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { InputMaskModule } from 'primeng/inputmask';
 
 import { CalendarModule } from 'primeng/calendar';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -40,6 +41,7 @@ import rrulePlugin from '@fullcalendar/rrule'; // plugin
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { AccordionModule } from 'primeng/accordion';
+import { interceptorProvider } from './interceptors/prod-interceptor.service';
 
 import { InicioCComponent } from './inicio-c/inicio-c.component';
 import { ContactosCComponent } from './contactos-c/contactos-c.component';
@@ -51,6 +53,7 @@ import { FiestasIdCComponent } from './fiestas-id-c/fiestas-id-c.component';
 import { LoginComponent } from './auth/login.component';
 import { RegistroComponent } from './auth/registro.component';
 import { PerfilCComponent } from './perfil-c/perfil-c.component';
+
 
 registerLocaleData(localeEs, 'es');
 
@@ -106,9 +109,10 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     InputSwitchModule,
     SplitButtonModule,
     InputTextareaModule,
-    KeyFilterModule
+    KeyFilterModule,
+    InputMaskModule
   ],
-  providers: [MessageService, ConfirmationService, { provide: LOCALE_ID, useValue: 'es' }],
+  providers: [interceptorProvider, MessageService, ConfirmationService, { provide: LOCALE_ID, useValue: 'es' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

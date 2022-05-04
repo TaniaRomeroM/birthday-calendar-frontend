@@ -40,7 +40,7 @@
 
 <!-- Modal displaySaveDialog - NUEVA SUGERENCIA -->
 <p-dialog [(visible)]="displaySaveDialog" header="Nueva sugerencia" [modal]="true" styleClass="p-fluid"
-  [style]="{width: '60%', height:'90%'}">
+  [style]="{width: '60%', height:'70%'}">
   <div class="divModal">
     <input type="text" pInputText [(ngModel)]="sugerencia.nombre" placeholder="Título *" required autofocus>
     <small class="p-invalid" *ngIf="submitted && !sugerencia.nombre">El título es requerido.</small>

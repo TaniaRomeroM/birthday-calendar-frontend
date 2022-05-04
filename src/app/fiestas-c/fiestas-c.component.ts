@@ -42,7 +42,8 @@ export class FiestasCComponent implements OnInit {
   pipe = new DatePipe('es');
   todayWithPipe = null;
 
-  constructor(private fiestaService: FiestaService, private messageService: MessageService, private contactoService: ContactoService, private confirmationService: ConfirmationService, private tokenService: TokenService) { }
+  constructor(private fiestaService: FiestaService, private messageService: MessageService, private contactoService: ContactoService,
+    private confirmationService: ConfirmationService, private tokenService: TokenService) { }
 
   abrirModal() {
     this.fiesta = {
@@ -176,7 +177,7 @@ export class FiestasCComponent implements OnInit {
     this.cols = [
       { field: "nombreContacto", header: "Nombre contacto" },
       { field: "fechaFiesta", header: "Fecha de la Fiesta" },
-      { field: "tipo", header: "Tipo" }
+      { field: "tipo", header: "Temática" }
     ];
   }
 

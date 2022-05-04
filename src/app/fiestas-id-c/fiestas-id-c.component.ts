@@ -48,6 +48,7 @@ export class FiestasIdCComponent implements OnInit {
   }
 
   btnCancelar() {
+    this.getFiesta();
     this.disabled = true;
   }
 

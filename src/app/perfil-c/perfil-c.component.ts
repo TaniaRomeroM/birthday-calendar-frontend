@@ -34,6 +34,7 @@ export class PerfilCComponent implements OnInit {
 
   btnCancelar() {
     this.disabled = true;
+    this.getUsuario();
   }
 
   getUsuario() {

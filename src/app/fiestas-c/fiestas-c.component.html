@@ -1,7 +1,7 @@
 <p-confirmDialog [style]="{width: '450px'}" acceptLabel="Sí" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
 <p-toast></p-toast>
 
-<p-card header="Fiestas">
+<p-card header="Fiestas" [style]="{height: '90%'}">
 
   <!-- MENU BAR -->
   <p-menubar>
@@ -48,7 +48,7 @@
   [style]="{width: '40%', height:'100%'}">
   <ng-template pTemplate="content">
 
-    <h4 class="tituloH4">Contacto</h4>
+    <h4 class="tituloH4">Contacto *</h4>
     <p-autoComplete [suggestions]="contactosDropdown" (completeMethod)="getAllContactos($event)" [dropdown]="true"
       [style]="{width: '90%', 'padding-left': '10%'}">
       <ng-template let-contacto pTemplate="item">
@@ -60,11 +60,12 @@
 
     <h4 class="tituloH4">Fecha</h4>
     <div class="p-field" [style]="{width: '90%', 'padding-left': '10%'}">
-      <p-calendar inputId="icon" [(ngModel)]="fiesta.fechaFiesta" [showIcon]="true" dateFormat="dd/MM/yyyy"
-      [firstDayOfWeek]="1"></p-calendar>
+     <!-- <p-calendar inputId="icon" [(ngModel)]="fiesta.fechaFiesta" [showIcon]="true" dateFormat="dd/MM/yyyy"
+      [firstDayOfWeek]="1"></p-calendar>-->
+       <p-inputMask mask="99/99/9999" [(ngModel)]="fiesta.fechaFiesta" placeholder="dd/mm/yyyy"></p-inputMask>
     </div>
 
-    <h4 class="tituloH4">Tipo</h4>
+    <h4 class="tituloH4">Temática de la fiesta</h4>
     <div class="p-field" [style]="{width: '90%', 'padding-left': '10%'}">
       <input type="text" pInputText id="tipo" [(ngModel)]="fiesta.tipo" required/>
     </div>
