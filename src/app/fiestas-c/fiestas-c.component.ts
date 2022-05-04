@@ -7,6 +7,8 @@ import { ContactoService } from '../service/contacto.service';
 import { Contacto } from 'src/models/contacto';
 import { ConfirmationService } from 'primeng/api';
 import { TokenService } from '../service/token.service';
+import { UsuarioService } from '../service/usuario.service';
+import { Usuario } from 'src/models/usuario';
 
 @Component({
   selector: 'app-fiestas-c',
@@ -25,7 +27,7 @@ export class FiestasCComponent implements OnInit {
     nombreContacto: null
   };
   contactos: Contacto[];
-  contactosDropdown: any[];
+  contactosDropdown: Contacto[];
   contacto: Contacto = {  // Modal de Nueva Fiesta
     contactoId: null,
     usuarioId: null,
@@ -42,7 +44,7 @@ export class FiestasCComponent implements OnInit {
   pipe = new DatePipe('es');
   todayWithPipe = null;
 
-  constructor(private fiestaService: FiestaService, private messageService: MessageService, private contactoService: ContactoService,
+  constructor(private fiestaService: FiestaService, private usuarioService: UsuarioService, private messageService: MessageService, private contactoService: ContactoService,
     private confirmationService: ConfirmationService, private tokenService: TokenService) { }
 
   abrirModal() {
@@ -102,12 +104,8 @@ export class FiestasCComponent implements OnInit {
     );
   }
 
-  getAllContactos(event) {
-    let query = event.query;
+  getAllContactos() {
     if (this.tokenService.getToken()) {
-      console.log("TOKEN" + this.tokenService.getToken());
-      console.log("USERNAME" + this.tokenService.getUsername());
-
       this.contactoService.getAll(this.tokenService.getUsername()).subscribe(
         (result: any) => {
           let contactos: Contacto[] = [];
@@ -115,7 +113,7 @@ export class FiestasCComponent implements OnInit {
             let contacto = result[i] as Contacto; // Convertir la variable contacto (que no tiene un tipo definido) en una variable de tipo Contacto
             contactos.push(contacto);
           }
-          this.contactosDropdown = contactos;
+          this.contactos = contactos;
         },
         error => {
           console.log(error);
@@ -124,33 +122,51 @@ export class FiestasCComponent implements OnInit {
     }
   }
 
+  filterContactos(event): void {
+    this.contactosDropdown = [];
+    for (let i = 0; i < this.contactos.length; i++) {
+      this.contacto = this.contactos[i];
+      if (this.contacto.nombre.toLowerCase().indexOf(event.query.toLowerCase()) === 0) {
+        this.contactosDropdown.push(this.contacto);
+      }
+    }
+  }
+
   addFiesta() {
     this.submitted = true;
+
+    this.fiesta.contactoId = this.contacto.contactoId;
     if (this.fiesta.fechaFiesta instanceof Date) {
       this.todayWithPipe = this.pipe.transform(this.fiesta.fechaFiesta, 'dd/MM/yyyy'); // Formatea la fecha que obtiene del formulario Cumpleanyos
       this.fiesta.fechaFiesta = this.todayWithPipe;
     }
-    console.log("contacto nombre " + this.contacto.nombre);
-    console.log("contacto id " + this.contacto.contactoId);
-    console.log("fiesta id " + this.fiesta.fiestaId);
-    /*  IGUALAR contacto.contactoId   A   fiesta.contactoId  */
-    //this.fiesta.contactoId = this.contacto.contactoId;
 
-    this.fiestaService.addFiesta(this.fiesta).subscribe( // Procesos que surgan una vez se ha guardado el contacto
+    this.usuarioService.getUsuarioByNombreUsuario(this.tokenService.getUsername()).subscribe( // Procesos que surgan una vez se ha guardado el contacto
       (result: any) => {
-        let fiesta = result as Fiesta;
-        this.fiestas.push(fiesta);
-        this.messageService.add({ severity: 'success', summary: "Nueva Fiesta", detail: "Se guardó la fiesta correctamente." });
-        this.displaySaveDialog = false; // Cierra el modal
+        let usuario = result as Usuario;
+        this.fiesta.usuarioId = usuario.usuarioId;
+
+        this.fiestaService.addFiesta(this.fiesta).subscribe( // Procesos que surgan una vez se ha guardado el contacto
+          (result: any) => {
+            let fiesta = result as Fiesta;
+            this.fiestas.push(fiesta);
+            this.messageService.add({ severity: 'success', summary: "Nueva Fiesta", detail: "Se guardó la fiesta correctamente." });
+            this.displaySaveDialog = false; // Cierra el modal
+            this.getAllFiestas();
+          },
+          error => {
+            console.log(error);
+          }
+        )
       },
       error => {
         console.log(error);
       }
     )
+
   }
 
   eliminarFiesta(fiesta: Fiesta) {
-    console.log("fiesta " + fiesta)
     this.confirmationService.confirm({
       message: '¿Estás seguro de que quieres eliminar la fiesta de ' + fiesta.nombreContacto + '?',
       header: 'Eliminar',
@@ -174,6 +190,7 @@ export class FiestasCComponent implements OnInit {
 
   ngOnInit() {
     this.getAllFiestas();
+    this.getAllContactos();
     this.cols = [
       { field: "nombreContacto", header: "Nombre contacto" },
       { field: "fechaFiesta", header: "Fecha de la Fiesta" },

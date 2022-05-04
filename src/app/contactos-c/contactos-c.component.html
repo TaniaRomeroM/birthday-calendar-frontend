@@ -15,7 +15,8 @@
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th *ngFor="let col of columns" [style]="{'text-align': 'center'}">
-          {{col.header}} <!-- Pinta de forma dinamica los headers -->
+          {{col.header}}
+          <!-- Pinta de forma dinamica los headers -->
         </th>
         <th></th>
       </tr>
@@ -43,19 +44,9 @@
 
 <!-- Modal displaySaveDialog - NUEVO/EDITAR CONTACTO -->
 <p-dialog [(visible)]="displaySaveDialog" header={{title}} [modal]="true" styleClass="p-fluid" [responsive]="true"
-  [style]="{width: '60%', height:'90%'}">
+  [style]="{width: '40%'}">
 
   <ng-template pTemplate="content">
-
-    <!--<p-accordion [style]="{width: '90%', margin: 'auto', 'padding-top': '1%'}">
-      <p-accordionTab header="Cumpleaños *">
-        <div class="field" [style]="{width: '57%', margin: 'auto'}">
-          <p-calendar class="estiloIcon" [(ngModel)]="contacto.fechanac" dateFormat="dd/mm/yy" [inline]="true">
-          </p-calendar>
-          <small class="p-invalid" *ngIf="submitted && !contacto.fechanac">La fecha es requerida.</small>
-        </div>
-      </p-accordionTab>
-    </p-accordion>-->
 
     <h4 class="tituloH4">Nombre *</h4>
     <div class="p-field" [style]="{width: '80%', margin: 'auto'}">
@@ -68,9 +59,10 @@
       <input type="text" pInputText id="apellido" [(ngModel)]="contacto.apellido" />
     </div>
 
-     <h4 class="tituloH4">Fecha de nacimiento *</h4>
+    <h4 class="tituloH4">Fecha de nacimiento *</h4>
     <div class="p-field" [style]="{width: '80%', margin: 'auto'}">
-      <p-inputMask mask="99/99/9999" [(ngModel)]="contacto.fechanac" placeholder="dd/mm/yyyy" [style]="{'text-align': 'center'}"></p-inputMask>
+      <p-inputMask mask="99/99/9999" [(ngModel)]="contacto.fechanac" placeholder="dd/mm/yyyy"
+        [style]="{'text-align': 'center'}"></p-inputMask>
       <small class="p-invalid" *ngIf="submitted && !contacto.fechanac">La fecha es requerida.</small>
     </div>
 

@@ -24,13 +24,13 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SplitterModule } from 'primeng/splitter';
 import { DividerModule } from 'primeng/divider';  // Quitar
 import { CardModule } from 'primeng/card';
-import { AutoCompleteModule } from 'primeng/autocomplete';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { InputMaskModule } from 'primeng/inputmask';
+import { DropdownModule } from 'primeng/dropdown';
 
 import { CalendarModule } from 'primeng/calendar';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -102,7 +102,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ConfirmDialogModule,
     SplitterModule,
     DividerModule,     // Quitar
-    AutoCompleteModule,
     CardModule,
     MatGridListModule,
     AccordionModule,
@@ -110,7 +109,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     SplitButtonModule,
     InputTextareaModule,
     KeyFilterModule,
-    InputMaskModule
+    InputMaskModule,
+    DropdownModule
   ],
   providers: [interceptorProvider, MessageService, ConfirmationService, { provide: LOCALE_ID, useValue: 'es' }],
   bootstrap: [AppComponent]
