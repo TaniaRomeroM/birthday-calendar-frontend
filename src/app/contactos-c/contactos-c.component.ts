@@ -140,32 +140,7 @@ export class ContactosCComponent implements OnInit {
         console.log(error);
       }
     )
-
-    //.subscribe({this.contacto.usuarioId = data.userid}
-
-    /*this.contactoService.addContacto(this.contacto).subscribe( // Procesos que surgan una vez se ha guardado el contacto
-      (result: any) => {
-        let contacto = result as Contacto;
-        if (this.edit) {
-          this.contactos[this.findIndexById(this.contacto.contactoId)] = this.contacto;
-        }
-        this.messageService.add({ severity: 'succes', summary: "Resultado", detail: "Se guardó el contacto correctamente." });
-        this.displaySaveDialog = false; // Cierra el modal
-
-        this.getAll();
-      },
-      error => {
-        console.log(error);
-      }
-    )*/
   }
-  /*
-    public clickBonusChecked(e) {
-      this.bonusChecked = e.checked;
-       if (this.bonusChecked) {
-         console.log('jsdhck');
-       }
-     }*/
 
   findIndexById(id: number): number {
     let index = -1;
@@ -210,7 +185,6 @@ export class ContactosCComponent implements OnInit {
   ngOnInit() { // Se ejecuta su interior cuando se cargue el componente por primera vez
     this.getAllContactos();
     this.cols = [
-      { field: "nombre", header: "Nombre" },
       { field: "apellido", header: "Apellido" },
       { field: "fechanac", header: "Fecha de Cumpleaños" },
       { field: "email", header: "Email" }

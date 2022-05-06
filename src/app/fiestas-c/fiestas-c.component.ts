@@ -27,7 +27,6 @@ export class FiestasCComponent implements OnInit {
     nombreContacto: null
   };
   contactos: Contacto[];
-  contactosDropdown: Contacto[];
   contacto: Contacto = {  // Modal de Nueva Fiesta
     contactoId: null,
     usuarioId: null,
@@ -122,16 +121,6 @@ export class FiestasCComponent implements OnInit {
     }
   }
 
-  filterContactos(event): void {
-    this.contactosDropdown = [];
-    for (let i = 0; i < this.contactos.length; i++) {
-      this.contacto = this.contactos[i];
-      if (this.contacto.nombre.toLowerCase().indexOf(event.query.toLowerCase()) === 0) {
-        this.contactosDropdown.push(this.contacto);
-      }
-    }
-  }
-
   addFiesta() {
     this.submitted = true;
 
@@ -192,7 +181,6 @@ export class FiestasCComponent implements OnInit {
     this.getAllFiestas();
     this.getAllContactos();
     this.cols = [
-      { field: "nombreContacto", header: "Nombre contacto" },
       { field: "fechaFiesta", header: "Fecha de la Fiesta" },
       { field: "tipo", header: "Temática" }
     ];

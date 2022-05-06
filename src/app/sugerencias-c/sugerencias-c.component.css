@@ -1,3 +1,7 @@
+button {
+  margin-left: 5px;
+}
+
 .btnNuevo {
   background-color: rgb(93, 149, 127);
   border-color: rgb(93, 149, 127);
@@ -6,7 +10,7 @@
   height: 40px;
 }
 
-.btnNuevo:hover{
+.btnNuevo:hover {
   background-color: white !important;
   border-color: rgb(93, 149, 127) !important;
   color: rgb(93, 149, 127) !important;
@@ -20,32 +24,58 @@
 
 .btnEdit:hover {
   background-color: rgb(84, 150, 124) !important;
-  border-color: rgb(84, 150, 124);
+  border-color: rgb(84, 150, 124) !important;
   color: white;
 }
 
-.btonCancelar {
+.btnVer {
+  background-color: rgb(108, 162, 178);
+  border-color: rgb(108, 162, 178);
+  color: white;
+}
+
+.btnVer:hover {
+  background-color: rgb(41, 108, 110) !important;
+  border-color: rgb(41, 108, 110) !important;
+  color: white;
+}
+
+.btnCancelar {
   color: rgb(192, 112, 102);
 }
 
-.btonCancelar:hover {
+.btnCancelar:hover {
   color: rgb(192, 112, 102) !important;
 }
 
-.btonGuardar {
+.btnGuardar {
   color: rgb(93, 149, 127);
 }
 
-.btonGuardar:hover {
+.btnGuardar:hover {
   color: rgb(93, 149, 127) !important;
 }
 
+.btnVolver {
+  color: rgb(108, 162, 178);
+}
+
+.btnVolver:hover {
+  color: rgb(108, 162, 178) !important;
+}
+
 .divModal {
-  margin: 5%;
+  margin: 4%;
+  margin-bottom: 0%;
 }
 
 .p-invalid {
   color: red;
+}
+
+.tituloH4 {
+  margin: 0%;
+  text-align: center;
 }
 
 .PENDIENTE {
@@ -78,4 +108,12 @@
   text-align: center;
   font-weight: bold;
   font-size: 14px;
+}
+
+.classpSortableColumn:hover {
+  color: rgb(0, 0, 0) !important;
+}
+
+.classpSortableColumn:active .classpSortableColumn:visited .classpSortableColumn:link {
+  color: rgb(0, 0, 0) !important;
 }

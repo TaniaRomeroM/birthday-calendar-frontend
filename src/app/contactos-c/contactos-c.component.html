@@ -14,19 +14,20 @@
     [style]="{width: '90%', height:'80%', margin: 'auto', border: 'solid 2px rgb(223, 231, 227)', 'margin-top': '1%'}">
     <ng-template pTemplate="header" let-columns>
       <tr>
+        <th pSortableColumn="nombre" [style]="{'text-align': 'center'}">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
         <th *ngFor="let col of columns" [style]="{'text-align': 'center'}">
-          {{col.header}}
-          <!-- Pinta de forma dinamica los headers -->
+          {{col.header}} <!-- Pinta de forma dinamica los headers -->
         </th>
         <th></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-contacto let-columns="columns">
       <tr>
+        <td class="classpSortableColumn" [style]="{'text-align': 'center'}">{{contacto.nombre}}</td>
         <td *ngFor="let col of columns" [style]="{'text-align': 'center'}">
           {{contacto[col.field]}}
         </td>
-        <td>
+        <td [style]="{'text-align': 'center'}">
           <button pButton pRipple icon="pi pi-pencil" class="btnEdit p-button-rounded p-button-success p-mr-2"
             (click)="editarContacto(contacto);"></button>
           <button pButton pRipple icon="pi pi-trash" class="btnDelete p-button-rounded p-button-warning"

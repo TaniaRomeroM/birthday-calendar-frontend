@@ -14,6 +14,7 @@
     [style]="{width: '90%', height:'80%', margin: 'auto', border: 'solid 2px rgb(223, 231, 227)', 'margin-top': '1%'}">
     <ng-template pTemplate="header" let-columns>
       <tr>
+        <th pSortableColumn="nombreContacto" class="classpSortableColumn" [style]="{'text-align': 'center'}">Nombre contacto<p-sortIcon field="nombreContacto"></p-sortIcon></th>
         <th *ngFor="let col of columns" [style]="{'text-align': 'center'}">
           {{col.header}}
           <!-- Pinta de forma dinamica los headers -->
@@ -23,12 +24,13 @@
     </ng-template>
     <ng-template pTemplate="body" let-fiesta let-columns="columns">
       <tr>
+        <td [style]="{'text-align': 'center'}">{{fiesta.nombreContacto}}</td>
         <td *ngFor="let col of columns" [style]="{'text-align': 'center'}">
           <a [routerLink]="['/fiestas',fiesta.fiestaId]">
             {{fiesta[col.field]}}
           </a>
         </td>
-        <td>
+        <td [style]="{'text-align': 'center'}">
           <button pButton pRipple icon="pi pi-pencil" class="btnEdit p-button-rounded p-button-success"
             [routerLink]="['/fiestas',fiesta.fiestaId]"></button>
           <button pButton pRipple icon="pi pi-trash" class="btnDelete p-button-rounded p-button-warning"

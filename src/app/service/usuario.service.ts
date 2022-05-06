@@ -21,4 +21,8 @@ export class UsuarioService {
     return this.http.post(this.baseUrl + "/usuarios/editar", JSON.stringify(usuario), { headers: headers });
   }
 
+  encontrarUsuario(usuarioId: number): Observable<any> {
+    return this.http.get(this.baseUrl + "/usuario/find/" + usuarioId);
+  }
+
 }

@@ -50,7 +50,7 @@ button {
 
 .btnEdit:hover {
   background-color: rgb(84, 150, 124) !important;
-  border-color: rgb(84, 150, 124);
+  border-color: rgb(84, 150, 124) !important;
   color: white;
 }
 
