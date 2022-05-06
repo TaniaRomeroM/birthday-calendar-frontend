@@ -30,11 +30,8 @@
 
             <div class="p-field">
               <h3 class="fieldinput">Fecha</h3>
-              <!-- <p-inputMask mask="99/99/9999" [(ngModel)]="fiesta.fechaFiesta" placeholder="dd/mm/yyyy" [disabled]="disabled" autofocus></p-inputMask>-->
-             <input size="30" type="text" pInputText id="fechaFiesta" [disabled]="disabled"
-                [(ngModel)]="fiesta.fechaFiesta" required autofocus />
-              <!-- <p-calendar id="fechaFiesta" inputId="icon" class="estiloIcon" [(ngModel)]="fiesta.fechaFiesta"
-                [showIcon]="true" [disabled]="disabled" dateFormat="dd/mm/yy"></p-calendar>-->
+              <p-inputMask [size]="30" mask="99/99/9999" [(ngModel)]="fiesta.fechaFiesta" placeholder="dd/mm/yyyy"
+                [disabled]="disabled" autofocus [style]="{'text-align': 'center'}"></p-inputMask>
             </div>
 
             <div class="p-field">
@@ -82,7 +79,7 @@
                     </p-cellEditor>
                   </td>
                   <td>
-                    <button pButton pRipple icon="pi pi-times" class="btnDeleteCompras p-button-text"
+                    <button pButton pRipple icon="pi pi-times" class="btnDeleteLista p-button-text"
                       (click)="eliminarCompra(compra)"></button>
                   </td>
               </ng-template>
@@ -102,31 +99,31 @@
       <p-card header="Invitados" [style]="{'width': '18rem', 'margin-bottom': '2em'}">
         <ng-template pTemplate>
           <div class="panelInvitados col flex align-items-center justify-content-center">
-            <p-table [value]="compras" dataKey="id">
+            <p-table [value]="invitados" dataKey="id">
               <ng-template pTemplate="header">
                 <tr>
                   <th></th>
                   <th>
                     <button pButton pRipple icon="pi pi-plus" class="btnModal p-button-text"
-                      (click)="btnNuevaCompra()"></button>
+                      (click)="btnNuevoInvitado()"></button>
                   </th>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="body" let-compra>
+              <ng-template pTemplate="body" let-invitado>
                 <tr>
                   <td pEditableColumn>
                     <p-cellEditor>
                       <ng-template pTemplate="input">
-                        <input pInputText type="text" [(ngModel)]="compra.nombre">
+                        <input pInputText type="text" [(ngModel)]="invitado.nombre">
                       </ng-template>
                       <ng-template pTemplate="output">
-                        {{compra.nombre}}
+                        {{invitado.nombre}}
                       </ng-template>
                     </p-cellEditor>
                   </td>
                   <td>
-                    <button pButton pRipple icon="pi pi-times" class="btnDeleteCompras p-button-text"
-                      (click)="eliminarCompra(compra)"></button>
+                    <button pButton pRipple icon="pi pi-times" class="btnDeleteLista p-button-text"
+                      (click)="eliminarInvitado(invitado)"></button>
                   </td>
               </ng-template>
               <ng-template pTemplate="emptymessage">
@@ -156,5 +153,22 @@
       (click)="cerrarDialog()"></button>
     <button pButton pRipple label="Guardar" icon="pi pi-check" class="btnGuardar btnModal p-button-text"
       (click)="addCompra()"></button>
+  </ng-template>
+</p-dialog>
+
+<!-- Modal saveDialogInvitados - NUEVO INVITADO -->
+<p-dialog [(visible)]="saveDialogInvitados" header={{title}} [modal]="true" styleClass="p-fluid"
+  [style]="{width: '30%', height:'35%'}">
+  <ng-template pTemplate="content">
+    <div class="p-field" [style]="{width: '90%', 'padding-left': '10%'}">
+      <input type="text" pInputText id="invitado" [(ngModel)]="invitado.nombre" required autofocus />
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btnCancelar btnModal p-button-text"
+      (click)="cerrarDialog()"></button>
+    <button pButton pRipple label="Guardar" icon="pi pi-check" class="btnGuardar btnModal p-button-text"
+      (click)="addInvitado()"></button>
   </ng-template>
 </p-dialog>

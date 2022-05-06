@@ -70,5 +70,9 @@ button {
 .tituloH4 {
   margin-top: 3%;
   margin-bottom: 1%;
-  padding-left: 10%;
+  text-align: center;
+}
+
+input {
+  text-align: center;
 }

@@ -43,6 +43,12 @@ button {
   color: rgb(93, 149, 127) !important;
 }
 
+.botonesEdit {
+  margin-top: 2%;
+  width: 30%;
+  text-align: center;
+}
+
 .btonCancelar {
   color: rgb(192, 112, 102);
 }
@@ -69,27 +75,10 @@ button {
   text-align: center;
 }
 
-.estiloLabel {
-  margin-right: 2%;
-}
-
 input {
   text-align: center;
 }
 
-/*.p-datepicker-calendar {
-  width: 20px;
-  height: 20px;
-  padding: 4px;
-}*/
-
-/*div.ng-trigger:nth-child(3)
-.p-datepicker-group-container
-.p-datepicker-group
-.p-datepicker-calendar-container
-
-
-div.ng-trigger:nth-child(3) - Panel blanco
-.p-datepicker-calendar
-.p-datepicker-calendar
-*/
+.estiloLabel {
+  margin-right: 2%;
+}

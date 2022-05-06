@@ -64,11 +64,11 @@ p-table {
   text-align: center;
 }
 
-.btnDeleteCompras {
+.btnDeleteLista {
   color: rgb(192, 112, 102);
 }
 
-.btnDeleteCompras:hover {
+.btnDeleteLista:hover {
   color: rgb(192, 112, 102) !important;
 }
 

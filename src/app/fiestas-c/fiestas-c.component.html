@@ -45,24 +45,25 @@
 </p-card>
 
 <!-- Modal displaySaveDialog - NUEVA FIESTA -->
-<p-dialog [(visible)]="displaySaveDialog" header={{title}} [modal]="true" styleClass="p-fluid" [style]="{width: '40%'}">
+<p-dialog [(visible)]="displaySaveDialog" header={{title}} [modal]="true" styleClass="p-fluid" [style]="{width: '35%'}">
   <ng-template pTemplate="content">
-
-    <h4 class="tituloH4">Contacto *</h4>
-    <div class="p-field" [style]="{width: '80%', 'margin': 'auto'}">
+    <div class="p-field" [style]="{width: '60%', 'margin': 'auto'}">
+      <h4 class="tituloH4">Contacto *</h4>
       <p-dropdown [options]="contactos" [(ngModel)]="contacto" placeholder="Selecciona un contacto" optionLabel="nombre"
-        [showClear]="true"></p-dropdown>
+        [showClear]="true" [style]="{'text-align': 'center'}"></p-dropdown>
+      <small class="p-invalid" *ngIf="submitted && !contacto.nombre">El contacto es requerido.</small>
     </div>
 
-    <h4 class="tituloH4">Fecha</h4>
-    <div class="p-field" [style]="{width: '80%', 'margin': 'auto'}">
+    <div class="p-field" [style]="{width: '60%', 'margin': 'auto'}">
+      <h4 class="tituloH4">Fecha</h4>
       <!-- <p-calendar inputId="icon" [(ngModel)]="fiesta.fechaFiesta" [showIcon]="true" dateFormat="dd/MM/yyyy"
       [firstDayOfWeek]="1"></p-calendar>-->
-      <p-inputMask mask="99/99/9999" [(ngModel)]="fiesta.fechaFiesta" placeholder="dd/mm/yyyy"></p-inputMask>
+      <p-inputMask mask="99/99/9999" [(ngModel)]="fiesta.fechaFiesta" placeholder="dd/mm/yyyy"
+        [style]="{'text-align': 'center'}"></p-inputMask>
     </div>
 
-    <h4 class="tituloH4">Temática de la fiesta</h4>
-    <div class="p-field" [style]="{width: '80%', 'margin': 'auto'}">
+    <div class="p-field" [style]="{width: '60%', 'margin': 'auto'}">
+      <h4 class="tituloH4">Temática de la fiesta</h4>
       <input type="text" pInputText id="tipo" [(ngModel)]="fiesta.tipo" required />
     </div>
   </ng-template>

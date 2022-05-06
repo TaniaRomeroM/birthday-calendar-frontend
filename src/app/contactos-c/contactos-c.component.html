@@ -46,41 +46,40 @@
 <p-dialog [(visible)]="displaySaveDialog" header={{title}} [modal]="true" styleClass="p-fluid" [responsive]="true"
   [style]="{width: '40%'}">
 
-  <ng-template pTemplate="content">
+  <form ngNativeValidate [style]="{width: '80%', height: '50%', margin: 'auto'}">
 
-    <h4 class="tituloH4">Nombre *</h4>
-    <div class="p-field" [style]="{width: '80%', margin: 'auto'}">
-      <input type="text" pInputText id="name" [(ngModel)]="contacto.nombre" required autofocus />
-      <small class="p-invalid" *ngIf="submitted && !contacto.nombre">El nombre es requerido.</small>
+    <div class="form-group" [style]="{width: '80%', margin: 'auto'}">
+      <h4 class="tituloH4">Nombre *</h4>
+      <input class="form-control" type="text" pInputText id="nombre" [(ngModel)]="contacto.nombre" name="nombre" required autofocus />
     </div>
 
-    <h4 class="tituloH4">Apellido</h4>
-    <div class="p-field" [style]="{width: '80%', margin: 'auto'}">
-      <input type="text" pInputText id="apellido" [(ngModel)]="contacto.apellido" />
+    <div class="form-group" [style]="{width: '80%', margin: 'auto'}">
+      <h4 class="tituloH4">Apellido</h4>
+      <input class="form-control" type="text" pInputText id="apellido" [(ngModel)]="contacto.apellido" name="apellido" />
     </div>
 
-    <h4 class="tituloH4">Fecha de nacimiento *</h4>
-    <div class="p-field" [style]="{width: '80%', margin: 'auto'}">
-      <p-inputMask mask="99/99/9999" [(ngModel)]="contacto.fechanac" placeholder="dd/mm/yyyy"
-        [style]="{'text-align': 'center'}"></p-inputMask>
-      <small class="p-invalid" *ngIf="submitted && !contacto.fechanac">La fecha es requerida.</small>
+    <div class="form-group" [style]="{width: '80%', margin: 'auto'}">
+      <h4 class="tituloH4">Fecha Nacimiento *</h4>
+      <p-inputMask class="form-control"  mask="99/99/9999" id="fechanac" [(ngModel)]="contacto.fechanac" name="fechanac" placeholder="dd/mm/yyyy"
+        [style]="{'text-align': 'center'}" [required]="true"></p-inputMask>
     </div>
 
-    <h4 class="tituloH4">Email</h4>
-    <div class="p-field" [style]="{width: '80%', margin: 'auto'}">
-      <input type="text" pInputText id="email" [(ngModel)]="contacto.email" />
+    <div class="form-group" [style]="{width: '80%', margin: 'auto'}">
+      <h4 class="tituloH4">Email</h4>
+      <input class="form-control" type="text" pInputText id="email" [(ngModel)]="contacto.email" name="email"/>
     </div>
 
     <div class="tituloH4">
-      <label class="estiloLabel">Fiesta</label>
-      <p-inputSwitch [(ngModel)]="checked"></p-inputSwitch>
+      <label class="estiloLabel form-group">Fiesta</label>
+      <p-inputSwitch id="fiesta" [(ngModel)]="checked" name="fiesta"></p-inputSwitch>
     </div>
-  </ng-template>
 
-  <ng-template pTemplate="footer">
-    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btonCancelar p-button-text"
-      (click)="cerrarDialog()"></button>
-    <button pButton pRipple label="Guardar" icon="pi pi-check" class="btonGuardar p-button-text"
-      (click)="guardarContacto()"></button>
-  </ng-template>
+    <div class="botonesEdit form-group">
+      <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btonCancelar p-button-text"
+        (click)="cerrarDialog()"></button>
+      <button pButton pRipple label="Guardar" icon="pi pi-check"
+      (click)="guardarContacto()" class="btonGuardar p-button-text"></button>
+    </div>
+
+  </form>
 </p-dialog>

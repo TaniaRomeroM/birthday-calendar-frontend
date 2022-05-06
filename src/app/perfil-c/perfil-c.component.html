@@ -10,46 +10,45 @@
   <div class="grid" [style]="{width: '100%', margin: 'auto'}">
 
     <form (ngSubmit)="editarUsuario()" ngNativeValidate [style]="{width: '80%', height: '50%', margin: 'auto'}">
-    <div class="form-group" [style]="{width: '50%', margin: 'auto'}">
-      <h4 class="tituloH4">Nombre Usuario</h4>
-      <input class="form-control" type="text" pInputText id="nombreUsuario" [(ngModel)]="usuario.nombreUsuario" name="nombreUsuario" required [disabled]="true"
-        [style]="{width: '100%', margin: 'auto'}" />
-    </div>
-
-    <div class="form-group" [style]="{width: '50%', margin: 'auto'}">
-      <h4 class="tituloH4">Nombre *</h4>
-      <input class="form-control" type="text" pInputText id="nombre" [(ngModel)]="usuario.nombre" name="nombre"[disabled]="disabled" required
-        [style]="{width: '100%', margin: 'auto'}" />
+      <div class="form-group" [style]="{width: '50%', margin: 'auto'}">
+        <h4 class="tituloH4">Nombre Usuario</h4>
+        <input class="form-control" type="text" pInputText id="nombreUsuario" [(ngModel)]="usuario.nombreUsuario"
+          name="nombreUsuario" required [disabled]="true" [style]="{width: '100%', margin: 'auto'}" />
       </div>
 
-    <div class="form-group" [style]="{width: '50%', margin: 'auto'}">
-      <h4 class="tituloH4">Apellido</h4>
-      <input class="form-control" type="text" pInputText id="apellido" [(ngModel)]="usuario.apellido" name="apellido" [disabled]="disabled"
-        [style]="{width: '100%', margin: 'auto'}" />
-    </div>
+      <div class="form-group" [style]="{width: '50%', margin: 'auto'}">
+        <h4 class="tituloH4">Nombre *</h4>
+        <input class="form-control" type="text" pInputText id="nombre" [(ngModel)]="usuario.nombre" name="nombre"
+          [disabled]="disabled" required [style]="{width: '100%', margin: 'auto'}" />
+      </div>
 
-    <div class="form-group" [style]="{width: '50%', margin: 'auto'}">
-      <h4 class="tituloH4">Fecha Nacimiento *</h4>
-      <!--<input type="text" pInputText id="fechanac" [(ngModel)]="usuario.fechanac" required [disabled]="disabled"
+      <div class="form-group" [style]="{width: '50%', margin: 'auto'}">
+        <h4 class="tituloH4">Apellido</h4>
+        <input class="form-control" type="text" pInputText id="apellido" [(ngModel)]="usuario.apellido" name="apellido"
+          [disabled]="disabled" [style]="{width: '100%', margin: 'auto'}" />
+      </div>
+
+      <div class="form-group" [style]="{width: '50%', margin: 'auto'}">
+        <h4 class="tituloH4">Fecha Nacimiento *</h4>
+        <!--<input type="text" pInputText id="fechanac" [(ngModel)]="usuario.fechanac" required [disabled]="disabled"
         [style]="{width: '100%', margin: 'auto'}" />-->
-      <p-inputMask class="form-control" mask="99/99/9999" [(ngModel)]="usuario.fechanac" name="fechanac" placeholder="dd/mm/yyy" [disabled]="disabled"
-      [style]="{width: '100%', margin: 'auto', 'text-align': 'center'}"></p-inputMask>
-    </div>
+        <p-inputMask class="form-control" mask="99/99/9999" [(ngModel)]="usuario.fechanac" name="fechanac"
+          placeholder="dd/mm/yyy" [disabled]="disabled" [required]="true"
+          [style]="{width: '100%', margin: 'auto', 'text-align': 'center'}"></p-inputMask>
+      </div>
 
-    <div class="form-group" [style]="{width: '50%', margin: 'auto'}">
-      <h4 class="tituloH4">Email *</h4>
-      <input class="form-control" type="text" pInputText id="email" [(ngModel)]="usuario.email" name="email" [disabled]="disabled" required
-        [style]="{width: '100%', margin: 'auto'}" />
-    </div>
+      <div class="form-group" [style]="{width: '50%', margin: 'auto'}">
+        <h4 class="tituloH4">Email *</h4>
+        <input class="form-control" type="text" pInputText id="email" [(ngModel)]="usuario.email" name="email"
+          [disabled]="disabled" required [style]="{width: '100%', margin: 'auto'}" />
+      </div>
 
-    <div class="botonesEdit form-group">
-      <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btnCancelar p-button-text"
-        (click)="btnCancelar()" *ngIf="!this.disabled"></button>
-      <button pButton pRipple type="submit" label="Guardar" icon="pi pi-check" class="btnGuardar p-button-text"
-       *ngIf="!this.disabled"></button>
-    </div>
-  </form>
-
-
+      <div class="botonesEdit form-group">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btnCancelar p-button-text"
+          (click)="btnCancelar()" *ngIf="!this.disabled"></button>
+        <button pButton pRipple type="submit" label="Guardar" icon="pi pi-check" class="btnGuardar p-button-text"
+          *ngIf="!this.disabled"></button>
+      </div>
+    </form>
   </div>
 </p-card>
