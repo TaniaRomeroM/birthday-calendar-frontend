@@ -1,3 +1,5 @@
+<p-toast></p-toast>
+
 <p-card header="BIENVENIDO" [style]="{width: '30%', height: '55%','margin': 'auto', 'margin-top': '5%', 'text-align': 'center', 'color': 'white', 'background-color': 'rgb(115, 176, 146)'}">
 <!--
   <div>
@@ -45,7 +47,7 @@
       <button pButton label="Iniciar sesion" class="btnIniciarSesion p-button-raised p-button-text"></button>
     </div>
   </form>
-  <div *ngIf="f.submitted && isLoginFail" class="alert alert-danger mt-3">Error al iniciar sesión: campos incorrectos.</div>
+  <!--<div *ngIf="f.submitted && isLoginFail" class="alert alert-danger mt-3">Error al iniciar sesión: campos incorrectos.</div>-->
   <div>
     <p class="hrefregistro">¿Aún no tienes cuenta? <a [routerLink]="'registro'">Regístrate</a></p>
   </div>

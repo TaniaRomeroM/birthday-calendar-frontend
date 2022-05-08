@@ -9,19 +9,20 @@ import { FiestasIdCComponent } from './fiestas-id-c/fiestas-id-c.component';
 import { InicioCComponent } from './inicio-c/inicio-c.component';
 import { NotificacionesCComponent } from './notificaciones-c/notificaciones-c.component';
 import { SugerenciasCComponent } from './sugerencias-c/sugerencias-c.component';
-import { ProdGuardService as guard } from './guards/prod-guard.service';
+import { ProdGuardService } from './guards/prod-guard.service';
 import { PerfilCComponent } from './perfil-c/perfil-c.component';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [ // Crear un objeto por cada ruta
-  { path: '', component: LoginComponent },
-  { path: 'registro', component: RegistroComponent },
-  { path: 'perfil', component: PerfilCComponent },
-  { path: 'inicio', component: InicioCComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user'] } },
-  { path: 'contactos', component: ContactosCComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user'] } },
-  { path: 'fiestas', component: FiestasCComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user'] } },
-  { path: 'fiestas/:id', component: FiestasIdCComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user'] } },
-  { path: 'notificaciones', component: NotificacionesCComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user'] } },
-  { path: 'sugerencias', component: SugerenciasCComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user'] } },
+  { path: '', component: LoginComponent, canActivate: [LoginGuard] },
+  { path: 'registro', component: RegistroComponent, canActivate: [LoginGuard] },
+  { path: 'perfil', component: PerfilCComponent,  canActivate: [ProdGuardService], data: { expectedRol: ['admin', 'user'] } },
+  { path: 'inicio', component: InicioCComponent, canActivate: [ProdGuardService], data: { expectedRol: ['admin', 'user'] } },
+  { path: 'contactos', component: ContactosCComponent, canActivate: [ProdGuardService], data: { expectedRol: ['admin', 'user'] } },
+  { path: 'fiestas', component: FiestasCComponent, canActivate: [ProdGuardService], data: { expectedRol: ['admin', 'user'] } },
+  { path: 'fiestas/:id', component: FiestasIdCComponent, canActivate: [ProdGuardService], data: { expectedRol: ['admin', 'user'] } },
+  { path: 'notificaciones', component: NotificacionesCComponent, canActivate: [ProdGuardService], data: { expectedRol: ['admin', 'user'] } },
+  { path: 'sugerencias', component: SugerenciasCComponent, canActivate: [ProdGuardService], data: { expectedRol: ['admin', 'user'] } },
   { path: '**', component: ErrorPersonalizadoComponent } // Tienes que estar siempre el ultimo, Cualquier ruta que sea diferente a las anteriores ira aqui
   // si solo se permite administrador seria expectedRol: ['admin'] }
 ];

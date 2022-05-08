@@ -44,12 +44,14 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    if (this.tokenService.getToken()) {
+    this.isLogged = this.tokenService.isLogged();
+
+    /*if (this.tokenService.getToken()) {
       this.isLogged = true;
       this.getUsuario();
     } else {
       this.isLogged = false;
-    }
+    }*/
 
     this.items = [
       { label: 'Perfil', icon: 'pi pi-user-edit', routerLink: ['perfil'] },
@@ -71,6 +73,5 @@ export class AppComponent {
   onLogOut(): void {
     this.tokenService.logOut();
     this.router.navigate(['/']);
-    //window.location.reload();
   }
 }

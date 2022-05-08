@@ -179,14 +179,19 @@ export class SugerenciasCComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllSugerenciasUsuario();
-    this.getAllSugerenciasAdmin();
+    this.isAdmin = this.tokenService.isAdmin();
 
-    this.roles = this.tokenService.getAuthorities();
+    if (this.isAdmin) {
+      this.getAllSugerenciasAdmin();
+    }
+
+    /*this.roles = this.tokenService.getAuthorities();
     this.roles.forEach(rol => {
       if (rol === "ROLE_ADMIN") {
         this.isAdmin = true;
+        this.getAllSugerenciasAdmin();
       }
-    })
+    });*/
 
     this.cols = [
       { field: "nombre", header: "Título" },

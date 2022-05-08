@@ -13,7 +13,6 @@ import { TokenService } from '../service/token.service';
 })
 export class RegistroComponent implements OnInit {
 
-  isLogged = false;
   isRegister = false;
   isRegisterFail = false;
   nuevoUsuario: NuevoUsuario;
@@ -71,22 +70,7 @@ export class RegistroComponent implements OnInit {
         this.onRegister();
       }
     });
-    /*this.messageService.clear();
-    this.messageService.add({key: 'c', sticky: true, severity:'info',
-      summary:'Quieres registrar el usuario?',
-      detail:'El usuario será registrado y se redirigirá al inicio de sesión'
-    });*/
   }
-
-  /*onRegisterReject() {
-    this.messageService.clear('c');
-  }
-
-  onRegisterConfirm() {
-    this.messageService.clear('c');
-    this.onRegister();
-    //this.router.navigate(['/login']);
-  }*/
 
   clearFields(): void {
     this.nombre = "";
@@ -98,9 +82,6 @@ export class RegistroComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.tokenService.getToken()) {
-      this.isLogged = true;
-    }
   }
 
 }
