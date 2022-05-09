@@ -1,3 +1,0 @@
-export enum EnumEstadoSugerencia {
-  PENDIENTE, ACEPTADA, REALIZADA, RECHAZADA
-}

@@ -31,7 +31,11 @@ export class InicioCComponent implements OnInit {
   pipe = new DatePipe('es'); // Modal fechanac
   todayWithPipe = null; // Modal fechanac
 
-  constructor(private contactoService: ContactoService, private messageService: MessageService, private tokenService: TokenService) { }
+  constructor(
+    private contactoService: ContactoService,
+    private messageService: MessageService,
+    private tokenService: TokenService
+  ) { }
 
   getAll() {
     if (this.tokenService.getToken()) {

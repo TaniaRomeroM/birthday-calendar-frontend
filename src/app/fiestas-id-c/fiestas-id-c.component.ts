@@ -48,9 +48,16 @@ export class FiestasIdCComponent implements OnInit {
   pipe = new DatePipe('es');
   todayWithPipe = null;
 
-  constructor(private router: Router, private route: ActivatedRoute, private fiestaService: FiestaService,
-    private contactoService: ContactoService, private compraService: CompraService, private invitadoService: InvitadoService,
-    private messageService: MessageService, private confirmationService: ConfirmationService) { }
+  constructor(
+    private fiestaService: FiestaService,
+    private contactoService: ContactoService,
+    private compraService: CompraService,
+    private invitadoService: InvitadoService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) { }
 
   /* FIESTA */
   btnEditarFiesta() {
@@ -124,7 +131,6 @@ export class FiestasIdCComponent implements OnInit {
       }
     });
   }
-
 
   /* COMPRA */
   btnNuevaCompra() {

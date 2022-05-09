@@ -24,7 +24,11 @@ export class AppComponent {
   };
   items: MenuItem[];
 
-  constructor(private tokenService: TokenService, private router: Router, private usuarioService: UsuarioService) { }
+  constructor(
+    private tokenService: TokenService,
+    private router: Router,
+    private usuarioService: UsuarioService
+  ) { }
 
   getUsuario() {
     if (this.tokenService.getToken()) {
@@ -46,16 +50,12 @@ export class AppComponent {
   ngOnInit() {
     this.isLogged = this.tokenService.isLogged();
 
-    /*if (this.tokenService.getToken()) {
-      this.isLogged = true;
-      this.getUsuario();
-    } else {
-      this.isLogged = false;
-    }*/
+    /* this.getUsuario(); */ // FALTA
 
     this.items = [
       { label: 'Perfil', icon: 'pi pi-user-edit', routerLink: ['perfil'] },
-      { label: 'Cerrar Sesión', icon: 'pi pi-sign-out', command: () => {
+      {
+        label: 'Cerrar Sesión', icon: 'pi pi-sign-out', command: () => {
           this.onLogOut();
         }
       }
@@ -63,11 +63,7 @@ export class AppComponent {
   }
 
   ngDoCheck() {
-    if (this.tokenService.getToken()) {
-      this.isLogged = true;
-    } else {
-      this.isLogged = false;
-    }
+    this.isLogged = this.tokenService.isLogged();
   }
 
   onLogOut(): void {

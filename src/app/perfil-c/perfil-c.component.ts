@@ -25,7 +25,11 @@ export class PerfilCComponent implements OnInit {
   pipe = new DatePipe('es');
   todayWithPipe = null;
 
-  constructor(private usuarioService: UsuarioService, private tokenService: TokenService, private messageService: MessageService) { }
+  constructor(
+    private usuarioService: UsuarioService,
+    private tokenService: TokenService,
+    private messageService: MessageService
+  ) { }
 
 
   btnEditarUsuario() {

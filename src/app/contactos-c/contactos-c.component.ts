@@ -45,10 +45,14 @@ export class ContactosCComponent implements OnInit {
   pipe = new DatePipe('es');
   todayWithPipe = null;
 
-
-  constructor(private contactoService: ContactoService, private usuarioService: UsuarioService, private messageService: MessageService,
-    private confirmationService: ConfirmationService, private tokenService: TokenService, private fiestaService: FiestaService) { }
-
+  constructor(
+    private contactoService: ContactoService,
+    private usuarioService: UsuarioService,
+    private fiestaService: FiestaService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+    private tokenService: TokenService
+  ) { }
 
   abrirModal() {
     this.contacto = {
@@ -72,9 +76,6 @@ export class ContactosCComponent implements OnInit {
 
   getAllContactos() {
     if (this.tokenService.getToken()) {
-      /*console.log("TOKEN: " + this.tokenService.getToken());
-      console.log("USERNAME: " + this.tokenService.getUsername());*/
-
       this.contactoService.getAll(this.tokenService.getUsername()).subscribe(
         (result: any) => {
           let contactos: Contacto[] = [];

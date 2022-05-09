@@ -19,19 +19,12 @@ export class SugerenciasCComponent implements OnInit {
     usuarioId: null,
     nombre: null,
     descripcion: null,
-    estadoSugerencia: null,  /* ENUM */
+    estadoSugerencia: null,
     nombreUsuario: null
   };
   cols: any[];
   submitted: boolean;
   displaySaveDialogUsuario: boolean = false;
-
-  enumEstadoSugerencia: any = {
-    "PENDIENTE" : null,
-    "REALIZADA" : null,
-    "ACEPTADA": null,
-    "RECHAZADA": null
-  }
 
   /* ADMIN */
   sugerenciasAdmin: Sugerencia[];
@@ -40,9 +33,17 @@ export class SugerenciasCComponent implements OnInit {
     usuarioId: null,
     nombre: null,
     descripcion: null,
-    estadoSugerencia: null,  /* ENUM */
+    estadoSugerencia: null,
     nombreUsuario: null
   };
+
+  seleccionEstado: any; // Necesario para el p-dropdown del modal EditarSugerencia del Admin
+  estados: any = [
+    { estado: 'PENDIENTE' },
+    { estado: 'REALIZADA' },
+    { estado: 'ACEPTADA' },
+    { estado: 'RECHAZADA' }
+  ]
 
   colsAdmin: any[];
   displaySaveDialogAdminVer: boolean = false;
@@ -54,7 +55,11 @@ export class SugerenciasCComponent implements OnInit {
   roles: String[];
   isAdmin: boolean = false;
 
-  constructor(private tokenService: TokenService, private sugerenciaService: SugerenciaService, private messageService: MessageService, private usuarioService: UsuarioService) { }
+  constructor(
+    private tokenService: TokenService,
+    private sugerenciaService: SugerenciaService,
+    private messageService: MessageService,
+    private usuarioService: UsuarioService) { }
 
   /*  USUARIO */
   abrirModal() {
@@ -63,7 +68,7 @@ export class SugerenciasCComponent implements OnInit {
       usuarioId: null,
       nombre: null,
       descripcion: null,
-      estadoSugerencia: null,  /* ENUM */
+      estadoSugerencia: null,
       nombreUsuario: null
     };
     this.submitted = false;
@@ -170,11 +175,31 @@ export class SugerenciasCComponent implements OnInit {
     this.displaySaveDialogAdminVer = true;
   }
 
-  editarSugerenciaAdmin(sugerenciaAdmin: Sugerencia) {
+  abrilModalEstadoAdmin(sugerenciaAdmin: Sugerencia) {
     this.sugerenciaAdmin = { ...sugerenciaAdmin };
+    this.seleccionEstado = this.sugerenciaAdmin.estadoSugerencia; // Para que aparezca el estado de la sugerencia seleccionada
     this.title = "Editar estado";
     this.isVer = false;
     this.displaySaveDialogAdminEditar = true;
+  }
+
+  editarEstadoAdmin() {
+    this.sugerenciaAdmin.estadoSugerencia = this.seleccionEstado;
+    if (this.tokenService.getToken()) {
+      this.sugerenciaService.addSugerencia(this.sugerenciaAdmin).subscribe(
+        (result: any) => {
+          let sugerenciaAdmin = result as Sugerencia;
+          this.messageService.add({ severity: 'success', summary: "Sugerencia editada", detail: "Se ha editado el estado correctamente." });
+          this.displaySaveDialogAdminEditar = false; // Cierra el modal
+          this.getAllSugerenciasAdmin();
+          this.seleccionEstado = null;
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
+
   }
 
   ngOnInit(): void {
@@ -184,14 +209,6 @@ export class SugerenciasCComponent implements OnInit {
     if (this.isAdmin) {
       this.getAllSugerenciasAdmin();
     }
-
-    /*this.roles = this.tokenService.getAuthorities();
-    this.roles.forEach(rol => {
-      if (rol === "ROLE_ADMIN") {
-        this.isAdmin = true;
-        this.getAllSugerenciasAdmin();
-      }
-    });*/
 
     this.cols = [
       { field: "nombre", header: "Título" },

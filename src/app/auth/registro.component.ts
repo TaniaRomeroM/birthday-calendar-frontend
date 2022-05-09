@@ -46,7 +46,7 @@ export class RegistroComponent implements OnInit {
       data => {
         this.isRegister = true;
         this.isRegisterFail = false;
-        this.messageService.add({severity:'success', summary: 'Nuevo usuario', detail: 'Cuenta creada con éxito'});
+        this.messageService.add({ severity: 'success', summary: 'Nuevo usuario', detail: 'Cuenta creada con éxito' });
         //this.clearFields(); // si no se redirige habría que borrar los campos para que se vacien al registrarse
         setTimeout(() => {
           this.router.navigate(['']);
@@ -56,7 +56,7 @@ export class RegistroComponent implements OnInit {
         this.isRegister = false;
         this.isRegisterFail = true;
         this.errMsg = err.error.message;
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error en el registro: ' + this.errMsg});
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error en el registro: ' + this.errMsg });
       }
     );
   }
@@ -77,7 +77,7 @@ export class RegistroComponent implements OnInit {
     this.apellido = "";
     this.fechanac = new Date();
     this.nombreUsuario = "";
-    this.email  = "";
+    this.email = "";
     this.password = "";
   }
 

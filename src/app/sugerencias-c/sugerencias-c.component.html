@@ -73,7 +73,7 @@
           <button pButton pRipple icon="pi pi-eye" class="btnVer p-button-rounded p-button-success p-mr-2"
             (click)="verSugerenciaAdmin(sugerenciaAdmin);"></button>
           <button pButton pRipple icon="pi pi-pencil" class="btnEdit p-button-rounded p-button-success p-mr-2"
-            (click)="editarSugerenciaAdmin(sugerenciaAdmin);"></button>
+            (click)="abrilModalEstadoAdmin(sugerenciaAdmin);"></button>
         </td>
       </tr>
     </ng-template>
@@ -134,7 +134,7 @@
   [style]="{width: '40%', height:'70%'}">
   <div class="divModal">
     <h4 class="tituloH4">Estado</h4>
-    <p-dropdown [options]="enumEstadoSugerencia" [(ngModel)]="sugerenciaAdmin" optionLabel="estadoSugerencia"
+    <p-dropdown [options]="estados" [(ngModel)]="seleccionEstado" optionLabel="estado" optionValue="estado" placeholder="Selecciona un estado"
         [showClear]="true" [style]="{width: '70%', 'margin':'auto', 'text-align': 'center'}"></p-dropdown>
   </div>
 
@@ -142,6 +142,6 @@
     <button pButton pRipple label="Cancelar" icon="pi pi-times" class="btnCancelar p-button-text"
       (click)="cerrarDialog()"></button>
     <button pButton pRipple label="Enviar" icon="pi pi-check" class="btnGuardar p-button-text"
-      (click)="editarSugerenciaAdmin(sugerenciaAdmin)"></button>
+      (click)="editarEstadoAdmin()"></button>
   </ng-template>
 </p-dialog>

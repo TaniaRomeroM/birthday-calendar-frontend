@@ -27,7 +27,7 @@ export class FiestasCComponent implements OnInit {
     nombreContacto: null
   };
   contactos: Contacto[];
-  contacto: Contacto = {  // Modal de Nueva Fiesta
+  contacto: Contacto = {  // Modal de Nueva Fiesta, p-dropdown del nombre de los Contactos
     contactoId: null,
     usuarioId: null,
     nombre: null,
@@ -43,8 +43,14 @@ export class FiestasCComponent implements OnInit {
   pipe = new DatePipe('es');
   todayWithPipe = null;
 
-  constructor(private fiestaService: FiestaService, private usuarioService: UsuarioService, private messageService: MessageService, private contactoService: ContactoService,
-    private confirmationService: ConfirmationService, private tokenService: TokenService) { }
+  constructor(
+    private fiestaService: FiestaService,
+    private usuarioService: UsuarioService,
+    private contactoService: ContactoService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+    private tokenService: TokenService
+  ) { }
 
   abrirModal() {
     this.fiesta = {
@@ -152,7 +158,6 @@ export class FiestasCComponent implements OnInit {
         console.log(error);
       }
     )
-
   }
 
   eliminarFiesta(fiesta: Fiesta) {
@@ -185,5 +190,4 @@ export class FiestasCComponent implements OnInit {
       { field: "tipo", header: "Temática" }
     ];
   }
-
 }
