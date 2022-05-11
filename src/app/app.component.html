@@ -1,41 +1,65 @@
 <mat-toolbar>
-    <mat-icon [routerLink]="'inicio'" style="cursor: pointer;">cake</mat-icon>
-    <span [routerLink]="'inicio'" class="toolbar-item-span" style="cursor: pointer;">BirthDay Calendar</span>
-    <span class="toolbar-spacer"></span>
-    <p-splitButton icon="pi pi-fw pi-users" label={{this.usuario.nombre}} styleClass="p-button-text p-button-secondary p-mr-2 p-mb-2" [menuStyle]="{'width':'auto'}" *ngIf="isLogged" (onClick)="routePerfil()" [model]="items"></p-splitButton>
-  </mat-toolbar>
+  <mat-icon [routerLink]="'inicio'" style="cursor: pointer;">cake</mat-icon>
+  <span [routerLink]="'inicio'" class="toolbar-item-span" style="cursor: pointer;">BirthDay Calendar</span>
+  <span class="toolbar-spacer"></span>
+
+  <p-button icon="pi pi-bell" styleClass="p-button-secondary p-button-text" badge={{valorNot}}
+    badgeClass="p-badge-warning" (click)="op.toggle($event)" *ngIf="isLogged"></p-button>
+  <p-overlayPanel #op [showCloseIcon]="true" [style]="{width: '22%'}">
+    <ng-template pTemplate>
+      <p-table [value]="contactos" selectionMode="single" [responsive]="true">
+
+        <ng-template pTemplate="body" let-contacto let-columns="columns">
+          <tr>
+            <td class="classpSortableColumn"> Hoy es el cumpleaños de ¡¡ {{contacto.nombre}} !!</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="4">No hay notificaciones</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </ng-template>
+  </p-overlayPanel>
+
+  <p-splitButton icon="pi pi-fw pi-users" label={{this.usuario.nombreUsuario}}
+    styleClass="p-button-text p-button-secondary p-mr-2 p-mb-2" [menuStyle]="{'width':'auto'}" *ngIf="isLogged"
+    (onClick)="routePerfil()" [model]="items"></p-splitButton>
+</mat-toolbar>
 
 <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="side" opened="true" *ngIf="isLogged">
-        <mat-nav-list>
+  <mat-sidenav #sidenav mode="side" opened="true" *ngIf="isLogged">
+    <mat-nav-list>
 
-            <mat-list-item [routerLink]="'inicio'" class="sidenav-item">
-                <mat-icon mat-ist-icon>calendar_today</mat-icon>
-                <span class="sidenav-item-span">Inicio</span>
-            </mat-list-item>
+      <mat-list-item [routerLink]="'inicio'" class="sidenav-item">
+        <mat-icon mat-ist-icon>calendar_today</mat-icon>
+        <span class="sidenav-item-span">Inicio</span>
+      </mat-list-item>
 
-            <mat-list-item [routerLink]="'contactos'" class="sidenav-item">
-                <mat-icon mat-ist-icon>contacts</mat-icon>
-                <span class="sidenav-item-span">Contactos</span>
-            </mat-list-item>
+      <mat-list-item [routerLink]="'contactos'" class="sidenav-item">
+        <mat-icon mat-ist-icon>contacts</mat-icon>
+        <span class="sidenav-item-span">Contactos</span>
+      </mat-list-item>
 
-            <mat-list-item [routerLink]="'fiestas'" class="sidenav-item">
-                <mat-icon mat-ist-icon>celebration</mat-icon>
-                <span class="sidenav-item-span">Fiestas</span>
-            </mat-list-item>
+      <mat-list-item [routerLink]="'fiestas'" class="sidenav-item">
+        <mat-icon mat-ist-icon>celebration</mat-icon>
+        <span class="sidenav-item-span">Fiestas</span>
+      </mat-list-item>
 
-            <mat-list-item [routerLink]="'notificaciones'" class="sidenav-item">
-                <mat-icon mat-ist-icon>notifications</mat-icon>
-                <span class="sidenav-item-span">Notificaciones</span>
-            </mat-list-item>
+      <!--<mat-list-item [routerLink]="'notificaciones'" class="sidenav-item">
+        <mat-icon mat-ist-icon>notifications</mat-icon>
+        <span class="sidenav-item-span">Notificaciones</span>
+      </mat-list-item>-->
 
-            <mat-list-item [routerLink]="'sugerencias'" class="sidenav-item">
-                <mat-icon mat-ist-icon>assistant</mat-icon>
-                <span class="sidenav-item-span">Sugerencias</span>
-            </mat-list-item>
-        </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <router-outlet></router-outlet> <!-- Asi se le dice que desde este html (del componente principal) se gestiona todo el enrutamiento -->
-    </mat-sidenav-content>
+      <mat-list-item [routerLink]="'sugerencias'" class="sidenav-item">
+        <mat-icon mat-ist-icon>assistant</mat-icon>
+        <span class="sidenav-item-span">Sugerencias</span>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+    <!-- Asi se le dice que desde este html (del componente principal) se gestiona todo el enrutamiento -->
+  </mat-sidenav-content>
 </mat-sidenav-container>

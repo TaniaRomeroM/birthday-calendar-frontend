@@ -104,6 +104,8 @@ export class ContactosCComponent implements OnInit {
       this.contacto.fechanac = this.todayWithPipe;
     }
 
+    if (this.tokenService.getToken()) {
+
     this.usuarioService.getUsuarioByNombreUsuario(this.tokenService.getUsername()).subscribe( // Procesos que surgan una vez se ha guardado el contacto
       (result: any) => {
         let usuario = result as Usuario;
@@ -141,6 +143,7 @@ export class ContactosCComponent implements OnInit {
         console.log(error);
       }
     )
+    }
   }
 
   findIndexById(id: number): number {
@@ -162,18 +165,20 @@ export class ContactosCComponent implements OnInit {
   }
 
   eliminarContacto(contacto: Contacto) {
-    this.confirmationService.confirm({
-      message: '¿Estás seguro de que quieres eliminar a ' + contacto.nombre + '?',
-      header: 'Eliminar',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.contactoService.eliminarContacto(contacto.contactoId).subscribe(
-          (result: any) => {
-            this.messageService.add({ severity: 'success', summary: 'Contacto', detail: 'Contacto eliminado con éxito', life: 3000 });
-            this.eliminarObjeto(result.contactoId);
-          });
-      }
-    });
+    if (this.tokenService.getToken()) {
+      this.confirmationService.confirm({
+        message: '¿Estás seguro de que quieres eliminar a ' + contacto.nombre + '?',
+        header: 'Eliminar',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          this.contactoService.eliminarContacto(contacto.contactoId).subscribe(
+            (result: any) => {
+              this.messageService.add({ severity: 'success', summary: 'Contacto', detail: 'Contacto eliminado con éxito', life: 3000 });
+              this.eliminarObjeto(result.contactoId);
+            });
+        }
+      });
+    }
   }
 
   eliminarObjeto(contactoId: number) {

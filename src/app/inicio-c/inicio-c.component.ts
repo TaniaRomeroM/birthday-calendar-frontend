@@ -39,8 +39,8 @@ export class InicioCComponent implements OnInit {
 
   getAll() {
     if (this.tokenService.getToken()) {
-      console.log("TOKEN" + this.tokenService.getToken());
-      console.log("USERNAME" + this.tokenService.getUsername());
+      /*console.log("TOKEN" + this.tokenService.getToken());
+      console.log("USERNAME" + this.tokenService.getUsername());*/
       this.contactoService.getAll(this.tokenService.getUsername()).subscribe(result => {
 
         let contactos: Contacto[] = [];
@@ -116,6 +116,7 @@ export class InicioCComponent implements OnInit {
   }
 
   addContacto() { // Modal
+    if (this.tokenService.getToken()) {
     this.todayWithPipe = this.pipe.transform(this.contacto.fechanac, 'dd/MM/yyyy'); // Formatea la fecha que obtiene del formulario Cumpleanyos
     this.contacto.fechanac = this.todayWithPipe;
 
@@ -129,6 +130,7 @@ export class InicioCComponent implements OnInit {
         console.log(error);
       }
     )
+    }
   }
 
   ngOnInit(): void {

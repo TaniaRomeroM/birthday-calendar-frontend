@@ -31,6 +31,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { InputMaskModule } from 'primeng/inputmask';
 import { DropdownModule } from 'primeng/dropdown';
+import { BadgeModule } from 'primeng/badge';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 import { CalendarModule } from 'primeng/calendar';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -110,7 +112,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     InputTextareaModule,
     KeyFilterModule,
     InputMaskModule,
-    DropdownModule
+    DropdownModule,
+    BadgeModule,
+    OverlayPanelModule
   ],
   providers: [interceptorProvider, MessageService, ConfirmationService, { provide: LOCALE_ID, useValue: 'es' }],
   bootstrap: [AppComponent]

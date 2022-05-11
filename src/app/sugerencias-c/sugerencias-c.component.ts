@@ -104,6 +104,7 @@ export class SugerenciasCComponent implements OnInit {
   }
 
   addSugerencia() {
+    if (this.tokenService.getToken()) {
     this.submitted = true;
     this.usuarioService.getUsuarioByNombreUsuario(this.tokenService.getUsername()).subscribe( // Procesos que surgan una vez se ha guardado el contacto
       (result: any) => {
@@ -126,6 +127,7 @@ export class SugerenciasCComponent implements OnInit {
         console.log(error);
       }
     )
+    }
   }
 
   verSugerenciaUsuario(sugerencia: Sugerencia) {

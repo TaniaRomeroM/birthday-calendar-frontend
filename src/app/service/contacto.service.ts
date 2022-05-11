@@ -17,6 +17,10 @@ export class ContactoService {
     return this.http.get(this.baseUrl + "/contactos/" + nombreUsuario);
   }
 
+  getAllContactosNotif(nombreUsuario: string): Observable<any> {
+    return this.http.get(this.baseUrl + "/contactos/hoy/" + nombreUsuario);
+  }
+
   encontrarContacto(contactoId: number): Observable<any> {
     return this.http.get(this.baseUrl + "/contacto/" + contactoId);
   }

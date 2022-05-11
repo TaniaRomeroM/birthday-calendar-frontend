@@ -81,32 +81,34 @@ export class FiestasCComponent implements OnInit {
   }
 
   getAllFiestas() {
-    this.fiestaService.getAll(this.tokenService.getUsername()).subscribe(
-      (result: any) => {
-        let fiestas: Fiesta[] = [];
-        for (let i = 0; i < result.length; i++) {
-          let fiesta = result[i] as Fiesta; // Convertir la variable fiesta (que no tiene un tipo definido) en una variable de tipo Fiesta
+    if (this.tokenService.getToken()) {
+      this.fiestaService.getAll(this.tokenService.getUsername()).subscribe(
+        (result: any) => {
+          let fiestas: Fiesta[] = [];
+          for (let i = 0; i < result.length; i++) {
+            let fiesta = result[i] as Fiesta; // Convertir la variable fiesta (que no tiene un tipo definido) en una variable de tipo Fiesta
 
-          this.contactoService.encontrarContacto(fiesta.contactoId).subscribe(
-            (result: any) => {
-              for (let i = 0; i < result.length; i++) {
-                let contacto = result[i] as Contacto; // Convertir la variable fiesta (que no tiene un tipo definido) en una variable de tipo Fiesta
-                fiesta.nombreContacto = contacto.nombre;
+            this.contactoService.encontrarContacto(fiesta.contactoId).subscribe(
+              (result: any) => {
+                for (let i = 0; i < result.length; i++) {
+                  let contacto = result[i] as Contacto; // Convertir la variable fiesta (que no tiene un tipo definido) en una variable de tipo Fiesta
+                  fiesta.nombreContacto = contacto.nombre;
+                }
+              },
+              error => {
+                console.log(error);
               }
-            },
-            error => {
-              console.log(error);
-            }
-          );
+            );
 
-          fiestas.push(fiesta);
+            fiestas.push(fiesta);
+          }
+          this.fiestas = fiestas;
+        },
+        error => {
+          console.log(error);
         }
-        this.fiestas = fiestas;
-      },
-      error => {
-        console.log(error);
-      }
-    );
+      );
+    }
   }
 
   getAllContactos() {
@@ -161,18 +163,20 @@ export class FiestasCComponent implements OnInit {
   }
 
   eliminarFiesta(fiesta: Fiesta) {
-    this.confirmationService.confirm({
-      message: '¿Estás seguro de que quieres eliminar la fiesta de ' + fiesta.nombreContacto + '?',
-      header: 'Eliminar',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.fiestaService.eliminarFiesta(fiesta.fiestaId).subscribe(
-          (result: any) => {
-            this.messageService.add({ severity: 'success', summary: 'Fiesta', detail: 'Fiesta eliminada con éxito', life: 3000 });
-            this.eliminarObjeto(result.fiestaId);
-          });
-      }
-    });
+    if (this.tokenService.getToken()) {
+      this.confirmationService.confirm({
+        message: '¿Estás seguro de que quieres eliminar la fiesta de ' + fiesta.nombreContacto + '?',
+        header: 'Eliminar',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          this.fiestaService.eliminarFiesta(fiesta.fiestaId).subscribe(
+            (result: any) => {
+              this.messageService.add({ severity: 'success', summary: 'Fiesta', detail: 'Fiesta eliminada con éxito', life: 3000 });
+              this.eliminarObjeto(result.fiestaId);
+            });
+        }
+      });
+    }
   }
 
   eliminarObjeto(fiestaId: number) {

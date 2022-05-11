@@ -55,6 +55,7 @@ export class PerfilCComponent implements OnInit {
   }
 
   editarUsuario() {
+    if (this.tokenService.getToken()) {
     if (this.usuario.fechanac instanceof Date) {
       this.todayWithPipe = this.pipe.transform(this.usuario.fechanac, 'dd/MM/yyyy'); // Formatea la fecha que obtiene del formulario Cumpleanyos
       this.usuario.fechanac = this.todayWithPipe;
@@ -71,6 +72,7 @@ export class PerfilCComponent implements OnInit {
         console.log(error);
       }
     )
+    }
   }
 
   ngOnInit(): void {

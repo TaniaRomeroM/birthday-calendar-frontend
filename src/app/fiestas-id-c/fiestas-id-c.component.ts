@@ -11,6 +11,7 @@ import { ConfirmationService } from 'primeng/api';
 import { DatePipe } from '@angular/common';
 import { Invitado } from 'src/models/invitado';
 import { InvitadoService } from '../service/invitado.service';
+import { TokenService } from '../service/token.service';
 
 @Component({
   selector: 'app-fiestas-id-c',
@@ -57,6 +58,7 @@ export class FiestasIdCComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private router: Router,
     private route: ActivatedRoute,
+    private tokenService: TokenService
   ) { }
 
   /* FIESTA */
@@ -70,6 +72,7 @@ export class FiestasIdCComponent implements OnInit {
   }
 
   getFiesta() {
+    if (this.tokenService.getToken()) {
     this.fiestaService.encontrarFiesta(this.fiestaId).subscribe(
       (result: any) => {
         for (let i = 0; i < result.length; i++) {
@@ -96,9 +99,11 @@ export class FiestasIdCComponent implements OnInit {
         console.log(error);
       }
     );
+    }
   }
 
   editarFiesta() {
+    if (this.tokenService.getToken()) {
     if (this.fiesta.fechaFiesta instanceof Date) {
       this.todayWithPipe = this.pipe.transform(this.fiesta.fechaFiesta, 'dd/MM/yyyy'); // Formatea la fecha que obtiene del formulario Cumpleanyos
       this.fiesta.fechaFiesta = this.todayWithPipe;
@@ -115,9 +120,11 @@ export class FiestasIdCComponent implements OnInit {
         console.log(error);
       }
     )
+    }
   }
 
   eliminarFiesta(fiesta: Fiesta) {
+    if (this.tokenService.getToken()) {
     this.confirmationService.confirm({
       message: '¿Estás seguro de que quieres eliminar la fiesta de ' + fiesta.nombreContacto + '?',
       header: 'Eliminar',
@@ -130,6 +137,7 @@ export class FiestasIdCComponent implements OnInit {
           });
       }
     });
+  }
   }
 
   /* COMPRA */
@@ -153,6 +161,7 @@ export class FiestasIdCComponent implements OnInit {
   }
 
   getCompras() {
+    if (this.tokenService.getToken()) {
     this.compraService.getAll(this.fiesta.fiestaId).subscribe(
       (result: any) => {
         let compras: Compra[] = [];
@@ -166,9 +175,11 @@ export class FiestasIdCComponent implements OnInit {
         console.log(error);
       }
     );
+    }
   }
 
   addCompra() {
+    if (this.tokenService.getToken()) {
     this.submitted = true;
     this.compra.fiestaId = this.fiesta.fiestaId;
     this.compraService.addCompra(this.compra).subscribe( // Procesos que surgan una vez se ha guardado el contacto
@@ -182,9 +193,11 @@ export class FiestasIdCComponent implements OnInit {
         console.log(error);
       }
     )
+    }
   }
 
   eliminarCompra(compra: Compra) {
+    if (this.tokenService.getToken()) {
     this.confirmationService.confirm({
       message: '¿Estás seguro de que quieres eliminar ' + compra.nombre + '?',
       header: 'Eliminar',
@@ -197,6 +210,7 @@ export class FiestasIdCComponent implements OnInit {
           });
       }
     });
+  }
   }
 
   eliminarObjetoCompras(compraId: number) {
@@ -218,6 +232,7 @@ export class FiestasIdCComponent implements OnInit {
   }
 
   getInvitados() {
+    if (this.tokenService.getToken()) {
     this.invitadoService.getAll(this.fiesta.fiestaId).subscribe(
       (result: any) => {
         let invitados: Invitado[] = [];
@@ -231,9 +246,11 @@ export class FiestasIdCComponent implements OnInit {
         console.log(error);
       }
     );
+    }
   }
 
   addInvitado() {
+    if (this.tokenService.getToken()) {
     this.submitted = true;
     this.invitado.fiestaId = this.fiesta.fiestaId;
     this.invitadoService.addInvitado(this.invitado).subscribe( // Procesos que surgan una vez se ha guardado el contacto
@@ -247,9 +264,11 @@ export class FiestasIdCComponent implements OnInit {
         console.log(error);
       }
     )
+    }
   }
 
   eliminarInvitado(invitado: Invitado) {
+    if (this.tokenService.getToken()) {
     this.confirmationService.confirm({
       message: '¿Estás seguro de que quieres eliminar ' + invitado.nombre + '?',
       header: 'Eliminar',
@@ -262,6 +281,7 @@ export class FiestasIdCComponent implements OnInit {
           });
       }
     });
+  }
   }
 
   eliminarObjetoInvitado(invitadoId: number) {
