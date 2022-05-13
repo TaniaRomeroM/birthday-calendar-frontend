@@ -33,6 +33,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { DropdownModule } from 'primeng/dropdown';
 import { BadgeModule } from 'primeng/badge';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { AvatarModule } from 'primeng/avatar';
 
 import { CalendarModule } from 'primeng/calendar';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -114,7 +115,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     InputMaskModule,
     DropdownModule,
     BadgeModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    AvatarModule
   ],
   providers: [interceptorProvider, MessageService, ConfirmationService, { provide: LOCALE_ID, useValue: 'es' }],
   bootstrap: [AppComponent]

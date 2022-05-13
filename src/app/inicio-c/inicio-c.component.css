@@ -1,5 +1,4 @@
 /* MENU */
-
 mat-sidenav-container {
   height:100%;
 }
@@ -32,39 +31,20 @@ mat-sidenav-content {
 
 mat-toolbar {
 background-color: rgb(97, 191, 153, 0.6);
-/*color: white;*/
 }
 
 mat-sidenav {
 background-color: rgb(139, 204, 178, 0.1);
 }
 
-
 /* INICIO */
-
 full-calendar {
-  /*// No funciona*/
-  width: '200px';
-  height: '100%';
   text-transform: capitalize;
-  color: rgb(66, 113, 94);
+  color: rgb(69, 107, 92);
+  text-align: center;
 }
 
 .modalNuevoContacto {
   justify-content: center;
   text-align: center;
-}
-
-button.fc-prevYear-button.fc-button.fc-button-primary {
-  /*// No funciona*/
-  background-color: rgb(128, 212, 178) !important;
-  border-color: rgb(128, 212, 178) !important;
-  color: white !important;
-}
-
-button.fc-dayGridMonth-button.fc-button.fc-button-primary.fc-button.fc-button-active {
-  /*// No funciona*/
-  background-color: rgb(128, 212, 178);
-  border-color: rgb(128, 212, 178);
-  color: white;
 }

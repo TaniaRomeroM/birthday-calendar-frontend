@@ -3,6 +3,9 @@
 
   <!-- MENU BAR -->
   <p-menubar class="menubar">
+    <ng-template pTemplate="start">
+      <p-avatar icon="pi pi-user" styleClass="mr-2" size="large" [style]="{float: 'left', left: '0%'}"></p-avatar>
+    </ng-template>
     <button pButton pRipple label="Editar" style="float: right;" icon="pi pi-pencil"
       class="btnEdit p-button-rounded p-button-success p-mr-2" (click)="btnEditarUsuario();"></button>
   </p-menubar>
