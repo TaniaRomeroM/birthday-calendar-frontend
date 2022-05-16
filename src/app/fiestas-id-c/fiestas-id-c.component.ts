@@ -152,9 +152,9 @@ export class FiestasIdCComponent implements OnInit {
   }
 
   cerrarDialog() {
-    if (this.saveDialogCompras = true) {
+    if (this.saveDialogCompras === true) {
       this.saveDialogCompras = false;
-    } else if (this.saveDialogInvitados = true) {
+    } else if (this.saveDialogInvitados === true) {
       this.saveDialogInvitados = false
     }
     this.submitted = false;
@@ -191,6 +191,7 @@ export class FiestasIdCComponent implements OnInit {
       },
       error => {
         console.log(error);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al guardar el producto: ' + error.error.message });
       }
     )
     }
@@ -262,6 +263,7 @@ export class FiestasIdCComponent implements OnInit {
       },
       error => {
         console.log(error);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al guardar el invitado: ' + error.error.message });
       }
     )
     }

@@ -1,5 +1,5 @@
 /* MENU */
-mat-sidenav-container {
+/*mat-sidenav-container {
   height:100%;
 }
 
@@ -35,16 +35,11 @@ background-color: rgb(97, 191, 153, 0.6);
 
 mat-sidenav {
 background-color: rgb(139, 204, 178, 0.1);
-}
+}*/
 
 /* INICIO */
 full-calendar {
   text-transform: capitalize;
   color: rgb(69, 107, 92);
-  text-align: center;
-}
-
-.modalNuevoContacto {
-  justify-content: center;
   text-align: center;
 }

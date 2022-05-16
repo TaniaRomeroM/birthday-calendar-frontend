@@ -14,7 +14,9 @@
     [style]="{width: '90%', height:'80%', margin: 'auto', border: 'solid 2px rgb(223, 231, 227)', 'margin-top': '1%'}">
     <ng-template pTemplate="header" let-columns>
       <tr>
-        <th pSortableColumn="nombreContacto" class="classpSortableColumn" [style]="{'text-align': 'center'}">Nombre contacto<p-sortIcon field="nombreContacto"></p-sortIcon></th>
+        <th pSortableColumn="nombreContacto" class="classpSortableColumn" [style]="{'text-align': 'center'}">Nombre
+          contacto<p-sortIcon field="nombreContacto"></p-sortIcon>
+        </th>
         <th *ngFor="let col of columns" [style]="{'text-align': 'center'}">
           {{col.header}}
           <!-- Pinta de forma dinamica los headers -->

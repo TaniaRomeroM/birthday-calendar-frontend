@@ -43,12 +43,6 @@ button {
   color: rgb(93, 149, 127) !important;
 }
 
-.botonesEdit {
-  margin-top: 2%;
-  width: 30%;
-  text-align: center;
-}
-
 .btonCancelar {
   color: rgb(192, 112, 102);
 }
@@ -66,7 +60,7 @@ button {
 }
 
 .p-invalid {
-  color: rgb(245, 51, 51);
+  color: rgb(216, 106, 91);
 }
 
 .tituloH4 {

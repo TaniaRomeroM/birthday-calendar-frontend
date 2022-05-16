@@ -7,7 +7,6 @@ import { ErrorPersonalizadoComponent } from './error-personalizado/error-persona
 import { FiestasCComponent } from './fiestas-c/fiestas-c.component';
 import { FiestasIdCComponent } from './fiestas-id-c/fiestas-id-c.component';
 import { InicioCComponent } from './inicio-c/inicio-c.component';
-import { NotificacionesCComponent } from './notificaciones-c/notificaciones-c.component';
 import { SugerenciasCComponent } from './sugerencias-c/sugerencias-c.component';
 import { ProdGuardService } from './guards/prod-guard.service';
 import { PerfilCComponent } from './perfil-c/perfil-c.component';
@@ -21,7 +20,6 @@ const routes: Routes = [ // Crear un objeto por cada ruta
   { path: 'contactos', component: ContactosCComponent, canActivate: [ProdGuardService], data: { expectedRol: ['admin', 'user'] } },
   { path: 'fiestas', component: FiestasCComponent, canActivate: [ProdGuardService], data: { expectedRol: ['admin', 'user'] } },
   { path: 'fiestas/:id', component: FiestasIdCComponent, canActivate: [ProdGuardService], data: { expectedRol: ['admin', 'user'] } },
-  { path: 'notificaciones', component: NotificacionesCComponent, canActivate: [ProdGuardService], data: { expectedRol: ['admin', 'user'] } },
   { path: 'sugerencias', component: SugerenciasCComponent, canActivate: [ProdGuardService], data: { expectedRol: ['admin', 'user'] } },
   { path: '**', component: ErrorPersonalizadoComponent } // Tienes que estar siempre el ultimo, Cualquier ruta que sea diferente a las anteriores ira aqui
   // si solo se permite administrador seria expectedRol: ['admin'] }

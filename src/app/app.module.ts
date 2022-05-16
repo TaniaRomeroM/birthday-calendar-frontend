@@ -49,7 +49,6 @@ import { interceptorProvider } from './interceptors/prod-interceptor.service';
 import { InicioCComponent } from './inicio-c/inicio-c.component';
 import { ContactosCComponent } from './contactos-c/contactos-c.component';
 import { FiestasCComponent } from './fiestas-c/fiestas-c.component';
-import { NotificacionesCComponent } from './notificaciones-c/notificaciones-c.component';
 import { SugerenciasCComponent } from './sugerencias-c/sugerencias-c.component';
 import { ErrorPersonalizadoComponent } from './error-personalizado/error-personalizado.component';
 import { FiestasIdCComponent } from './fiestas-id-c/fiestas-id-c.component';
@@ -73,7 +72,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     InicioCComponent,
     ContactosCComponent,
     FiestasCComponent,
-    NotificacionesCComponent,
     SugerenciasCComponent,
     ErrorPersonalizadoComponent,
     FiestasIdCComponent,

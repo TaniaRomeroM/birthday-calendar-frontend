@@ -52,8 +52,7 @@ export class SugerenciasCComponent implements OnInit {
   title: string;
   disabled: boolean = false;
   isVer: boolean = false;
-  roles: String[];
-  isAdmin: boolean = false;
+  isAdmin: boolean = false; // Admin
 
   constructor(
     private tokenService: TokenService,
@@ -120,6 +119,7 @@ export class SugerenciasCComponent implements OnInit {
           },
           error => {
             console.log(error);
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al guardar la sugerencia: ' + error.error.message });
           }
         )
       },

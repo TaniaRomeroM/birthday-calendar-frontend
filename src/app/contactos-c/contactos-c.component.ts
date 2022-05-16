@@ -120,7 +120,7 @@ export class ContactosCComponent implements OnInit {
             this.displaySaveDialog = false; // Cierra el modal
             this.getAllContactos();
 
-            // CREAR FIESTA
+            /* CREAR FIESTA */
             if (this.checked === true) {
               this.fiesta.contactoId = contacto.contactoId;
               this.fiesta.usuarioId = usuario.usuarioId;
@@ -132,10 +132,11 @@ export class ContactosCComponent implements OnInit {
                 }
               )
               this.checked = false;
-            }  ////
+            }
           },
           error => {
             console.log(error);
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al guardar el contacto: ' + error.error.message });
           }
         )
       },

@@ -68,7 +68,7 @@
               </ng-template>
               <ng-template pTemplate="body" let-compra>
                 <tr>
-                  <td pEditableColumn>
+                  <td pEditableColumn [style]="{'text-align': 'center'}">
                     <p-cellEditor>
                       <ng-template pTemplate="input">
                         <input pInputText type="text" [(ngModel)]="compra.nombre">
@@ -111,7 +111,7 @@
               </ng-template>
               <ng-template pTemplate="body" let-invitado>
                 <tr>
-                  <td pEditableColumn>
+                  <td pEditableColumn [style]="{'text-align': 'center'}">
                     <p-cellEditor>
                       <ng-template pTemplate="input">
                         <input pInputText type="text" [(ngModel)]="invitado.nombre">

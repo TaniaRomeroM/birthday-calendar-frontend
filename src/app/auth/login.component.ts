@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginUsuario: LoginUsuario;
   nombreUsuario: string;
   password: string;
-  //errMsg: string;
+  errMsg: string;
 
   constructor(
     private tokenService: TokenService,
@@ -32,9 +32,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/inicio']);
       },
       err => {
-        console.log("error en el login usuario");
-        /*this.errMsg = err.error.message;
-        this.messageService.add({severity:'error', summary: 'Error', detail: 'Error en el login: '});*/
+        this.errMsg = "Error al iniciar sesión";
+        this.messageService.add({severity:'error', summary: 'Error', detail: this.errMsg});
       }
     );
   }

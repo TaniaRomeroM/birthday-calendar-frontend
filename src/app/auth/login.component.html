@@ -1,56 +1,27 @@
 <p-toast></p-toast>
 
-<p-card header="BIENVENIDO" [style]="{width: '30%', height: '55%','margin': 'auto', 'margin-top': '5%', 'text-align': 'center', 'color': 'white', 'background-color': 'rgb(115, 176, 146)'}">
-<!--
-  <div>
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-        <i class="pi pi-user"></i>
-      </span>
-      <span class="p-float-label">
-        <input type="text" id="nombreUsuario" pInputText [(ngModel)]="nombreUsuario" required>
-        <label for="inputgroup">Nombre de usuario</label>
-      </span>
-    </div>
+<p-card header="BIENVENIDO"
+  [style]="{width: '30%', height: '55%','margin': 'auto', 'margin-top': '5%', 'text-align': 'center', 'color': 'white', 'background-color': 'rgb(115, 176, 146)'}">
 
-    <div class="p-inputgroup">
-      <span class="p-inputgroup-addon">
-        <i class="pi pi-user"></i>
-      </span>
-      <span class="p-float-label">
-        <input type="password" id="password" pInputText [(ngModel)]="password" required>
-        <label for="inputgroup">Contraseña</label>
-      </span>
+  <div class="card-body">
+    <form #f="ngForm" (ngSubmit)="onLogin()" novalidate>
+      <div class="form-group">
+        <h4 class="tituloH4" for="nombreUsuario">Nombre de usuario</h4>
+        <input type="text" pInputText name="nombreUsuario" id="nombreUsuario" class="form-control"
+          [(ngModel)]="nombreUsuario" required [style]="{'text-align': 'center'}">
+      </div>
+      <div class="form-group">
+        <h4 class="tituloH4" for="password">Contraseña</h4>
+        <input type="password" pInputText name="password" id="password" class="form-control" [(ngModel)]="password"
+          required [style]="{'text-align': 'center'}">
+      </div>
+      <div class="form-group">
+        <button pButton label="Iniciar sesion" class="btnIniciarSesion p-button-raised p-button-text"></button>
+      </div>
+    </form>
+    <div>
+      <p class="hrefregistro">¿Aún no tienes cuenta? <a [routerLink]="'registro'">Regístrate</a></p>
     </div>
   </div>
-  <button pButton pRipple type="button" label="Iniciar sesión" class="p-button-outlined p-button-success"
-    (ngSubmit)="onLogin()" style="color:white"></button>
-  <!--<div *ngIf="f.submitted && isLoginFail" class="alert alert-danger mt-3">Error en el login: campos incorrectos</div>-->
-  <!--<div>
-    <p class="hrefregistro">¿Aún no tienes cuenta? <a [routerLink]="'registro'">Regístrate</a></p>
-  </div>-->
-
-<div class="card-body">
-  <form #f="ngForm" (ngSubmit)="onLogin()" novalidate>
-    <div class="form-group">
-      <label for="nombreUsuario">Nombre de usuario</label><br>
-      <input type="text" name="nombreUsuario" id="nombreUsuario" class="form-control"
-      [(ngModel)]="nombreUsuario" required>
-    </div>
-    <div class="form-group">
-      <label for="password">Contraseña</label><br>
-      <input type="password" name="password" id="password" class="form-control"
-      [(ngModel)]="password" required>
-    </div>
-    <div class="form-group">
-      <!--button class="btnIniciarSesion btn-outline-success btn-block">Iniciar sesion</button>-->
-      <button pButton label="Iniciar sesion" class="btnIniciarSesion p-button-raised p-button-text"></button>
-    </div>
-  </form>
-  <!--<div *ngIf="f.submitted && isLoginFail" class="alert alert-danger mt-3">Error al iniciar sesión: campos incorrectos.</div>-->
-  <div>
-    <p class="hrefregistro">¿Aún no tienes cuenta? <a [routerLink]="'registro'">Regístrate</a></p>
-  </div>
-</div>
 
 </p-card>

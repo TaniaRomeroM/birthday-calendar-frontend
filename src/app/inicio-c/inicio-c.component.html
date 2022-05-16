@@ -1,52 +1,22 @@
-<full-calendar [options]="calendarOptions"></full-calendar>
+<p-button icon="pi pi-bell" styleClass="p-button-secondary p-button-text" style="float: left;" badge={{valorNotif}}
+  *ngIf="valorNotif!=null" badgeClass="p-badge-warning" (click)="op.toggle($event)"></p-button>
+<p-overlayPanel #op [showCloseIcon]="true" [style]="{width: '21%'}">
+  <ng-template pTemplate>
+    <p-table [value]="contactosNotif" selectionMode="single" [responsive]="true">
+      <ng-template pTemplate="body" let-contactoNotif let-columns="columns">
+        <tr>
+          <td class="classpSortableColumn"> ¡ Hoy es el cumpleaños de {{contactoNotif.nombre}} !</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="4">No hay notificaciones</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </ng-template>
+</p-overlayPanel>
 
-<!-- Modal - La estructura de div es para que sea responsive -->
-<!--
-<p-dialog header="Cumpleaños" [responsive]="true" [(visible)]="displaySaveDialog" [modal]="true"
-  [style]="{width: '700px'}">
-  <div class="ui-g ui-fluid modalNuevoContacto">
-
-    <div class="ui-g-12">
-      <span class="p-float-label">
-        <input type="text" id="disabled-input" pInputText [disabled]="disabled" [(ngModel)]="contacto.fechanac">
-        <label for="inputtext">Cumpleaños</label>
-      </span>
-    </div>
-
-    <div class="ui-g-12">
-      <span class="p-float-label">
-        <input type="text" id="inputtext" pInputText [(ngModel)]="contacto.usuarioId">
-        <label for="inputtext">Usuario Id</label>
-      </span>
-    </div>
-
-    <div class="ui-g-12">
-
-      <span class="p-float-label">
-        <input type="text" id="inputtext" pInputText [(ngModel)]="contacto.nombre">
-        <label for="inputtext">Nombre</label>
-      </span>
-    </div>
-
-    <div class="ui-g-12">
-      <span class="p-float-label">
-        <input type="text" id="inputtext" pInputText [(ngModel)]="contacto.apellido">
-        <label for="inputtext">Apellido</label>
-      </span>
-    </div>
-
-    <div class="ui-g-12">
-      <span class="p-float-label">
-        <input type="text" id="inputtext" pInputText [(ngModel)]="contacto.email">
-        <label for="inputtext">Email</label>
-      </span>
-    </div>
-  </div>
-
-  <p-footer>
-    <div class="" ui-dialog-buttonpane ui-helper-clearfix>
-      <button type="button" pButton (click)="addContacto()" label="Añadir"></button>
-    </div>
-  </p-footer>
-</p-dialog>
--->
+<p-card class="no-header">
+  <full-calendar [options]="calendarOptions"></full-calendar>
+</p-card>

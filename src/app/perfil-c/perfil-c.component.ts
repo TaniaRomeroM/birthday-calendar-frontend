@@ -24,6 +24,7 @@ export class PerfilCComponent implements OnInit {
   disabled: boolean = true;
   pipe = new DatePipe('es');
   todayWithPipe = null;
+  isAdmin: boolean = false; // Admin
 
   constructor(
     private usuarioService: UsuarioService,
@@ -56,26 +57,28 @@ export class PerfilCComponent implements OnInit {
 
   editarUsuario() {
     if (this.tokenService.getToken()) {
-    if (this.usuario.fechanac instanceof Date) {
-      this.todayWithPipe = this.pipe.transform(this.usuario.fechanac, 'dd/MM/yyyy'); // Formatea la fecha que obtiene del formulario Cumpleanyos
-      this.usuario.fechanac = this.todayWithPipe;
-    }
-
-    this.usuarioService.editarUsuario(this.usuario).subscribe( // Procesos que surgan una vez se ha guardado el contacto
-      (result: any) => {
-        let usuario = result as Usuario;
-        this.usuario = usuario;
-        this.messageService.add({ severity: 'success', summary: "Usuario", detail: "Se han modificado los datos correctamente." });
-        this.disabled = true;
-      },
-      error => {
-        console.log(error);
+      if (this.usuario.fechanac instanceof Date) {
+        this.todayWithPipe = this.pipe.transform(this.usuario.fechanac, 'dd/MM/yyyy'); // Formatea la fecha que obtiene del formulario Cumpleanyos
+        this.usuario.fechanac = this.todayWithPipe;
       }
-    )
+
+      this.usuarioService.editarUsuario(this.usuario).subscribe( // Procesos que surgan una vez se ha guardado el contacto
+        (result: any) => {
+          let usuario = result as Usuario;
+          this.usuario = usuario;
+          this.messageService.add({ severity: 'success', summary: "Usuario", detail: "Se han modificado los datos correctamente." });
+          this.disabled = true;
+        },
+        error => {
+          console.log(error);
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al editar los datos: ' + error.error.message });
+        }
+      )
     }
   }
 
   ngOnInit(): void {
     this.getUsuario();
+    this.isAdmin = this.tokenService.isAdmin();
   }
 }
