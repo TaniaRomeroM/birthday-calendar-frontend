@@ -198,6 +198,7 @@ export class SugerenciasCComponent implements OnInit {
         },
         error => {
           console.log(error);
+          this.messageService.add({ severity: 'error', summary: 'Error al editar el estado', detail: 'El campo no debe estar vacío'});
         }
       );
     }

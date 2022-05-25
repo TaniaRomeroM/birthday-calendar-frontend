@@ -94,11 +94,7 @@ export class ContactosCComponent implements OnInit {
 
   guardarContacto() {
     this.submitted = true;
-    /*if(this.contacto.fechanac instanceof Date){
-      console.log("I'm a date " + this.contacto.fechanac);
-    } else {
-    console.log("I'm not a date " + this.contacto.fechanac);
-    }*/
+
     if (this.contacto.fechanac instanceof Date) {
       this.todayWithPipe = this.pipe.transform(this.contacto.fechanac, 'dd/MM/yyyy'); // Formatea la fecha que obtiene del formulario Cumpleanyos
       this.contacto.fechanac = this.todayWithPipe;
