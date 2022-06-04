@@ -22,7 +22,6 @@ import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SplitterModule } from 'primeng/splitter';
-import { DividerModule } from 'primeng/divider';  // Quitar
 import { CardModule } from 'primeng/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { InputSwitchModule } from 'primeng/inputswitch';
@@ -102,7 +101,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     CalendarModule,
     ConfirmDialogModule,
     SplitterModule,
-    DividerModule,     // Quitar
     CardModule,
     MatGridListModule,
     AccordionModule,
